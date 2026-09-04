@@ -161,4 +161,4 @@ Before signing, use the detailed [questions to ask a web designer](/blog/article
 
 The strongest sales pitch is less useful than a clear scope, verifiable work, secure account access, realistic search expectations, and a tested handoff. A capable designer should welcome specific questions because good answers prevent conflict after the project starts.
 
-If you are comparing web designers or trying to replace a website that left you locked out, Custom Web Architecture can help you define the scope, ownership, testing, and support terms before another dollar is spent. [Request a website quote](/leads.html) and tell me what your business needs, what you already control, and what went wrong with the last setup.
+If you are comparing web designers or trying to replace a website that left you locked out, Twin Lakes Web Co. can help you define the scope, ownership, testing, and support terms before another dollar is spent. [Request a website quote](/contact/) and tell me what your business needs, what you already control, and what went wrong with the last setup.

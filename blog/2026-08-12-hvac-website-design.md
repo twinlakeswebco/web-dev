@@ -168,4 +168,4 @@ The best HVAC website is useful under pressure. It tells customers what you do, 
 
 Keep emergency actions visible. Build real service pages. Show verifiable credentials and actual work. Make the mobile experience fast. Connect every inquiry to a dependable office process. Those basics create a website that supports the people answering the phones and the technicians doing the work.
 
-If your heating and cooling website is outdated, difficult to manage, or failing to produce qualified inquiries, Custom Web Architecture can help you plan a clearer replacement. [Request a website quote](/leads.html) and tell me how your HVAC company currently handles calls, scheduling, and service requests.
+If your heating and cooling website is outdated, difficult to manage, or failing to produce qualified inquiries, Twin Lakes Web Co. can help you plan a clearer replacement. [Request a website quote](/contact/) and tell me how your HVAC company currently handles calls, scheduling, and service requests.

@@ -74,7 +74,7 @@ Ask a provider to test real pages on mobile, compress images correctly, and expl
 
 Real project photos, named services, staff information, testimonials with permission, and links to completed work are stronger than generic claims. If local knowledge is important, ask how the provider is connected to the area and request examples you can open yourself.
 
-Custom Web Architecture's public portfolio includes the [City of Caneyville](https://caneyville.org), [Twin Lakes Skatepark](https://twinlakesskatepark.org), [Ground Pros LLC](https://groundprosky.com), and other Kentucky small-business projects. Those links let a prospective client evaluate actual work instead of relying on a badge or slogan.
+Twin Lakes Web Co.'s public portfolio includes the [City of Caneyville](https://caneyville.org), [Twin Lakes Skatepark](https://twinlakesskatepark.org), [Ground Pros LLC](https://groundprosky.com), and other Kentucky small-business projects. Those links let a prospective client evaluate actual work instead of relying on a badge or slogan.
 
 Local proof should remain honest. Serving Leitchfield is not the same as maintaining an office there. Completing one project does not justify claiming an entire industry. Specific, checkable statements build more trust than exaggerated familiarity.
 
@@ -137,4 +137,4 @@ Compare the work, process, ownership terms, support, and total cost. Ask whether
 
 A useful website should make the business easier to understand and easier to contact. It should load quickly, work for more people, support local search, and remain an asset you can control. Those basics are more valuable than a complicated feature list.
 
-If you need website design in Leitchfield, KY and want a straightforward plan, [request a website quote](/leads.html). Tell me what your business does, who you serve, what is not working now, and what you want customers to do next.
+If you need website design in Leitchfield, KY and want a straightforward plan, [request a website quote](/contact/). Tell me what your business does, who you serve, what is not working now, and what you want customers to do next.

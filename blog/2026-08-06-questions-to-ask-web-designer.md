@@ -171,4 +171,4 @@ The best questions to ask a web designer before hiring are the ones that reveal 
 
 You do not need every provider to use the same tools or process. You need answers you understand, terms that match your business, and a written scope that reflects the conversation.
 
-If you are planning a website for a small business in Grayson, Breckinridge, Meade, Bullitt, Hardin, Larue, or Jefferson County, I build straightforward custom websites and explain the decisions without mystery tech talk. [Tell me what you need and request a quote](/leads.html).
+If you are planning a website for a small business in Grayson, Breckinridge, Meade, Bullitt, Hardin, Larue, or Jefferson County, I build straightforward custom websites and explain the decisions without mystery tech talk. [Tell me what you need and request a quote](/contact/).

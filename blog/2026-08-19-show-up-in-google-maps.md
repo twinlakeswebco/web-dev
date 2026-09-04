@@ -175,4 +175,4 @@ No reputable company can guarantee a permanent top-three Google Maps ranking. Re
 
 Start with the profile, but do not stop there. A clear website, genuine customer feedback, consistent information, and a good local reputation work together. That foundation is slower than a shortcut, but it also helps customers choose you after they find you.
 
-If your profile is live but your business still disappears across the searches that matter, use Custom Web Architecture's [free SEO performance check](/#seo-check) for a clearer starting point. If your website or local search setup needs hands-on work, [request a website quote](/leads.html) and tell me what customers search for, where you serve, and what you have already tried.
+If your profile is live but your business still disappears across the searches that matter, [send me the details](/contact/) and I will tell you what I see. If your website or local search setup needs hands-on work, [request a website quote](/contact/) and tell me what customers search for, where you serve, and what you have already tried.

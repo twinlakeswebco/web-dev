@@ -155,4 +155,4 @@ For a Wix vs. custom website decision, start with a one-page requirements list. 
 
 Then ask each option to prove it can meet those requirements. Wix may deliver everything you need in one manageable subscription. Custom development may remove a limitation that would otherwise affect leads, operations, or future growth. Sometimes the right answer is to launch on Wix now and plan a careful rebuild later.
 
-If you want an honest recommendation based on the work your website needs to perform, [request a quote from Custom Web Architecture](/leads.html). If Wix is enough for the job, we’ll tell you. If custom development would solve a real business problem, we’ll explain why before you spend the money.
+If you want an honest recommendation based on the work your website needs to perform, [request a quote from Twin Lakes Web Co.](/contact/). If Wix is enough for the job, I’ll say so. If custom development would solve a real business problem, I’ll explain why before you spend the money.

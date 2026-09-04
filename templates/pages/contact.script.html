@@ -1,0 +1,374 @@
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    
+
+    const WORKER_ENDPOINT = "https://leads-intake.caseykeown.workers.dev/";
+    const MAX_FILES = 20;
+    const MAX_TOTAL_BYTES = 25 * 1024 * 1024;
+    const COMPRESS_THRESHOLD = 1.5 * 1024 * 1024;
+    const MAX_DIMENSION = 2000;
+    const SUBMISSION_LOCK_KEY = 'twinLakesLeadSubmission';
+    const SUBMISSION_LOCK_MS = 15 * 60 * 1000;
+
+    const form = document.getElementById('lead-form');
+    const steps = Array.from(document.querySelectorAll('.form-step'));
+    const stepLabels = Array.from(document.querySelectorAll('.wizard-step-label'));
+    const progressFill = document.getElementById('progress-fill');
+    let currentStep = 1;
+
+    function showStep(stepNumber) {
+      currentStep = Math.max(1, Math.min(3, stepNumber));
+      steps.forEach(step => step.classList.toggle('active', Number(step.dataset.step) === currentStep));
+      stepLabels.forEach(label => label.classList.toggle('active', Number(label.dataset.labelStep) === currentStep));
+      progressFill.style.width = (currentStep * 33.333) + '%';
+      document.querySelector('.wizard-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateStep(stepNumber) {
+      const step = document.querySelector('.form-step[data-step="' + stepNumber + '"]');
+      const requiredFields = Array.from(step.querySelectorAll('[required]'));
+      const invalid = requiredFields.find(field => !field.checkValidity());
+      if (invalid) {
+        invalid.reportValidity();
+        invalid.focus();
+        return false;
+      }
+      return true;
+    }
+
+    document.querySelectorAll('.next-step').forEach(button => {
+      button.addEventListener('click', () => {
+        if (validateStep(currentStep)) showStep(currentStep + 1);
+      });
+    });
+    document.querySelectorAll('.prev-step').forEach(button => {
+      button.addEventListener('click', () => showStep(currentStep - 1));
+    });
+
+    let selectedFiles = [];
+    let idCounter = 0;
+
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file-input');
+    const thumbGrid = document.getElementById('thumb-grid');
+    const fileCountEl = document.getElementById('file-count');
+    const fileSizeTotalEl = document.getElementById('file-size-total');
+    const uploadWarning = document.getElementById('upload-warning');
+
+    dropzone.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        fileInput.click();
+      }
+    });
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        dropzone.classList.add('dragover');
+      });
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        dropzone.classList.remove('dragover');
+      });
+    });
+    dropzone.addEventListener('drop', event => handleIncomingFiles(event.dataTransfer.files));
+    fileInput.addEventListener('change', event => {
+      handleIncomingFiles(event.target.files);
+      fileInput.value = '';
+    });
+
+    function showWarning(message) {
+      uploadWarning.textContent = message;
+      uploadWarning.hidden = !message;
+    }
+
+    function currentTotalBytes() {
+      return selectedFiles.reduce((sum, item) => sum + item.file.size, 0);
+    }
+
+    function formatBytes(bytes) {
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    function isImageFile(file) {
+      return file.type.startsWith('image/') || /\.(heic|heif|jpe?g|png|webp|gif)$/i.test(file.name);
+    }
+
+    async function handleIncomingFiles(fileList) {
+      const incoming = Array.from(fileList).filter(isImageFile);
+      if (!incoming.length) {
+        showWarning('Please select image files only.');
+        return;
+      }
+
+      const remainingSlots = MAX_FILES - selectedFiles.length;
+      if (remainingSlots <= 0) {
+        showWarning('You have reached the 20-photo limit. Remove a photo to add another.');
+        return;
+      }
+
+      const toProcess = incoming.slice(0, remainingSlots);
+      showWarning(incoming.length > remainingSlots
+        ? 'Only ' + remainingSlots + ' additional photo(s) could be added.'
+        : '');
+
+      for (const file of toProcess) {
+        const id = 'f' + idCounter++;
+        selectedFiles.push({ file, id, compressing: true });
+        renderThumbs();
+        const finalFile = await maybeCompressImage(file);
+        const index = selectedFiles.findIndex(item => item.id === id);
+        if (index !== -1) selectedFiles[index] = { file: finalFile, id, compressing: false };
+        renderThumbs();
+      }
+      checkTotalSize();
+    }
+
+    function checkTotalSize() {
+      const total = currentTotalBytes();
+      if (total > MAX_TOTAL_BYTES) {
+        showWarning('Total photo size (' + formatBytes(total) + ') exceeds the 25 MB limit. Remove a few photos.');
+      }
+    }
+
+    function removeFile(id) {
+      const item = selectedFiles.find(fileItem => fileItem.id === id);
+      if (item && item.objectUrl) URL.revokeObjectURL(item.objectUrl);
+      selectedFiles = selectedFiles.filter(fileItem => fileItem.id !== id);
+      showWarning('');
+      renderThumbs();
+      checkTotalSize();
+    }
+
+    function renderThumbs() {
+      thumbGrid.innerHTML = '';
+      selectedFiles.forEach(item => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'thumb';
+
+        if (item.compressing) {
+          const overlay = document.createElement('div');
+          overlay.className = 'thumb-compressing';
+          overlay.textContent = 'OPTIMIZING...';
+          wrapper.appendChild(overlay);
+        } else {
+          const objectUrl = URL.createObjectURL(item.file);
+          item.objectUrl = objectUrl;
+          const image = document.createElement('img');
+          image.src = objectUrl;
+          image.alt = item.file.name;
+          wrapper.appendChild(image);
+        }
+
+        const caption = document.createElement('div');
+        caption.className = 'thumb-caption';
+        caption.textContent = item.file.name + ' · ' + formatBytes(item.file.size);
+        wrapper.appendChild(caption);
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'thumb-remove';
+        removeButton.innerHTML = '&times;';
+        removeButton.setAttribute('aria-label', 'Remove ' + item.file.name);
+        removeButton.addEventListener('click', () => removeFile(item.id));
+        wrapper.appendChild(removeButton);
+        thumbGrid.appendChild(wrapper);
+      });
+
+      fileCountEl.textContent = selectedFiles.length;
+      fileSizeTotalEl.textContent = formatBytes(currentTotalBytes());
+    }
+
+    async function maybeCompressImage(file) {
+      if (file.size <= COMPRESS_THRESHOLD) return file;
+      try {
+        const bitmap = await createImageBitmap(file);
+        let width = bitmap.width;
+        let height = bitmap.height;
+        if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+          const scale = MAX_DIMENSION / Math.max(width, height);
+          width = Math.round(width * scale);
+          height = Math.round(height * scale);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(bitmap, 0, 0, width, height);
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.82));
+        if (!blob) return file;
+        const filename = file.name.replace(/\.[^.]+$/, '') + '.jpg';
+        return new File([blob], filename, { type: 'image/jpeg' });
+      } catch (error) {
+        console.warn('Could not optimize image; using original file:', file.name);
+        return file;
+      }
+    }
+
+    const summaryFields = [
+      ['1. Business or organization', 'business'],
+      ['2. What the business does', 'business_description'],
+      ['3. Main website purpose', 'primary_purpose'],
+      ['4. Ideal customer or audience', 'target_audience'],
+      ['5. Primary visitor action', 'primary_action'],
+      ['6. Pages needed', 'pages_needed'],
+      ['7. Priority services or information', 'priority_offering'],
+      ['8. Special features', 'special_features'],
+      ['9. Content status', 'content_status'],
+      ['10. Brand assets', 'brand_assets'],
+      ['11. Website inspiration', 'inspiration_sites'],
+      ['12. Existing website/domain/hosting', 'existing_web_presence'],
+      ['13. Public contact information', 'public_contact_info'],
+      ['14. Timeline or deadline', 'timeline'],
+      ['15. Budget and maintenance', 'budget']
+    ];
+
+    function buildProjectSummary() {
+      const ownsDomain = form.querySelector('input[name="owns_domain"]:checked');
+      const lines = summaryFields.map(([label, id]) => {
+        const field = document.getElementById(id);
+        return label + ':\n' + ((field && field.value.trim()) || 'Not provided');
+      });
+      lines.splice(12, 0, 'Domain/hosting selected answer:\n' + (ownsDomain ? ownsDomain.value : 'Not provided'));
+      return lines.join('\n\n');
+    }
+
+    const submitBtn = document.getElementById('submit-btn');
+    const statusBanner = document.getElementById('status-banner');
+    const statusTitle = document.getElementById('status-title');
+    const statusMessage = document.getElementById('status-message');
+
+    function setStatus(type, title, message) {
+      statusBanner.className = 'status-banner visible ' + type;
+      statusTitle.textContent = title;
+      statusMessage.textContent = message;
+    }
+
+    function clearStatus() {
+      statusBanner.className = 'status-banner';
+      statusTitle.textContent = '';
+      statusMessage.textContent = '';
+    }
+
+    function createSubmissionId() {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+      return 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+    }
+
+    function readSubmissionLock() {
+      try {
+        const lock = JSON.parse(sessionStorage.getItem(SUBMISSION_LOCK_KEY) || 'null');
+        if (!lock || !lock.startedAt || Date.now() - lock.startedAt > SUBMISSION_LOCK_MS) {
+          sessionStorage.removeItem(SUBMISSION_LOCK_KEY);
+          return null;
+        }
+        return lock;
+      } catch (error) {
+        sessionStorage.removeItem(SUBMISSION_LOCK_KEY);
+        return null;
+      }
+    }
+
+    function writeSubmissionLock(lock) {
+      try { sessionStorage.setItem(SUBMISSION_LOCK_KEY, JSON.stringify(lock)); } catch (error) {}
+    }
+
+    const existingSubmission = readSubmissionLock();
+    if (existingSubmission) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = existingSubmission.completed ? 'Request Received' : 'Request Processing';
+      setStatus(
+        'success',
+        existingSubmission.completed ? 'REQUEST RECEIVED' : 'REQUEST PROCESSING',
+        existingSubmission.completed
+          ? 'Your website request was already received. Casey will respond within one business day.'
+          : 'Your request may already be processing. Please do not submit it again. Casey will follow up within one business day.'
+      );
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      clearStatus();
+
+      if (readSubmissionLock()) {
+        setStatus('success', 'REQUEST ALREADY SENT', 'This request is already processing. Please do not submit it again.');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Request Processing';
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        const invalid = form.querySelector(':invalid');
+        const invalidStep = invalid && invalid.closest('.form-step');
+        if (invalidStep) showStep(Number(invalidStep.dataset.step));
+        form.reportValidity();
+        return;
+      }
+      if (currentTotalBytes() > MAX_TOTAL_BYTES) {
+        setStatus('error', 'UPLOAD TOO LARGE', 'The photographs exceed the 25 MB total limit. Remove a few and try again.');
+        return;
+      }
+      if (selectedFiles.some(item => item.compressing)) {
+        setStatus('error', 'PLEASE WAIT', 'Your photographs are still being optimized.');
+        return;
+      }
+
+      const recaptchaToken = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
+      if (!recaptchaToken) {
+        setStatus('error', 'VERIFICATION REQUIRED', 'Please complete the reCAPTCHA before sending your request.');
+        return;
+      }
+
+      document.getElementById('project_details').value = buildProjectSummary();
+      const submission = {
+        id: createSubmissionId(),
+        startedAt: Date.now(),
+        completed: false
+      };
+      writeSubmissionLock(submission);
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      let allowRetry = false;
+
+      try {
+        const formData = new FormData(form);
+        formData.append('submission_id', submission.id);
+        selectedFiles.forEach(item => formData.append('photos', item.file, item.file.name));
+        const response = await fetch(WORKER_ENDPOINT, { method: 'POST', body: formData });
+
+        let data = null;
+        try { data = await response.json(); } catch (error) {}
+
+        if (response.ok) {
+          submission.completed = true;
+          writeSubmissionLock(submission);
+          setStatus('success', 'REQUEST RECEIVED', 'Thank you! Your website request and photographs were received. Casey will respond within one business day.');
+          form.reset();
+          selectedFiles.forEach(item => item.objectUrl && URL.revokeObjectURL(item.objectUrl));
+          selectedFiles = [];
+          renderThumbs();
+          showWarning('');
+          submitBtn.textContent = 'Request Received';
+        } else {
+          allowRetry = true;
+          sessionStorage.removeItem(SUBMISSION_LOCK_KEY);
+          setStatus('error', 'REQUEST NOT SENT', (data && data.error) || 'The server rejected the request. Please review the form and try again.');
+          if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+        }
+      } catch (error) {
+        console.error('Submission response was uncertain:', error);
+        setStatus('success', 'REQUEST PROCESSING', 'Your request may already have been received. Please do not submit it again. Casey will follow up within one business day.');
+        submitBtn.textContent = 'Request Processing';
+      } finally {
+        if (allowRetry) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Website Request';
+        } else {
+          submitBtn.disabled = true;
+        }
+      }
+    });
+  </script>

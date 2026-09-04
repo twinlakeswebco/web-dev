@@ -3,521 +3,222 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Web Design &amp; SEO Articles | Custom Web Architecture</title>
-  <meta name="description" content="Practical website development, SEO, and small-business technology articles from Casey Keown of Custom Web Architecture in Kentucky.">
-  <link rel="canonical" href="https://caseykeown.com/blog/">
-
-  <meta property="og:title" content="Web Design &amp; SEO Articles | Custom Web Architecture">
-  <meta property="og:description" content="Straightforward website development and SEO guidance for small businesses, nonprofits, and organizations.">
+  <title>Web Design and SEO Blog | Twin Lakes Web Co.</title>
+  <meta name="description" content="Practical guidance on websites, local SEO, performance, and small-business technology from Twin Lakes Web Co. in Grayson County, Kentucky.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://twinlakesweb.com/blog/">
+  <meta property="og:site_name" content="Twin Lakes Web Co.">
+  <meta property="og:title" content="Web Design and SEO Blog | Twin Lakes Web Co.">
+  <meta property="og:description" content="Practical guidance on websites, local SEO, performance, and small-business technology from Twin Lakes Web Co. in Grayson County, Kentucky.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://caseykeown.com/blog/">
-  <meta property="og:image" content="https://raw.githubusercontent.com/caseykeown/web-dev/refs/heads/main/blog-social-image.jpg">
+  <meta property="og:url" content="https://twinlakesweb.com/blog/">
+  <meta property="og:image" content="https://twinlakesweb.com/assets/twin-lakes-social.jpg">
+  <meta property="og:image:alt" content="Twin Lakes Web Co., website design and development in Grayson County, Kentucky">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Web Design and SEO Blog | Twin Lakes Web Co.">
+  <meta name="twitter:description" content="Practical guidance on websites, local SEO, performance, and small-business technology from Twin Lakes Web Co. in Grayson County, Kentucky.">
+  <meta name="twitter:image" content="https://twinlakesweb.com/assets/twin-lakes-social.jpg">
   <meta name="theme-color" content="#F47A3C">
-
-  <link rel="alternate" type="application/rss+xml" title="Custom Web Architecture Blog" href="/blog/feed.xml">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/assets/favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="shortcut icon" href="/assets/favicon.ico">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="manifest" href="/assets/site.webmanifest">
-
+  <link rel="alternate" type="application/rss+xml" title="Twin Lakes Web Co. Blog" href="/blog/feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/styles.css">
-
-  <style>
-    .blog-hero .hero-lede {
-      max-width: 62ch;
-    }
-
-    .blog-actions {
-      margin-top: var(--space-3);
-    }
-
-    .blog-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-2);
-      margin-bottom: var(--space-3);
-      padding: var(--space-2);
-      background: var(--color-cream-soft);
-      border: 1px solid var(--color-gray);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .blog-search {
-      position: relative;
-      flex: 1 1 28rem;
-    }
-
-    .blog-search svg {
-      position: absolute;
-      top: 50%;
-      left: 0.9rem;
-      width: 1.1rem;
-      height: 1.1rem;
-      color: #5f5b55;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .blog-search input {
-      width: 100%;
-      min-height: 3rem;
-      padding: 0.75rem 0.9rem 0.75rem 2.75rem;
-      color: var(--color-charcoal);
-      background: var(--color-white);
-      border: 1px solid var(--color-gray);
-      border-radius: var(--radius-sm);
-      font: inherit;
-    }
-
-    .blog-search input:focus {
-      border-color: var(--color-orange);
-      outline: 3px solid var(--color-orange);
-      outline-offset: 1px;
-    }
-
-    .post-count {
-      flex: 0 0 auto;
-      color: var(--color-green);
-      font-family: var(--font-heading);
-      font-size: var(--step--1);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .article-grid {
-      display: grid;
-      gap: var(--space-3);
-    }
-
-    .article-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: var(--space-2) var(--space-3);
-      align-items: start;
-      padding: var(--space-3);
-      background: var(--color-cream-soft);
-      border: 1px solid var(--color-gray);
-      border-radius: var(--radius);
-      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
-    }
-
-    .article-card:hover {
-      border-color: rgba(214, 96, 42, 0.55);
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
-    }
-
-    .article-card[hidden] {
-      display: none;
-    }
-
-    .article-card h2 {
-      margin-bottom: 0.45rem;
-      font-size: var(--step-2);
-    }
-
-    .article-card h2 a {
-      color: var(--color-charcoal);
-      text-decoration: none;
-    }
-
-    .article-card h2 a:hover {
-      color: var(--color-orange-dark);
-    }
-
-    .article-meta {
-      margin-bottom: 0.7rem;
-      color: var(--color-green);
-      font-family: var(--font-heading);
-      font-size: var(--step--1);
-      font-weight: 600;
-    }
-
-    .article-excerpt {
-      max-width: 68ch;
-      margin: 0;
-      color: #5f5b55;
-    }
-
-    .article-link {
-      align-self: center;
-      white-space: nowrap;
-    }
-
-    .blog-empty {
-      margin: var(--space-3) 0 0;
-      padding: var(--space-3);
-      color: #5f5b55;
-      text-align: center;
-      background: var(--color-cream-soft);
-      border: 1px dashed var(--color-gray);
-      border-radius: var(--radius);
-    }
-
-    @media (max-width: 700px) {
-      .blog-toolbar {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .post-count {
-        white-space: normal;
-      }
-
-      .article-card {
-        grid-template-columns: 1fr;
-      }
-
-      .article-link {
-        justify-self: start;
-      }
-    }
-  </style>
-
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://caseykeown.com/#business","name":"Custom Web Architecture","url":"https://caseykeown.com/","logo":"https://caseykeown.com/assets/cwa-monogram-transparent-black.png","image":"https://raw.githubusercontent.com/caseykeown/web-dev/refs/heads/main/blog-social-image.jpg","email":"mailto:me@caseykeown.com","founder":{"@id":"https://caseykeown.com/#casey"},"areaServed":"Kentucky","sameAs":["https://www.facebook.com/profile.php?id=61590846744430"]},{"@type":"Person","@id":"https://caseykeown.com/#casey","name":"Casey Keown","url":"https://caseykeown.com/about.html","image":"https://caseykeown.com/assets/headshot-640.webp","jobTitle":"Web Developer","worksFor":{"@id":"https://caseykeown.com/#business"}},{"@type":"Blog","@id":"https://caseykeown.com/blog/#blog","url":"https://caseykeown.com/blog/","name":"Custom Web Architecture Blog","description":"Practical website development, SEO, and small-business technology articles from Casey Keown.","publisher":{"@id":"https://caseykeown.com/#business"},"author":{"@id":"https://caseykeown.com/#casey"},"blogPost":[{"@id":"https://caseykeown.com/blog/articles/website-design-clarkson-ky/#article"},{"@id":"https://caseykeown.com/blog/articles/local-seo-leitchfield-ky/#article"},{"@id":"https://caseykeown.com/blog/articles/website-design-leitchfield-ky/#article"},{"@id":"https://caseykeown.com/blog/articles/show-up-in-google-maps/#article"},{"@id":"https://caseykeown.com/blog/articles/business-not-showing-on-google/#article"},{"@id":"https://caseykeown.com/blog/articles/church-website-design/#article"},{"@id":"https://caseykeown.com/blog/articles/web-designer-red-flags/#article"},{"@id":"https://caseykeown.com/blog/articles/cheap-website-design-worth-it/#article"},{"@id":"https://caseykeown.com/blog/articles/real-estate-agent-website-design/#article"},{"@id":"https://caseykeown.com/blog/articles/restaurant-website-design/#article"},{"@id":"https://caseykeown.com/blog/articles/hvac-website-design/#article"},{"@id":"https://caseykeown.com/blog/articles/website-design-contractors-kentucky/#article"},{"@id":"https://caseykeown.com/blog/articles/web-designer-elizabethtown-ky/#article"},{"@id":"https://caseykeown.com/blog/articles/build-website-yourself-or-hire-professional/#article"},{"@id":"https://caseykeown.com/blog/articles/wix-vs-custom-website/#article"},{"@id":"https://caseykeown.com/blog/articles/who-owns-your-website/#article"},{"@id":"https://caseykeown.com/blog/articles/questions-to-ask-web-designer/#article"},{"@id":"https://caseykeown.com/blog/articles/freelance-web-designer-vs-agency/#article"},{"@id":"https://caseykeown.com/blog/articles/static-html-linktree-alternative/#article"},{"@id":"https://caseykeown.com/blog/articles/website-cost-kentucky/#article"},{"@id":"https://caseykeown.com/blog/articles/small-business-website-cost/#article"}],"inLanguage":"en-US"}]}</script>
 </head>
-<body>
+<body class="blog-page">
   <a class="skip-link" href="#main">Skip to content</a>
-
   <header class="site-header">
-    <div class="wrap header-bar">
-      <a class="brand-mark" href="/" aria-label="Custom Web Architecture home">
-        <img class="brand-logo" src="/assets/cwa-horizontal-black.svg" alt="Custom Web Architecture" width="200" height="34">
-      </a>
-
-      <nav class="main-nav" aria-label="Main navigation">
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-nav-toggle>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18"></path>
-          </svg>
-          <span class="sr-only">Open menu</span>
-        </button>
-
-        <ul class="nav-links" id="nav-links" data-open="false" data-nav-links>
-          <li><a href="/">Home</a></li>
-          <li><a href="/services.html">Services</a></li>
-          <li><a href="/work.html">Work</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/blog/" aria-current="page">Blog</a></li>
-          <li><a href="/leads.html">Contact</a></li>
-          <li><a class="btn btn-primary" href="/leads.html">Request a Quote</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
+  <div class="wrap header-bar">
+    <a class="brand-mark" href="/" aria-label="Twin Lakes Web Co. home">
+      <img class="brand-logo" src="/assets/twin-lakes-wordmark.png" alt="Twin Lakes Web Co." width="640" height="180" fetchpriority="high" decoding="async">
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-nav-toggle>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <span class="sr-only">Menu</span>
+      </button>
+      <ul class="nav-links" id="nav-links" data-open="false" data-nav-links><li><a href="/">Home</a></li><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/about/">About</a></li><li><a href="/blog/" aria-current="page">Blog</a></li><li><a href="/contact/">Contact</a></li><li><a class="btn btn-primary" href="/contact/">Request a Quote</a></li></ul>
+    </nav>
+  </div>
+</header>
   <main id="main">
-    <section class="hero blog-hero">
-      <div class="wrap wrap-narrow">
-        <p class="eyebrow">Practical web guidance</p>
-        <h1>Web development and SEO without the mystery tech talk.</h1>
-        <p class="hero-lede">Straightforward answers for Kentucky small businesses, nonprofits, and people who want their websites to look professional, load quickly, and do useful work.</p>
-
-        <div class="btn-row blog-actions">
-          <a class="btn btn-primary" href="/blog/feed.xml">Subscribe via RSS</a>
-          <a class="btn btn-secondary" href="/leads.html">Request a Quote</a>
-        </div>
+    <section class="hero section-tight">
+      <div class="wrap measure">
+        <p class="eyebrow">From the blog</p>
+        <h1>Website advice without the mystery tech talk.</h1>
+        <p class="hero-lede">Practical answers about websites, local search, performance, and useful technology for small businesses in Kentucky.</p>
       </div>
     </section>
-
-    <section class="section section-alt" aria-labelledby="latest-articles-heading">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">From Casey</p>
-          <h2 id="latest-articles-heading">Latest articles</h2>
-          <p>Website costs, search visibility, practical development decisions, and ways to make your online presence work better for your business.</p>
-        </div>
-
-        <div class="blog-toolbar">
-          <div class="blog-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="11" cy="11" r="7"></circle>
-              <path d="m20 20-3.5-3.5"></path>
-            </svg>
-            <label class="sr-only" for="post-filter">Search articles</label>
-            <input id="post-filter" type="search" placeholder="Search articles..." autocomplete="off">
-          </div>
-          <span class="post-count" id="post-count" aria-live="polite">21 articles</span>
-        </div>
-
-        <div class="article-grid" id="post-list" role="list">
-          <article class="article-card" role="listitem" data-search="website design for clarkson, kentucky businesses a practical guide to website design for clarkson, ky businesses, including mobile usability, local seo, ownership, content, and provider selection.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-22">August 22, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/website-design-clarkson-ky/">Website Design for Clarkson, Kentucky Businesses</a></h2>
-              <p class="article-excerpt">A practical guide to website design for Clarkson, KY businesses, including mobile usability, local SEO, ownership, content, and provider selection.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/website-design-clarkson-ky/" aria-label="Read Website Design for Clarkson, Kentucky Businesses">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="how leitchfield businesses can get found online a practical local seo plan for leitchfield businesses covering google profiles, service pages, reviews, citations, mobile speed, and conversions.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-21">August 21, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/local-seo-leitchfield-ky/">How Leitchfield Businesses Can Get Found Online</a></h2>
-              <p class="article-excerpt">A practical local SEO plan for Leitchfield businesses covering Google profiles, service pages, reviews, citations, mobile speed, and conversions.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/local-seo-leitchfield-ky/" aria-label="Read How Leitchfield Businesses Can Get Found Online">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="website design in leitchfield, ky: a local guide learn what leitchfield businesses should expect from a website, including local seo, ownership, speed, support, and choosing a provider.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-20">August 20, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/website-design-leitchfield-ky/">Website Design in Leitchfield, KY: A Local Guide</a></h2>
-              <p class="article-excerpt">Learn what Leitchfield businesses should expect from a website, including local SEO, ownership, speed, support, and choosing a provider.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/website-design-leitchfield-ky/" aria-label="Read Website Design in Leitchfield, KY: A Local Guide">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="how to show up in google maps improve your google maps visibility with an accurate business profile, stronger local signals, real reviews, and a useful website.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-19">August 19, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/show-up-in-google-maps/">How to Show Up in Google Maps</a></h2>
-              <p class="article-excerpt">Improve your Google Maps visibility with an accurate Business Profile, stronger local signals, real reviews, and a useful website.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/show-up-in-google-maps/" aria-label="Read How to Show Up in Google Maps">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="why your business is not showing up on google learn why your business is missing from google search or maps and follow a practical checklist to diagnose profiles, rankings, and indexing.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-18">August 18, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/business-not-showing-on-google/">Why Your Business Is Not Showing Up on Google</a></h2>
-              <p class="article-excerpt">Learn why your business is missing from Google Search or Maps and follow a practical checklist to diagnose profiles, rankings, and indexing.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/business-not-showing-on-google/" aria-label="Read Why Your Business Is Not Showing Up on Google">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="church website design that welcomes your community learn what a church website needs to welcome first-time guests, support members, share sermons, accept gifts, and stay accurate without extra work.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-17">August 17, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/church-website-design/">Church Website Design That Welcomes Your Community</a></h2>
-              <p class="article-excerpt">Learn what a church website needs to welcome first-time guests, support members, share sermons, accept gifts, and stay accurate without extra work.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/church-website-design/" aria-label="Read Church Website Design That Welcomes Your Community">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="7 red flags when hiring a web designer learn seven web designer red flags that can lead to lost domains, surprise fees, weak seo, broken forms, and costly rebuilds.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-16">August 16, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/web-designer-red-flags/">7 Red Flags When Hiring a Web Designer</a></h2>
-              <p class="article-excerpt">Learn seven web designer red flags that can lead to lost domains, surprise fees, weak SEO, broken forms, and costly rebuilds.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/web-designer-red-flags/" aria-label="Read 7 Red Flags When Hiring a Web Designer">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="cheap website design: what you are really paying for learn when cheap website design is good value, where low-cost packages cut corners, and what to check before trusting your business to one.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-15">August 15, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/cheap-website-design-worth-it/">Cheap Website Design: What You Are Really Paying For</a></h2>
-              <p class="article-excerpt">Learn when cheap website design is good value, where low-cost packages cut corners, and what to check before trusting your business to one.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/cheap-website-design-worth-it/" aria-label="Read Cheap Website Design: What You Are Really Paying For">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="real estate agent websites that win listings learn what a real estate agent website needs to build local trust, support buyers and sellers, handle idx correctly, and generate qualified leads.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-14">August 14, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/real-estate-agent-website-design/">Real Estate Agent Websites That Win Listings</a></h2>
-              <p class="article-excerpt">Learn what a real estate agent website needs to build local trust, support buyers and sellers, handle IDX correctly, and generate qualified leads.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/real-estate-agent-website-design/" aria-label="Read Real Estate Agent Websites That Win Listings">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="what a restaurant website actually needs learn what a restaurant website needs beyond social media: a readable menu, accurate hours, ordering links, local seo, accessibility, and clear ownership.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-13">August 13, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/restaurant-website-design/">What a Restaurant Website Actually Needs</a></h2>
-              <p class="article-excerpt">Learn what a restaurant website needs beyond social media: a readable menu, accurate hours, ordering links, local SEO, accessibility, and clear ownership.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/restaurant-website-design/" aria-label="Read What a Restaurant Website Actually Needs">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="hvac website design that books more jobs learn what an hvac company website needs to earn trust, capture emergency calls, support local seo, and turn more visitors into qualified leads.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-12">August 12, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/hvac-website-design/">HVAC Website Design That Books More Jobs</a></h2>
-              <p class="article-excerpt">Learn what an HVAC company website needs to earn trust, capture emergency calls, support local SEO, and turn more visitors into qualified leads.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/hvac-website-design/" aria-label="Read HVAC Website Design That Books More Jobs">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="website design for kentucky contractors learn what a kentucky contractor website needs to earn trust, generate qualified calls, support local seo, and make quoting easier.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-11">August 11, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/website-design-contractors-kentucky/">Website Design for Kentucky Contractors</a></h2>
-              <p class="article-excerpt">Learn what a Kentucky contractor website needs to earn trust, generate qualified calls, support local SEO, and make quoting easier.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/website-design-contractors-kentucky/" aria-label="Read Website Design for Kentucky Contractors">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="hiring a web designer in elizabethtown, ky hiring a web designer in elizabethtown, kentucky? learn what to ask, what a proposal should include, and how to choose the right local partner.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-10">August 10, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/web-designer-elizabethtown-ky/">Hiring a Web Designer in Elizabethtown, KY</a></h2>
-              <p class="article-excerpt">Hiring a web designer in Elizabethtown, Kentucky? Learn what to ask, what a proposal should include, and how to choose the right local partner.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/web-designer-elizabethtown-ky/" aria-label="Read Hiring a Web Designer in Elizabethtown, KY">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="build your website yourself or hire a pro? should you build your own website or hire someone? compare time, cost, skill, risk, seo, maintenance, and the practical middle-ground options.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-09">August 9, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/build-website-yourself-or-hire-professional/">Build Your Website Yourself or Hire a Pro?</a></h2>
-              <p class="article-excerpt">Should you build your own website or hire someone? Compare time, cost, skill, risk, SEO, maintenance, and the practical middle-ground options.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/build-website-yourself-or-hire-professional/" aria-label="Read Build Your Website Yourself or Hire a Pro?">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="wix vs. a custom website: an honest comparison compare wix and custom websites on cost, seo, speed, ownership, maintenance, and flexibility before choosing the right fit for your business.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-08">August 8, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/wix-vs-custom-website/">Wix vs. a Custom Website: An Honest Comparison</a></h2>
-              <p class="article-excerpt">Compare Wix and custom websites on cost, SEO, speed, ownership, maintenance, and flexibility before choosing the right fit for your business.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/wix-vs-custom-website/" aria-label="Read Wix vs. a Custom Website: An Honest Comparison">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="who owns your website after it’s built? learn who controls your domain, website files, content, hosting, analytics, and licenses—and what your web design contract should clearly state.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-07">August 7, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/who-owns-your-website/">Who Owns Your Website After It’s Built?</a></h2>
-              <p class="article-excerpt">Learn who controls your domain, website files, content, hosting, analytics, and licenses—and what your web design contract should clearly state.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/who-owns-your-website/" aria-label="Read Who Owns Your Website After It’s Built?">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="12 questions to ask before hiring a web designer ask these 12 questions before hiring a web designer to clarify scope, ownership, costs, seo, accessibility, timelines, and support.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-06">August 6, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/questions-to-ask-web-designer/">12 Questions to Ask Before Hiring a Web Designer</a></h2>
-              <p class="article-excerpt">Ask these 12 questions before hiring a web designer to clarify scope, ownership, costs, SEO, accessibility, timelines, and support.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/questions-to-ask-web-designer/" aria-label="Read 12 Questions to Ask Before Hiring a Web Designer">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="freelance web designer vs. agency: how to choose compare a freelance web designer vs. agency by scope, communication, support, ownership, and risk to choose the right fit for your business.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-05">August 5, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/freelance-web-designer-vs-agency/">Freelance Web Designer vs. Agency: How to Choose</a></h2>
-              <p class="article-excerpt">Compare a freelance web designer vs. agency by scope, communication, support, ownership, and risk to choose the right fit for your business.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/freelance-web-designer-vs-agency/" aria-label="Read Freelance Web Designer vs. Agency: How to Choose">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="a static html alternative to linktree learn when a custom static html link-in-bio page gives a small business more control, better branding, and fewer platform limitations.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-04">August 4, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/static-html-linktree-alternative/">A Static HTML Alternative to Linktree</a></h2>
-              <p class="article-excerpt">Learn when a custom static HTML link-in-bio page gives a small business more control, better branding, and fewer platform limitations.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/static-html-linktree-alternative/" aria-label="Read A Static HTML Alternative to Linktree">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="what does a website cost in kentucky? see realistic kentucky website pricing, what changes a quote, recurring costs, and how to compare proposals without buying the wrong scope.">
-            <div>
-              <p class="article-meta"><time datetime="2026-08-03">August 3, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/website-cost-kentucky/">What Does a Website Cost in Kentucky?</a></h2>
-              <p class="article-excerpt">See realistic Kentucky website pricing, what changes a quote, recurring costs, and how to compare proposals without buying the wrong scope.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/website-cost-kentucky/" aria-label="Read What Does a Website Cost in Kentucky?">Read article &rarr;</a>
-          </article>
-
-          <article class="article-card" role="listitem" data-search="how much does a small business website cost? learn what a small business website costs in 2026, what changes the price, and how kentucky owners can set a realistic budget.">
-            <div>
-              <p class="article-meta"><time datetime="2026-07-21">July 21, 2026</time> &middot; Casey Keown</p>
-              <h2><a href="/blog/articles/small-business-website-cost/">How Much Does a Small Business Website Cost?</a></h2>
-              <p class="article-excerpt">Learn what a small business website costs in 2026, what changes the price, and how Kentucky owners can set a realistic budget.</p>
-            </div>
-            <a class="btn btn-quiet article-link" href="/blog/articles/small-business-website-cost/" aria-label="Read How Much Does a Small Business Website Cost?">Read article &rarr;</a>
-          </article>
-        </div>
-
-        <p class="blog-empty" id="blog-empty" hidden>No articles matched that search. Try a broader word or phrase.</p>
-      </div>
-    </section>
-
     <section class="section">
-      <div class="wrap">
-        <div class="cta-band">
-          <h2>Have a website question I should write about?</h2>
-          <p>Send me the question or tell me what your business is trying to accomplish. I may turn it into a future article, and I will point you toward a practical next step.</p>
-          <div class="btn-row" style="justify-content:center;">
-            <a class="btn btn-primary" href="/leads.html">Request a Quote</a>
-            <a class="btn btn-secondary" href="mailto:me@caseykeown.com">Email Me</a>
+      <div class="wrap blog-shell">
+        <div>
+          <div class="blog-toolbar">
+            <label class="sr-only" for="post-filter">Filter articles</label>
+            <input id="post-filter" type="search" placeholder="Search articles…" autocomplete="off">
+            <span class="post-meta"><span id="visible-post-count">21</span> articles</span>
           </div>
+          <ul class="blog-list" id="post-list"><li data-search="website design for clarkson, kentucky businesses a practical guide to website design for clarkson, ky businesses, including mobile usability, local seo, ownership, content, and provider selection.">
+  <p class="post-meta">August 22, 2026</p>
+  <h2><a href="/blog/articles/website-design-clarkson-ky/">Website Design for Clarkson, Kentucky Businesses</a></h2>
+  <p>A practical guide to website design for Clarkson, KY businesses, including mobile usability, local SEO, ownership, content, and provider selection.</p>
+</li>
+<li data-search="how leitchfield businesses can get found online a practical local seo plan for leitchfield businesses covering google profiles, service pages, reviews, citations, mobile speed, and conversions.">
+  <p class="post-meta">August 21, 2026</p>
+  <h2><a href="/blog/articles/local-seo-leitchfield-ky/">How Leitchfield Businesses Can Get Found Online</a></h2>
+  <p>A practical local SEO plan for Leitchfield businesses covering Google profiles, service pages, reviews, citations, mobile speed, and conversions.</p>
+</li>
+<li data-search="website design in leitchfield, ky: a local guide learn what leitchfield businesses should expect from a website, including local seo, ownership, speed, support, and choosing a provider.">
+  <p class="post-meta">August 20, 2026</p>
+  <h2><a href="/blog/articles/website-design-leitchfield-ky/">Website Design in Leitchfield, KY: A Local Guide</a></h2>
+  <p>Learn what Leitchfield businesses should expect from a website, including local SEO, ownership, speed, support, and choosing a provider.</p>
+</li>
+<li data-search="how to show up in google maps improve your google maps visibility with an accurate business profile, stronger local signals, real reviews, and a useful website.">
+  <p class="post-meta">August 19, 2026</p>
+  <h2><a href="/blog/articles/show-up-in-google-maps/">How to Show Up in Google Maps</a></h2>
+  <p>Improve your Google Maps visibility with an accurate Business Profile, stronger local signals, real reviews, and a useful website.</p>
+</li>
+<li data-search="why your business is not showing up on google learn why your business is missing from google search or maps and follow a practical checklist to diagnose profiles, rankings, and indexing.">
+  <p class="post-meta">August 18, 2026</p>
+  <h2><a href="/blog/articles/business-not-showing-on-google/">Why Your Business Is Not Showing Up on Google</a></h2>
+  <p>Learn why your business is missing from Google Search or Maps and follow a practical checklist to diagnose profiles, rankings, and indexing.</p>
+</li>
+<li data-search="church website design that welcomes your community learn what a church website needs to welcome first-time guests, support members, share sermons, accept gifts, and stay accurate without extra work.">
+  <p class="post-meta">August 17, 2026</p>
+  <h2><a href="/blog/articles/church-website-design/">Church Website Design That Welcomes Your Community</a></h2>
+  <p>Learn what a church website needs to welcome first-time guests, support members, share sermons, accept gifts, and stay accurate without extra work.</p>
+</li>
+<li data-search="7 red flags when hiring a web designer learn seven web designer red flags that can lead to lost domains, surprise fees, weak seo, broken forms, and costly rebuilds.">
+  <p class="post-meta">August 16, 2026</p>
+  <h2><a href="/blog/articles/web-designer-red-flags/">7 Red Flags When Hiring a Web Designer</a></h2>
+  <p>Learn seven web designer red flags that can lead to lost domains, surprise fees, weak SEO, broken forms, and costly rebuilds.</p>
+</li>
+<li data-search="cheap website design: what you are really paying for learn when cheap website design is good value, where low-cost packages cut corners, and what to check before trusting your business to one.">
+  <p class="post-meta">August 15, 2026</p>
+  <h2><a href="/blog/articles/cheap-website-design-worth-it/">Cheap Website Design: What You Are Really Paying For</a></h2>
+  <p>Learn when cheap website design is good value, where low-cost packages cut corners, and what to check before trusting your business to one.</p>
+</li>
+<li data-search="real estate agent websites that win listings learn what a real estate agent website needs to build local trust, support buyers and sellers, handle idx correctly, and generate qualified leads.">
+  <p class="post-meta">August 14, 2026</p>
+  <h2><a href="/blog/articles/real-estate-agent-website-design/">Real Estate Agent Websites That Win Listings</a></h2>
+  <p>Learn what a real estate agent website needs to build local trust, support buyers and sellers, handle IDX correctly, and generate qualified leads.</p>
+</li>
+<li data-search="what a restaurant website actually needs learn what a restaurant website needs beyond social media: a readable menu, accurate hours, ordering links, local seo, accessibility, and clear ownership.">
+  <p class="post-meta">August 13, 2026</p>
+  <h2><a href="/blog/articles/restaurant-website-design/">What a Restaurant Website Actually Needs</a></h2>
+  <p>Learn what a restaurant website needs beyond social media: a readable menu, accurate hours, ordering links, local SEO, accessibility, and clear ownership.</p>
+</li>
+<li data-search="hvac website design that books more jobs learn what an hvac company website needs to earn trust, capture emergency calls, support local seo, and turn more visitors into qualified leads.">
+  <p class="post-meta">August 12, 2026</p>
+  <h2><a href="/blog/articles/hvac-website-design/">HVAC Website Design That Books More Jobs</a></h2>
+  <p>Learn what an HVAC company website needs to earn trust, capture emergency calls, support local SEO, and turn more visitors into qualified leads.</p>
+</li>
+<li data-search="website design for kentucky contractors learn what a kentucky contractor website needs to earn trust, generate qualified calls, support local seo, and make quoting easier.">
+  <p class="post-meta">August 11, 2026</p>
+  <h2><a href="/blog/articles/website-design-contractors-kentucky/">Website Design for Kentucky Contractors</a></h2>
+  <p>Learn what a Kentucky contractor website needs to earn trust, generate qualified calls, support local SEO, and make quoting easier.</p>
+</li>
+<li data-search="hiring a web designer in elizabethtown, ky hiring a web designer in elizabethtown, kentucky? learn what to ask, what a proposal should include, and how to choose the right local partner.">
+  <p class="post-meta">August 10, 2026</p>
+  <h2><a href="/blog/articles/web-designer-elizabethtown-ky/">Hiring a Web Designer in Elizabethtown, KY</a></h2>
+  <p>Hiring a web designer in Elizabethtown, Kentucky? Learn what to ask, what a proposal should include, and how to choose the right local partner.</p>
+</li>
+<li data-search="build your website yourself or hire a pro? should you build your own website or hire someone? compare time, cost, skill, risk, seo, maintenance, and the practical middle-ground options.">
+  <p class="post-meta">August 9, 2026</p>
+  <h2><a href="/blog/articles/build-website-yourself-or-hire-professional/">Build Your Website Yourself or Hire a Pro?</a></h2>
+  <p>Should you build your own website or hire someone? Compare time, cost, skill, risk, SEO, maintenance, and the practical middle-ground options.</p>
+</li>
+<li data-search="wix vs. a custom website: an honest comparison compare wix and custom websites on cost, seo, speed, ownership, maintenance, and flexibility before choosing the right fit for your business.">
+  <p class="post-meta">August 8, 2026</p>
+  <h2><a href="/blog/articles/wix-vs-custom-website/">Wix vs. a Custom Website: An Honest Comparison</a></h2>
+  <p>Compare Wix and custom websites on cost, SEO, speed, ownership, maintenance, and flexibility before choosing the right fit for your business.</p>
+</li>
+<li data-search="who owns your website after it’s built? learn who controls your domain, website files, content, hosting, analytics, and licenses, and what your web design contract should clearly state.">
+  <p class="post-meta">August 7, 2026</p>
+  <h2><a href="/blog/articles/who-owns-your-website/">Who Owns Your Website After It’s Built?</a></h2>
+  <p>Learn who controls your domain, website files, content, hosting, analytics, and licenses, and what your web design contract should clearly state.</p>
+</li>
+<li data-search="12 questions to ask before hiring a web designer ask these 12 questions before hiring a web designer to clarify scope, ownership, costs, seo, accessibility, timelines, and support.">
+  <p class="post-meta">August 6, 2026</p>
+  <h2><a href="/blog/articles/questions-to-ask-web-designer/">12 Questions to Ask Before Hiring a Web Designer</a></h2>
+  <p>Ask these 12 questions before hiring a web designer to clarify scope, ownership, costs, SEO, accessibility, timelines, and support.</p>
+</li>
+<li data-search="freelance web designer vs. agency: how to choose compare a freelance web designer vs. agency by scope, communication, support, ownership, and risk to choose the right fit for your business.">
+  <p class="post-meta">August 5, 2026</p>
+  <h2><a href="/blog/articles/freelance-web-designer-vs-agency/">Freelance Web Designer vs. Agency: How to Choose</a></h2>
+  <p>Compare a freelance web designer vs. agency by scope, communication, support, ownership, and risk to choose the right fit for your business.</p>
+</li>
+<li data-search="a static html alternative to linktree learn when a custom static html link-in-bio page gives a small business more control, better branding, and fewer platform limitations.">
+  <p class="post-meta">August 4, 2026</p>
+  <h2><a href="/blog/articles/static-html-linktree-alternative/">A Static HTML Alternative to Linktree</a></h2>
+  <p>Learn when a custom static HTML link-in-bio page gives a small business more control, better branding, and fewer platform limitations.</p>
+</li>
+<li data-search="what does a website cost in kentucky? see realistic kentucky website pricing, what changes a quote, recurring costs, and how to compare proposals without buying the wrong scope.">
+  <p class="post-meta">August 3, 2026</p>
+  <h2><a href="/blog/articles/website-cost-kentucky/">What Does a Website Cost in Kentucky?</a></h2>
+  <p>See realistic Kentucky website pricing, what changes a quote, recurring costs, and how to compare proposals without buying the wrong scope.</p>
+</li>
+<li data-search="how much does a small business website cost? learn what a small business website costs in 2026, what changes the price, and how kentucky owners can set a realistic budget.">
+  <p class="post-meta">July 21, 2026</p>
+  <h2><a href="/blog/articles/small-business-website-cost/">How Much Does a Small Business Website Cost?</a></h2>
+  <p>Learn what a small business website costs in 2026, what changes the price, and how Kentucky owners can set a realistic budget.</p>
+</li></ul>
+          <p id="no-post-results" hidden>No articles matched that search.</p>
         </div>
+        <aside class="blog-sidebar">
+          <h2>About this blog</h2>
+          <p>I'm Casey Keown of Twin Lakes Web Co. I write about practical website decisions, local search fundamentals, accessibility, performance, and owning your online presence.</p>
+          <p><a href="/blog/feed.xml">Subscribe with RSS</a></p>
+          <p><a class="btn btn-primary" href="/contact/">Request a Quote</a></p>
+        </aside>
       </div>
     </section>
   </main>
-
   <footer class="site-footer">
-    <div class="wrap footer-grid">
-      <div>
-        <h2>Custom Web Architecture</h2>
-        <p>Websites built with care and common sense, for small businesses and organizations across Kentucky.</p>
-      </div>
-
-      <div>
-        <h2>Site</h2>
-        <ul class="footer-links">
-          <li><a href="/services.html">Services</a></li>
-          <li><a href="/work.html">Work</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/blog/">Blog</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h2>Contact</h2>
-        <ul class="footer-links">
-          <li><a href="mailto:me@caseykeown.com">me@caseykeown.com</a></li>
-          <li><a href="/leads.html">Request a Quote</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61590846744430" target="_blank" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
+  <div class="wrap footer-grid">
+    <div>
+      <h2>Twin Lakes Web Co.</h2>
+      <p>Websites built here. Built to work everywhere.</p>
+      <p>Website design and development in Grayson County, Kentucky, serving the communities around Rough River Lake and Nolin Lake.</p>
     </div>
-
-    <div class="wrap footer-bottom">
-      <span>&copy; <span data-current-year>2026</span> Casey Keown | Custom Web Architecture. All rights reserved.</span>
-      <span>Websites built by Casey Keown.</span>
+    <div>
+      <h2>Site</h2>
+      <ul class="footer-links">
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/work/">Work</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
     </div>
-  </footer>
-
+    <div>
+      <h2>Contact</h2>
+      <ul class="footer-links">
+        <li><a href="mailto:me@caseykeown.com">Contact</a></li>
+        <li><a href="mailto:me@caseykeown.com">me@caseykeown.com</a></li>
+        <li><a href="/contact/">Request a Quote</a></li>
+        <li><a href="https://calendar.app.google/ZXUK3d3zYTUcgLhw5" target="_blank" rel="noopener">Book a Consultation</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61590846744430" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Service area</h2>
+      <p>Leitchfield, Clarkson, Caneyville, Rough River Lake, Nolin Lake, and Grayson County, plus businesses across Central Kentucky.</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; 2026 Twin Lakes Web Co. LLC. All rights reserved.</span>
+    <span><a href="mailto:me@caseykeown.com">Contact</a></span>
+  </div>
+</footer>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://twinlakesweb.com/#business","name":"Twin Lakes Web Co.","url":"https://twinlakesweb.com/","logo":"https://twinlakesweb.com/assets/twin-lakes-monogram.png","image":"https://twinlakesweb.com/assets/twin-lakes-social.jpg","email":"mailto:{brand.EMAIL}","founder":{"@id":"https://twinlakesweb.com/#casey"},"areaServed":"Kentucky","sameAs":["https://www.facebook.com/profile.php?id=61590846744430"]},{"@type":"Person","@id":"https://twinlakesweb.com/#casey","name":"Casey Keown","url":"https://twinlakesweb.com/about/","image":"https://twinlakesweb.com/assets/headshot-640.webp","jobTitle":"Web Developer","worksFor":{"@id":"https://twinlakesweb.com/#business"}},{"@type":"Blog","@id":"https://twinlakesweb.com/blog/#blog","url":"https://twinlakesweb.com/blog/","name":"Twin Lakes Web Co. Blog","description":"Practical guidance on websites, local SEO, performance, and small-business technology from Twin Lakes Web Co. in Grayson County, Kentucky.","publisher":{"@id":"https://twinlakesweb.com/#business"},"author":{"@id":"https://twinlakesweb.com/#casey"},"blogPost":[{"@id":"https://twinlakesweb.com/blog/articles/website-design-clarkson-ky/#article"},{"@id":"https://twinlakesweb.com/blog/articles/local-seo-leitchfield-ky/#article"},{"@id":"https://twinlakesweb.com/blog/articles/website-design-leitchfield-ky/#article"},{"@id":"https://twinlakesweb.com/blog/articles/show-up-in-google-maps/#article"},{"@id":"https://twinlakesweb.com/blog/articles/business-not-showing-on-google/#article"},{"@id":"https://twinlakesweb.com/blog/articles/church-website-design/#article"},{"@id":"https://twinlakesweb.com/blog/articles/web-designer-red-flags/#article"},{"@id":"https://twinlakesweb.com/blog/articles/cheap-website-design-worth-it/#article"},{"@id":"https://twinlakesweb.com/blog/articles/real-estate-agent-website-design/#article"},{"@id":"https://twinlakesweb.com/blog/articles/restaurant-website-design/#article"},{"@id":"https://twinlakesweb.com/blog/articles/hvac-website-design/#article"},{"@id":"https://twinlakesweb.com/blog/articles/website-design-contractors-kentucky/#article"},{"@id":"https://twinlakesweb.com/blog/articles/web-designer-elizabethtown-ky/#article"},{"@id":"https://twinlakesweb.com/blog/articles/build-website-yourself-or-hire-professional/#article"},{"@id":"https://twinlakesweb.com/blog/articles/wix-vs-custom-website/#article"},{"@id":"https://twinlakesweb.com/blog/articles/who-owns-your-website/#article"},{"@id":"https://twinlakesweb.com/blog/articles/questions-to-ask-web-designer/#article"},{"@id":"https://twinlakesweb.com/blog/articles/freelance-web-designer-vs-agency/#article"},{"@id":"https://twinlakesweb.com/blog/articles/static-html-linktree-alternative/#article"},{"@id":"https://twinlakesweb.com/blog/articles/website-cost-kentucky/#article"},{"@id":"https://twinlakesweb.com/blog/articles/small-business-website-cost/#article"}],"inLanguage":"en-US"}]}</script>
   <script src="/scripts/site.js" defer></script>
-  <script>
-    (function () {
-      var filter = document.getElementById('post-filter');
-      var posts = Array.prototype.slice.call(document.querySelectorAll('#post-list .article-card'));
-      var count = document.getElementById('post-count');
-      var empty = document.getElementById('blog-empty');
-
-      if (!filter || !posts.length || !count || !empty) return;
-
-      function updateResults() {
-        var query = filter.value.trim().toLowerCase();
-        var visible = 0;
-
-        posts.forEach(function (post) {
-          var searchableText = (post.dataset.search + ' ' + post.textContent).toLowerCase();
-          var matches = !query || searchableText.indexOf(query) !== -1;
-          post.hidden = !matches;
-          if (matches) visible += 1;
-        });
-
-        count.textContent = visible + ' article' + (visible === 1 ? '' : 's');
-        empty.hidden = visible !== 0;
-      }
-
-      filter.addEventListener('input', updateResults);
-      filter.addEventListener('search', updateResults);
-    }());
-  </script>
+  <script src="/scripts/blog.js" defer></script>
 </body>
 </html>

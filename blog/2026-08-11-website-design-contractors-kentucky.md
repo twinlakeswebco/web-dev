@@ -177,4 +177,4 @@ The best contractor website does not try to impress other web designers. It help
 
 Be specific about services. Show real work. Make credentials easy to verify. Keep the site fast on mobile. Give every page a clear next step. Then maintain the information as your crew, service area, and capabilities change.
 
-If your current site does not reflect the quality of your work, Custom Web Architecture can help you plan a practical replacement built around qualified calls and estimate requests. [Request a website quote](/leads.html) and tell me what your contracting business needs the site to do.
+If your current site does not reflect the quality of your work, Twin Lakes Web Co. can help you plan a practical replacement built around qualified calls and estimate requests. [Request a website quote](/contact/) and tell me what your contracting business needs the site to do.

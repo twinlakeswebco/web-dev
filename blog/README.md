@@ -1,4 +1,4 @@
-# Casey's Blog publishing instructions
+# Twin Lakes Web Co. blog publishing instructions
 
 Add finished articles directly to this `/blog` folder.
 
@@ -25,9 +25,9 @@ slug: "small-business-website-cost"
 
 Pushing a Markdown file automatically rebuilds:
 
-- `/blog/` — the article list
-- `/blog/articles/your-slug/` — the search-friendly article page
-- `/blog/feed.xml` — the RSS feed
-- `/sitemap.xml` — the XML sitemap
+- `/blog/` for the article list
+- `/blog/articles/your-slug/` for the search-friendly article page
+- `/blog/feed.xml` for the RSS feed
+- `/sitemap.xml` for the XML sitemap
 
 `.doc` and `.docx` files are included in the list as downloads, but cannot become normal web pages. For SEO, convert Word documents to Markdown before uploading. The daily article automation already creates Markdown.

@@ -198,4 +198,4 @@ A useful local website does not need to be complicated. It needs to be accurate,
 
 For a Clarkson business, that may mean directions for someone arriving from the parkway, current information before a community event, a simple quote form for a rural customer, or a clear explanation that makes a first-time visitor comfortable calling. Those practical details turn a website from an online brochure into a working part of the business.
 
-If your current website does not clearly show what you do, where you work, and how someone can hire you, Custom Web Architecture can help you plan a cleaner replacement. [Request a website quote](/leads.html) and tell me about your Clarkson business, your customers, and what the website needs to accomplish.
+If your current website does not clearly show what you do, where you work, and how someone can hire you, Twin Lakes Web Co. can help you plan a cleaner replacement. [Request a website quote](/contact/) and tell me about your Clarkson business, your customers, and what the website needs to accomplish.
