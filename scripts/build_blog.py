@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Custom Web Architecture static blog from Markdown files in /blog.
+"""Build the Twin Lakes Web Co. static blog from Markdown files in /blog.
 
 Generated files:
 - /blog/index.html
@@ -20,24 +20,32 @@ from email.utils import format_datetime
 from pathlib import Path
 from urllib.parse import quote
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import brand  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 BLOG = ROOT / "blog"
 ARTICLES = BLOG / "articles"
 EXCLUDED_DIRS = {"articles", "assets"}
 EXCLUDED_FILES = {"README.md"}
-SITE_URL = "https://caseykeown.com"
-SITE_NAME = "Custom Web Architecture"
-FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61590846744430"
-BOOKING_URL = "https://calendar.app.google/ZXUK3d3zYTUcgLhw5"
-OG_IMAGE = "https://raw.githubusercontent.com/caseykeown/web-dev/refs/heads/main/blog-social-image.jpg"
-AUDIO_PATH = "/Eden%20-%20TesseracT%20(128k).mp3"
+SITE_URL = brand.SITE_URL
+SITE_NAME = brand.SITE_NAME
+FACEBOOK_URL = brand.FACEBOOK_URL
+BOOKING_URL = brand.BOOKING_URL
+OG_IMAGE = brand.OG_IMAGE
 
 STATIC_URLS = [
     ("/", None),
-    ("/services.html", None),
-    ("/work.html", None),
-    ("/about.html", None),
-    ("/leads.html", None),
+    ("/services/", None),
+    ("/work/", None),
+    ("/work/nalls-specialized-hauling/", None),
+    ("/work/isr-with-daphne/", None),
+    ("/work/ground-pros/", None),
+    ("/about/", None),
+    ("/contact/", None),
     ("/blog/", None),
 ]
 
@@ -207,9 +215,9 @@ def organization_schema() -> dict[str, object]:
         "@id": f"{SITE_URL}/#business",
         "name": SITE_NAME,
         "url": f"{SITE_URL}/",
-        "logo": f"{SITE_URL}/assets/cwa-monogram-transparent-black.png",
+        "logo": f"{SITE_URL}{brand.LOGO_MONOGRAM}",
         "image": OG_IMAGE,
-        "email": "mailto:me@caseykeown.com",
+        "email": "mailto:{brand.EMAIL}",
         "founder": {"@id": f"{SITE_URL}/#casey"},
         "areaServed": "Kentucky",
         "sameAs": [FACEBOOK_URL],
@@ -221,7 +229,7 @@ def person_schema() -> dict[str, object]:
         "@type": "Person",
         "@id": f"{SITE_URL}/#casey",
         "name": "Casey Keown",
-        "url": f"{SITE_URL}/about.html",
+        "url": f"{SITE_URL}/about/",
         "image": f"{SITE_URL}/assets/headshot-640.webp",
         "jobTitle": "Web Developer",
         "worksFor": {"@id": f"{SITE_URL}/#business"},
@@ -229,78 +237,11 @@ def person_schema() -> dict[str, object]:
 
 
 def header_html(active: str = "blog") -> str:
-    links = [
-        ("home", "/", "Home"),
-        ("services", "/services.html", "Services"),
-        ("work", "/work.html", "Work"),
-        ("about", "/about.html", "About"),
-        ("blog", "/blog/", "Blog"),
-        ("contact", "/leads.html", "Contact"),
-    ]
-    items = []
-    for key, href, label in links:
-        current = ' aria-current="page"' if key == active else ""
-        items.append(f'<li><a href="{href}"{current}>{label}</a></li>')
-    items.append('<li><a class="btn btn-primary" href="/leads.html">Request a Quote</a></li>')
-    return f'''<header class="site-header">
-  <div class="wrap header-bar">
-    <a class="brand-mark" href="/" aria-label="Custom Web Architecture home">
-      <img class="brand-logo" src="/assets/cwa-horizontal-black.svg" alt="Custom Web Architecture" width="1200" height="200">
-    </a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-nav-toggle>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        <span class="sr-only">Open menu</span>
-      </button>
-      <ul class="nav-links" id="nav-links" data-open="false" data-nav-links>{''.join(items)}</ul>
-    </nav>
-  </div>
-</header>'''
+    return brand.header_html(active)
 
 
 def footer_html() -> str:
-    return f'''<footer class="site-footer">
-  <div class="wrap footer-grid">
-    <div>
-      <h2>{SITE_NAME}</h2>
-      <p>Websites built with care and common sense for small businesses and organizations across Kentucky.</p>
-      <p>Websites built by Casey Keown.</p>
-    </div>
-    <div>
-      <h2>Site</h2>
-      <ul class="footer-links">
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/work.html">Work</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/blog/">Blog</a></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Contact</h2>
-      <ul class="footer-links">
-        <li><a href="mailto:me@caseykeown.com">me@caseykeown.com</a></li>
-        <li><a href="/leads.html">Request a Quote</a></li>
-        <li><a href="{BOOKING_URL}" target="_blank" rel="noopener">Book a Consultation</a></li>
-        <li><a href="{FACEBOOK_URL}" target="_blank" rel="noopener">Facebook</a></li>
-      </ul>
-    </div>
-    <div class="music-player" data-music-player>
-      <h2 class="music-title">Site soundtrack</h2>
-      <p class="music-track">“Eden” — TesseracT</p>
-      <audio preload="none" data-src="{AUDIO_PATH}"></audio>
-      <div class="music-controls">
-        <button class="music-toggle" type="button" data-music-toggle aria-label="Play Eden by TesseracT">▶</button>
-        <input class="music-progress" type="range" min="0" max="0" value="0" step="0.1" data-music-progress aria-label="Music progress">
-        <span class="music-time" data-music-time>0:00 / 0:00</span>
-      </div>
-      <p class="music-status" data-music-status aria-live="polite">Press play to listen.</p>
-    </div>
-  </div>
-  <div class="wrap footer-bottom">
-    <span>&copy; <span data-current-year>{date.today().year}</span> Casey Keown | {SITE_NAME}. All rights reserved.</span>
-    <span>Serving Kentucky and working remotely.</span>
-  </div>
-</footer>'''
+    return brand.footer_html()
 
 
 def head_html(
@@ -325,20 +266,15 @@ def head_html(
   <meta property="og:type" content="{page_type}">
   <meta property="og:url" content="{html.escape(canonical, quote=True)}">
   <meta property="og:image" content="{OG_IMAGE}">
-  <meta property="og:image:alt" content="{SITE_NAME} by Casey Keown">{article_meta}
+  <meta property="og:image:alt" content="{SITE_NAME}, website design and development in Grayson County, Kentucky">{article_meta}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{html.escape(title, quote=True)}">
   <meta name="twitter:description" content="{html.escape(description, quote=True)}">
   <meta name="twitter:image" content="{OG_IMAGE}">
   <meta name="theme-color" content="#F47A3C">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/assets/favicon-96x96.png" sizes="96x96" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="manifest" href="/assets/site.webmanifest">
+{brand.ICON_LINKS}
   <link rel="alternate" type="application/rss+xml" title="{SITE_NAME} Blog" href="/blog/feed.xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{brand.FONT_LINKS}
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/styles.css">
 </head>'''
@@ -443,8 +379,8 @@ def build() -> None:
         filename_date = re.match(r"^(\d{4}-\d{2}-\d{2})", source.name)
         published = meta.get("date") or (filename_date.group(1) if filename_date else date.today().isoformat())
         modified = meta.get("modified") or published
-        description = meta.get("meta_description") or meta.get("description") or "Practical website development and SEO guidance from Custom Web Architecture."
-        seo_title = meta.get("meta_title") or f"{title} | Custom Web Architecture"
+        description = meta.get("meta_description") or meta.get("description") or "Practical website and local SEO guidance from Twin Lakes Web Co."
+        seo_title = meta.get("meta_title") or f"{title} | {SITE_NAME}"
         article_url = f"/blog/articles/{slug}/"
         canonical = f"{SITE_URL}{article_url}"
         body = markdown_to_html(markdown)
@@ -470,7 +406,7 @@ def build() -> None:
   {header_html("blog")}
   <main id="main">
     <section class="hero section-tight">
-      <div class="wrap wrap-narrow">
+      <div class="wrap measure">
         <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">{html.escape(title)}</li></ol></nav>
         <p class="eyebrow">Website guidance</p>
         <h1>{html.escape(title)}</h1>
@@ -484,7 +420,7 @@ def build() -> None:
         <aside class="blog-sidebar" aria-label="About the author">
           <h2>Written by Casey</h2>
           <p>I build straightforward websites and practical web tools for small businesses and organizations.</p>
-          <p><a class="btn btn-primary" href="/leads.html">Request a Quote</a></p>
+          <p><a class="btn btn-primary" href="/contact/">Request a Quote</a></p>
           <p><a href="/blog/">View all articles</a></p>
         </aside>
       </div>
@@ -519,8 +455,8 @@ def build() -> None:
     if not list_items:
         list_items.append('<li><h2>Articles are coming soon.</h2><p>Check back for practical website and SEO guidance.</p></li>')
 
-    index_title = "Web Design & SEO Blog | Custom Web Architecture"
-    index_description = "Practical website development, SEO, performance, and small-business technology guidance from Kentucky web developer Casey Keown."
+    index_title = f"Web Design and SEO Blog | {SITE_NAME}"
+    index_description = "Practical guidance on websites, local SEO, performance, and small-business technology from Twin Lakes Web Co. in Grayson County, Kentucky."
     index_schema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -548,10 +484,10 @@ def build() -> None:
   {header_html("blog")}
   <main id="main">
     <section class="hero section-tight">
-      <div class="wrap wrap-narrow">
+      <div class="wrap measure">
         <p class="eyebrow">From the blog</p>
-        <h1>Web development without the mystery tech talk.</h1>
-        <p class="hero-lede">Practical answers about websites, search visibility, performance, and useful technology for small businesses.</p>
+        <h1>Website advice without the mystery tech talk.</h1>
+        <p class="hero-lede">Practical answers about websites, local search, performance, and useful technology for small businesses in Kentucky.</p>
       </div>
     </section>
     <section class="section">
@@ -567,9 +503,9 @@ def build() -> None:
         </div>
         <aside class="blog-sidebar">
           <h2>About this blog</h2>
-          <p>I write about practical website decisions, local search fundamentals, accessibility, performance, and owning your online presence.</p>
+          <p>I'm Casey Keown of Twin Lakes Web Co. I write about practical website decisions, local search fundamentals, accessibility, performance, and owning your online presence.</p>
           <p><a href="/blog/feed.xml">Subscribe with RSS</a></p>
-          <p><a class="btn btn-primary" href="/leads.html">Request a Quote</a></p>
+          <p><a class="btn btn-primary" href="/contact/">Request a Quote</a></p>
         </aside>
       </div>
     </section>

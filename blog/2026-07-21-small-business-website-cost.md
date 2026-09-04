@@ -133,7 +133,7 @@ Content also changes. Employees leave, prices change, services expand, and photo
 
 Launching a website does not automatically create an audience. Depending on your goals, the next phase may include local SEO, new service pages, Google Business Profile work, email marketing, paid advertising, or regular articles.
 
-Think of the website as the place your marketing sends people—not the entire marketing plan by itself.
+Think of the website as the place your marketing sends people, not the entire marketing plan by itself.
 
 ## Three Realistic Small-Business Scenarios
 
@@ -189,7 +189,7 @@ Be cautious with promises of guaranteed Google rankings, unexplained recurring c
 
 ## So, How Much Should You Spend?
 
-A small business website should cost enough to solve the right problem—without paying for complexity that does not help the business.
+A small business website should cost enough to solve the right problem, without paying for complexity that does not help the business.
 
 If you mainly need a professional online presence, a focused site may be enough. If you depend on local search, you may need deeper service and location content. If customers must buy, schedule, upload documents, or manage accounts, expect the scope and budget to grow.
 

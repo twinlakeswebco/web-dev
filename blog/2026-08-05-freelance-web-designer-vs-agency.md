@@ -98,7 +98,7 @@ The safest choice is not automatically the larger provider. It is the provider t
 
 ### Scope and responsibility
 
-“Website design” can mean a finished, functioning website—or only visual mockups. Your proposal should state who handles strategy, writing, image preparation, development, mobile testing, forms, domain connection, redirects, analytics, accessibility checks, and launch.
+“Website design” can mean a finished, functioning website, or it can mean only visual mockups. Your proposal should state who handles strategy, writing, image preparation, development, mobile testing, forms, domain connection, redirects, analytics, accessibility checks, and launch.
 
 It should also identify what you must provide and when. A delayed logo, missing service descriptions, or weeks of unanswered approvals can stall either type of provider.
 
@@ -151,4 +151,4 @@ Do not choose a freelancer only because the quote is lower. Do not choose an age
 
 A website project goes better when everyone knows the goal, who is responsible for each piece, what completion looks like, and who controls the finished assets. Those fundamentals matter whether your provider works from a home office or a downtown agency.
 
-Custom Web Architecture is an owner-led web development business serving Kentucky small businesses and organizations. You work directly with the person planning and building your website, with the scope and ownership explained before work begins. If that approach sounds right for your project, [request a website quote](/leads.html) and tell me what you need the site to accomplish.
+Twin Lakes Web Co. is an owner-led web development business serving Kentucky small businesses and organizations. You work directly with the person planning and building your website, with the scope and ownership explained before work begins. If that approach sounds right for your project, [request a website quote](/contact/) and tell me what you need the site to accomplish.

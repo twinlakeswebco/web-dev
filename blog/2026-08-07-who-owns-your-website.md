@@ -1,7 +1,7 @@
 ---
 title: "Who Owns Your Website After It’s Built?"
 meta_title: "Who Owns Your Website After It’s Built?"
-meta_description: "Learn who controls your domain, website files, content, hosting, analytics, and licenses—and what your web design contract should clearly state."
+meta_description: "Learn who controls your domain, website files, content, hosting, analytics, and licenses, and what your web design contract should clearly state."
 target_keyword: "who owns my website after it's built"
 intent: "informational"
 queue_number: 5
@@ -177,4 +177,4 @@ The best answer to “who owns my website after it’s built?” is not a one-wo
 
 That clarity protects both sides. You know what you are buying, the developer knows what remains reusable or licensed, and future changes become an orderly handoff instead of a rescue project.
 
-If you want a website built with clear ownership, documented accounts, and no mystery about the handoff, [request a quote from Custom Web Architecture](/leads.html). We’ll discuss the structure before the build begins so you know what you control on launch day.
+If you want a website built with clear ownership, documented accounts, and no mystery about the handoff, [request a quote from Twin Lakes Web Co.](/contact/). I’ll walk through the structure before the build begins so you know what you control on launch day.

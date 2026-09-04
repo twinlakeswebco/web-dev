@@ -175,4 +175,4 @@ If the goal is simply to confirm that the business is legitimate and provide con
 
 Do not choose a proposal because it contains the most pages or the lowest number. Choose the clearest scope, the right level of complexity, ownership you understand, and a provider who can explain what happens after launch.
 
-If you want a straightforward estimate based on what your Kentucky business actually needs, [tell Custom Web Architecture about the project](/leads). You will get a recommendation built around the goal instead of a generic package padded with features you may never use.
+If you want a straightforward estimate based on what your Kentucky business actually needs, [tell Twin Lakes Web Co. about the project](/contact/). You will get a recommendation built around the goal instead of a generic package padded with features you may never use.

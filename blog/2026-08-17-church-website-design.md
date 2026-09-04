@@ -172,4 +172,4 @@ A church website should help a nervous first-time guest arrive with fewer unknow
 
 Start with the information people need this Sunday. Add features only when the church has a plan to keep them accurate, accessible, and secure.
 
-If your church website no longer reflects the congregation or is difficult for volunteers to update, Custom Web Architecture can help plan a simpler replacement with clear ownership and manageable costs. [Request a website quote](/leads.html) and tell me about your church, service schedule, ministries, current website, and the people who will maintain it.
+If your church website no longer reflects the congregation or is difficult for volunteers to update, Twin Lakes Web Co. can help plan a simpler replacement with clear ownership and manageable costs. [Request a website quote](/contact/) and tell me about your church, service schedule, ministries, current website, and the people who will maintain it.

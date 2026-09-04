@@ -164,4 +164,4 @@ Use four questions:
 
 The best Linktree alternative for a small business is not necessarily another app. Sometimes it is one small, fast page that belongs to the same web presence as the rest of the business.
 
-If you want a branded static link-in-bio page that uses your domain and sends customers toward the right action, [request a quote from Custom Web Architecture](/leads.html).
+If you want a branded static link-in-bio page that uses your domain and sends customers toward the right action, [request a quote from Twin Lakes Web Co.](/contact/).

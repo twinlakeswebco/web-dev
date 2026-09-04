@@ -150,4 +150,4 @@ A restaurant website does not need to compete with a social network or delivery 
 
 When those pieces work together, the website becomes more than an online brochure. It becomes a reliable part of the guest experience before the customer ever reaches the door.
 
-If your restaurant website is outdated, difficult to update, or scattered across too many platforms, Custom Web Architecture can help you plan a simpler system. [Request a website quote](/leads.html) and tell me how your menu, orders, reservations, and updates work today.
+If your restaurant website is outdated, difficult to update, or scattered across too many platforms, Twin Lakes Web Co. can help you plan a simpler system. [Request a website quote](/contact/) and tell me how your menu, orders, reservations, and updates work today.

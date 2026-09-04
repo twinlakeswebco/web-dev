@@ -192,4 +192,4 @@ Local SEO cannot hide a confusing offer or neglected customer experience. It wor
 
 For a Leitchfield business, that means accurate local information, useful service pages, visible proof, a fast mobile experience, and an easy next step. Those improvements help search engines understand the company, but they also help people choose it.
 
-If your business is difficult to find or your website gets visits without producing calls, [request a website quote](/leads.html). Tell me what you offer, where your customers come from, which searches matter, and what you want visitors to do next.
+If your business is difficult to find or your website gets visits without producing calls, [request a website quote](/contact/). Tell me what you offer, where your customers come from, which searches matter, and what you want visitors to do next.

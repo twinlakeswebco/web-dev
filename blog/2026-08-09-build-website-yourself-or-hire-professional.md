@@ -41,7 +41,7 @@ Write one sentence: “This website succeeds when visitors ______.” If the bla
 
 ## When Building Your Own Website Makes Sense
 
-Modern website builders have removed much of the technical barrier. You can select a template, add pages, connect a domain, and publish without writing code. For the right owner and project, that is useful—not a shortcut to be embarrassed about.
+Modern website builders have removed much of the technical barrier. You can select a template, add pages, connect a domain, and publish without writing code. For the right owner and project, that is useful, not a shortcut to be embarrassed about.
 
 DIY is a strong option when:
 
@@ -200,7 +200,7 @@ Answer these questions honestly:
 6. Is the cost of a weak or late launch relatively low?
 7. Will I maintain the site after it is published?
 
-Mostly yes answers point toward DIY. Several no answers—especially around time, risk, or required functionality—point toward hiring help. If the answers are mixed, use a hybrid approach.
+Mostly yes answers point toward DIY. Several no answers, especially around time, risk, or required functionality, point toward hiring help. If the answers are mixed, use a hybrid approach.
 
 ## Build the Smallest Website That Does the Job Well
 
@@ -208,4 +208,4 @@ The best website is not the one with the most custom code, pages, animations, or
 
 Build it yourself when the scope is manageable, the risk is low, and you genuinely have time to learn and finish. Hire someone when experience will reduce delays, protect an important revenue channel, solve a specialized problem, or free you to do higher-value work.
 
-If you want a straightforward recommendation before spending money, [request a quote from Custom Web Architecture](/leads.html). Tell us what the website needs to accomplish. If a DIY builder is enough, we’ll say so; if professional help would solve a real problem, we’ll explain the scope in plain English.
+If you want a straightforward recommendation before spending money, [request a quote from Twin Lakes Web Co.](/contact/). Tell me what the website needs to accomplish. If a DIY builder is enough, I’ll say so; if professional help would solve a real problem, I’ll explain the scope in plain English.

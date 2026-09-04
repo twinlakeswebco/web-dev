@@ -169,4 +169,4 @@ When a business is not showing up on Google, the answer is rarely "add more keyw
 
 A verified and policy-compliant profile addresses eligibility. Accurate information improves relevance. Real reviews and local mentions support prominence. A crawlable, indexable website gives Google useful pages to evaluate. None of these guarantees a particular position, but each solves a real part of the visibility problem.
 
-If you want a starting point, run Custom Web Architecture's [free SEO performance check](/#seo-check). If your profile is live but your website is unclear, slow, or missing important service pages, [request a website quote](/leads.html) and tell me where your customers are located, what they search for, and what you have already tried.
+If you want a starting point, [tell me about your business](/contact/) and I will look at how it currently shows up in local search. If your profile is live but your website is unclear, slow, or missing important service pages, [request a website quote](/contact/) and tell me where your customers are located, what they search for, and what you have already tried.

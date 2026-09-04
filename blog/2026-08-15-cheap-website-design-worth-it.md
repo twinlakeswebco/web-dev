@@ -187,4 +187,4 @@ A low-cost site can be a smart starting point when it is fast, accurate, accessi
 
 Compare the whole agreement, not the headline price. If you are still weighing your options, review whether you should [build the site yourself or hire a professional](/blog/articles/build-website-yourself-or-hire-professional/) and the [questions to ask before hiring a web designer](/blog/articles/questions-to-ask-web-designer/).
 
-If you need an affordable website with a scope that matches your business, Custom Web Architecture can help you plan the right-sized build without mystery fees or unnecessary features. [Request a website quote](/leads.html) and tell me what the website needs to accomplish, what you already have, and the budget you are trying to protect.
+If you need an affordable website with a scope that matches your business, Twin Lakes Web Co. can help you plan the right-sized build without mystery fees or unnecessary features. [Request a website quote](/contact/) and tell me what the website needs to accomplish, what you already have, and the budget you are trying to protect.

@@ -12,7 +12,7 @@ draft: false
 
 # Hiring a Web Designer in Elizabethtown, KY
 
-Your business has outgrown its website—or never had a real one—but every web designer seems to offer the same promises: custom design, great SEO, mobile-friendly pages, and personal service. The portfolios look polished. The prices are all over the place. The technical language makes it difficult to tell what you are actually buying.
+Your business has outgrown its website, or never had a real one, but every web designer seems to offer the same promises: custom design, great SEO, mobile-friendly pages, and personal service. The portfolios look polished. The prices are all over the place. The technical language makes it difficult to tell what you are actually buying.
 
 Hiring a web designer in Elizabethtown, Kentucky, should not require guessing. You need someone who understands the business goal, explains the build in plain language, and leaves you with a website you can operate and improve.
 
@@ -107,7 +107,7 @@ Clarify the content process at the beginning:
 
 If you are writing everything yourself, request a page outline and deadlines. If the provider writes it, ask whether the copy is original, whether AI tools are used, and how facts are verified. AI can help organize a draft, but it should not invent licenses, years in business, service areas, customer results, or local experience.
 
-The finished site should sound like your business—not a collection of phrases copied across every Kentucky city page.
+The finished site should sound like your business, not a collection of phrases copied across every Kentucky city page.
 
 ## Local SEO Needs More Than the City Name
 
@@ -219,4 +219,4 @@ The right web designer for an Elizabethtown business is not necessarily the chea
 
 Look for a proposal you can explain to another person. Know who supplies the content, who owns each account, what support costs, and what success will be measured after launch. Those details matter longer than the style of the first homepage mockup.
 
-If you are looking for a web designer serving Elizabethtown and Hardin County, [request a quote from Custom Web Architecture](/leads.html). Tell us what is not working and what you need the website to accomplish. You will receive a straightforward scope and recommendation without mystery fees or unnecessary features.
+If you are looking for a web designer serving Elizabethtown and Hardin County, [request a quote from Twin Lakes Web Co.](/contact/). Tell me what is not working and what you need the website to accomplish. You will receive a straightforward scope and recommendation without mystery fees or unnecessary features.
