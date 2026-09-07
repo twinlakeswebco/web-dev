@@ -1,0 +1,89 @@
+name: Contact form smoke test
+
+on:
+  pull_request:
+    paths:
+      - "contact/**"
+      - "templates/pages/contact*"
+      - "scripts/leads.js"
+      - ".github/workflows/contact-form-smoke.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  production-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify production contact page
+        shell: bash
+        run: |
+          set -euo pipefail
+          page="$(mktemp)"
+          code="$(curl --fail-with-body --silent --show-error --location \
+            --output "$page" --write-out '%{http_code}' \
+            https://www.twinlakesweb.com/contact/)"
+          test "$code" = "200"
+          grep -Fq 'id="lead-form"' "$page"
+          grep -Fq 'https://leads-intake.caseykeown.workers.dev/' "$page"
+          grep -Fq '6LcqDT4tAAAAACr0V9SAU5JCztMLIvz_1bM10jWb' "$page"
+
+      - name: Verify Worker CORS for production origins
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://leads-intake.caseykeown.workers.dev/'
+          for origin in 'https://www.twinlakesweb.com' 'https://twinlakesweb.com'; do
+            headers="$(mktemp)"
+            code="$(curl --silent --show-error --output /dev/null --dump-header "$headers" \
+              --write-out '%{http_code}' --request OPTIONS \
+              --header "Origin: $origin" \
+              --header 'Access-Control-Request-Method: POST' \
+              --header 'Access-Control-Request-Headers: content-type' \
+              "$endpoint")"
+            if [[ "$code" -lt 200 || "$code" -ge 300 ]]; then
+              echo "Worker preflight returned HTTP $code for $origin"
+              cat "$headers"
+              exit 1
+            fi
+            tr -d '\r' < "$headers" | grep -Eiq '^access-control-allow-origin: (\*|https://(www\.)?twinlakesweb\.com)$' || {
+              echo "Worker does not allow production origin: $origin"
+              cat "$headers"
+              exit 1
+            }
+          done
+
+      - name: Verify Worker rejects an incomplete request cleanly
+        shell: bash
+        run: |
+          set -euo pipefail
+          headers="$(mktemp)"
+          body="$(mktemp)"
+          code="$(curl --silent --show-error --output "$body" --dump-header "$headers" \
+            --write-out '%{http_code}' --request POST \
+            --header 'Origin: https://www.twinlakesweb.com' \
+            --form 'name=Twin Lakes Web Co smoke test' \
+            --form 'email=smoke-test@example.com' \
+            --form 'business=Automated smoke test' \
+            --form 'business_description=Automated health check' \
+            --form 'primary_purpose=Generate leads or quote requests' \
+            --form 'primary_action=Test' \
+            https://leads-intake.caseykeown.workers.dev/)"
+          if [[ "$code" -ge 500 ]]; then
+            echo "Worker returned server error HTTP $code"
+            cat "$body"
+            exit 1
+          fi
+          if [[ "$code" -lt 400 || "$code" -ge 500 ]]; then
+            echo "Expected the Worker to reject the intentionally incomplete request with 4xx; got HTTP $code"
+            cat "$body"
+            exit 1
+          fi
+          tr -d '\r' < "$headers" | grep -Eiq '^access-control-allow-origin: (\*|https://www\.twinlakesweb\.com)$' || {
+            echo 'Worker rejection response is missing CORS for the production origin'
+            cat "$headers"
+            exit 1
+          }
+          echo "Worker is reachable and rejected the missing verification token as expected (HTTP $code)."
