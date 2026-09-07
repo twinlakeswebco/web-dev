@@ -22,12 +22,12 @@ jobs:
             --output "$body" --write-out '%{http_code}' \
             --request POST \
             --form 'name=Twin Lakes Web Co setup' \
-            --form 'email=me@caseykeown.com' \
+            --form 'email=caseykeown@gmail.com' \
             --form 'message=Activate the fallback contact-form delivery endpoint for twinlakesweb.com.' \
             --form '_subject=Activate Twin Lakes Web Co contact form' \
             --form '_captcha=false' \
             --form '_url=https://www.twinlakesweb.com/contact/' \
-            https://formsubmit.co/ajax/me@caseykeown.com)"
+            https://formsubmit.co/ajax/caseykeown@gmail.com)"
           echo "HTTP $code"
           cat "$body"
           test "$code" -ge 200
