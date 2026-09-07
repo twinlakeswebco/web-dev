@@ -5,7 +5,6 @@ on:
     paths:
       - "contact/**"
       - "templates/pages/contact*"
-      - "scripts/leads.js"
       - ".github/workflows/contact-form-smoke.yml"
   workflow_dispatch: {}
 
@@ -19,94 +18,65 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Verify Turnstile migration in source
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Build contact page
+        run: python3 scripts/build_site.py
+
+      - name: Verify replacement backend is wired
         shell: bash
         run: |
           set -euo pipefail
-          script='templates/pages/contact.script.html'
-          form='templates/pages/contact.html'
-
-          grep -Fq 'https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha' "$script" || {
-            echo 'Cloudflare Turnstile compatibility script is missing.'
-            exit 1
-          }
-          grep -Fq '0x4AAAAAAEr77nbJ4X_j3jyb' "$form" || {
-            echo 'Expected Turnstile site key is missing from the contact form.'
-            exit 1
-          }
-          if grep -Fq 'www.google.com/recaptcha/api.js' "$script"; then
-            echo 'Google reCAPTCHA is still loaded by the contact form source.'
+          page='contact/index.html'
+          grep -Fq 'id="lead-form"' "$page"
+          grep -Fq 'https://flowform.to/me@caseykeown.com' "$page"
+          grep -Fq 'New Website Request' "$page"
+          if grep -Fq 'https://leads-intake.caseykeown.workers.dev/' "$page"; then
+            echo 'Retired leads-intake Worker is still referenced by the generated contact page.'
             exit 1
           fi
-          if grep -Fq '6LcqDT4tAAAAACr0V9SAU5JCztMLIvz_1bM10jWb' "$form" "$script"; then
-            echo 'Retired Google reCAPTCHA site key is still present.'
+          if grep -Fq 'www.google.com/recaptcha/api.js' "$page"; then
+            echo 'Google reCAPTCHA is still loaded by the generated contact page.'
+            exit 1
+          fi
+          if grep -Fq 'challenges.cloudflare.com/turnstile/v0/api.js' "$page"; then
+            echo 'Turnstile is still loaded even though FlowForm is now the submission backend.'
             exit 1
           fi
 
-      - name: Verify generated contact page builds with Turnstile
+      - name: Verify FlowForm browser endpoint and CORS
         shell: bash
         run: |
           set -euo pipefail
-          python3 scripts/build_site.py
-          grep -Fq 'id="lead-form"' contact/index.html
-          grep -Fq 'https://leads-intake.caseykeown.workers.dev/' contact/index.html
-          grep -Fq 'https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha' contact/index.html
-          grep -Fq '0x4AAAAAAEr77nbJ4X_j3jyb' contact/index.html
-          if grep -Fq 'www.google.com/recaptcha/api.js' contact/index.html; then
-            echo 'Generated contact page still loads Google reCAPTCHA.'
-            exit 1
-          fi
-
-      - name: Verify live Worker rejects incomplete requests cleanly
-        shell: bash
-        run: |
-          set -euo pipefail
-          body="$(mktemp)"
-          code="$(curl --silent --show-error --output "$body" \
-            --write-out '%{http_code}' --request POST \
+          headers="$(mktemp)"
+          code="$(curl --silent --show-error --output /dev/null --dump-header "$headers" \
+            --write-out '%{http_code}' --request OPTIONS \
             --header 'Origin: https://www.twinlakesweb.com' \
-            --form 'name=Twin Lakes Web Co smoke test' \
-            --form 'email=smoke-test@example.com' \
-            --form 'business=Automated smoke test' \
-            --form 'business_description=Automated health check' \
-            --form 'primary_purpose=Generate leads or quote requests' \
-            --form 'primary_action=Test' \
-            https://leads-intake.caseykeown.workers.dev/)"
-          if [[ "$code" -ge 500 ]]; then
-            echo "Worker returned server error HTTP $code"
-            cat "$body"
+            --header 'Access-Control-Request-Method: POST' \
+            --header 'Access-Control-Request-Headers: content-type' \
+            'https://flowform.to/me@caseykeown.com')"
+          if [[ "$code" -lt 200 || "$code" -ge 400 ]]; then
+            echo "FlowForm preflight returned HTTP $code"
+            cat "$headers"
             exit 1
           fi
-          if [[ "$code" -lt 400 || "$code" -ge 500 ]]; then
-            echo "Expected the Worker to reject the intentionally incomplete request with 4xx; got HTTP $code"
-            cat "$body"
+          allowed="$(tr -d '\r' < "$headers" | awk -F': ' 'tolower($1)=="access-control-allow-origin" {print $2}')"
+          if [[ "$allowed" != 'https://www.twinlakesweb.com' && "$allowed" != '*' ]]; then
+            echo "FlowForm does not allow the production browser origin."
+            echo "Access-Control-Allow-Origin: ${allowed:-<missing>}"
+            cat "$headers"
             exit 1
           fi
-          echo "Worker is reachable and rejected the missing verification token as expected (HTTP $code)."
 
-      - name: Verify live Worker CORS for Twin Lakes Web origins
+      - name: Verify FlowForm endpoint is healthy without sending a lead
         shell: bash
         run: |
           set -euo pipefail
-          endpoint='https://leads-intake.caseykeown.workers.dev/'
-          for origin in 'https://www.twinlakesweb.com' 'https://twinlakesweb.com'; do
-            headers="$(mktemp)"
-            code="$(curl --silent --show-error --output /dev/null --dump-header "$headers" \
-              --write-out '%{http_code}' --request OPTIONS \
-              --header "Origin: $origin" \
-              --header 'Access-Control-Request-Method: POST' \
-              --header 'Access-Control-Request-Headers: content-type' \
-              "$endpoint")"
-            if [[ "$code" -lt 200 || "$code" -ge 300 ]]; then
-              echo "Worker preflight returned HTTP $code for $origin"
-              cat "$headers"
-              exit 1
-            fi
-            allowed="$(tr -d '\r' < "$headers" | awk -F': ' 'tolower($1)=="access-control-allow-origin" {print $2}')"
-            if [[ "$allowed" != "$origin" && "$allowed" != "*" ]]; then
-              echo "Worker does not allow production origin: $origin"
-              echo "Access-Control-Allow-Origin: ${allowed:-<missing>}"
-              cat "$headers"
-              exit 1
-            fi
-          done
+          code="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+            'https://flowform.to/me@caseykeown.com')"
+          test "$code" = "405" || {
+            echo "Expected GET to be rejected with 405; got HTTP $code"
+            exit 1
+          }
