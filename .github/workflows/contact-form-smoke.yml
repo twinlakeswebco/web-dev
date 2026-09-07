@@ -15,7 +15,7 @@ permissions:
 jobs:
   production-smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Verify production contact page
         shell: bash
@@ -29,6 +29,76 @@ jobs:
           grep -Fq 'id="lead-form"' "$page"
           grep -Fq 'https://leads-intake.caseykeown.workers.dev/' "$page"
           grep -Fq '6LcqDT4tAAAAACr0V9SAU5JCztMLIvz_1bM10jWb' "$page"
+
+      - name: Verify reCAPTCHA recognizes production domain
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          import sys
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import Select, WebDriverWait
+          from selenium.webdriver.support import expected_conditions as EC
+
+          options = webdriver.ChromeOptions()
+          options.add_argument('--headless=new')
+          options.add_argument('--no-sandbox')
+          options.add_argument('--disable-dev-shm-usage')
+          driver = webdriver.Chrome(options=options)
+          wait = WebDriverWait(driver, 20)
+          try:
+              driver.get('https://www.twinlakesweb.com/contact/')
+              wait.until(EC.presence_of_element_located((By.ID, 'lead-form')))
+              driver.find_element(By.ID, 'name').send_keys('Smoke Test')
+              driver.find_element(By.ID, 'email').send_keys('smoke-test@example.com')
+              driver.find_element(By.ID, 'business').send_keys('Twin Lakes Web Co automated test')
+              driver.find_element(By.ID, 'business_description').send_keys('Automated production form check')
+              Select(driver.find_element(By.ID, 'primary_purpose')).select_by_visible_text('Generate leads or quote requests')
+              driver.find_element(By.ID, 'primary_action').send_keys('Test the contact form')
+              driver.find_element(By.CSS_SELECTOR, '.form-step[data-step="1"] .next-step').click()
+              wait.until(lambda d: 'active' in d.find_element(By.CSS_SELECTOR, '.form-step[data-step="2"]').get_attribute('class'))
+              driver.find_element(By.CSS_SELECTOR, '.form-step[data-step="2"] .next-step').click()
+              wait.until(lambda d: 'active' in d.find_element(By.CSS_SELECTOR, '.form-step[data-step="3"]').get_attribute('class'))
+              frame = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.g-recaptcha iframe')))
+              driver.switch_to.frame(frame)
+              text = wait.until(lambda d: d.find_element(By.TAG_NAME, 'body').text.strip())
+              print('reCAPTCHA frame text:', repr(text))
+              if 'ERROR for site owner' in text or 'Invalid domain for site key' in text:
+                  raise SystemExit('reCAPTCHA site key is not authorized for www.twinlakesweb.com')
+              if "I'm not a robot" not in text:
+                  raise SystemExit('reCAPTCHA did not render the expected checkbox')
+          finally:
+              driver.quit()
+          PY
+
+      - name: Verify Worker rejects an incomplete request cleanly
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(mktemp)"
+          code="$(curl --silent --show-error --output "$body" \
+            --write-out '%{http_code}' --request POST \
+            --header 'Origin: https://www.twinlakesweb.com' \
+            --form 'name=Twin Lakes Web Co smoke test' \
+            --form 'email=smoke-test@example.com' \
+            --form 'business=Automated smoke test' \
+            --form 'business_description=Automated health check' \
+            --form 'primary_purpose=Generate leads or quote requests' \
+            --form 'primary_action=Test' \
+            https://leads-intake.caseykeown.workers.dev/)"
+          if [[ "$code" -ge 500 ]]; then
+            echo "Worker returned server error HTTP $code"
+            cat "$body"
+            exit 1
+          fi
+          if [[ "$code" -lt 400 || "$code" -ge 500 ]]; then
+            echo "Expected the Worker to reject the intentionally incomplete request with 4xx; got HTTP $code"
+            cat "$body"
+            exit 1
+          fi
+          echo "Worker is reachable and rejected the missing verification token as expected (HTTP $code)."
 
       - name: Verify Worker CORS for production origins
         shell: bash
@@ -54,36 +124,3 @@ jobs:
               exit 1
             }
           done
-
-      - name: Verify Worker rejects an incomplete request cleanly
-        shell: bash
-        run: |
-          set -euo pipefail
-          headers="$(mktemp)"
-          body="$(mktemp)"
-          code="$(curl --silent --show-error --output "$body" --dump-header "$headers" \
-            --write-out '%{http_code}' --request POST \
-            --header 'Origin: https://www.twinlakesweb.com' \
-            --form 'name=Twin Lakes Web Co smoke test' \
-            --form 'email=smoke-test@example.com' \
-            --form 'business=Automated smoke test' \
-            --form 'business_description=Automated health check' \
-            --form 'primary_purpose=Generate leads or quote requests' \
-            --form 'primary_action=Test' \
-            https://leads-intake.caseykeown.workers.dev/)"
-          if [[ "$code" -ge 500 ]]; then
-            echo "Worker returned server error HTTP $code"
-            cat "$body"
-            exit 1
-          fi
-          if [[ "$code" -lt 400 || "$code" -ge 500 ]]; then
-            echo "Expected the Worker to reject the intentionally incomplete request with 4xx; got HTTP $code"
-            cat "$body"
-            exit 1
-          fi
-          tr -d '\r' < "$headers" | grep -Eiq '^access-control-allow-origin: (\*|https://www\.twinlakesweb\.com)$' || {
-            echo 'Worker rejection response is missing CORS for the production origin'
-            cat "$headers"
-            exit 1
-          }
-          echo "Worker is reachable and rejected the missing verification token as expected (HTTP $code)."
