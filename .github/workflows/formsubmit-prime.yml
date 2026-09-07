@@ -1,0 +1,34 @@
+name: Prime fallback form backend
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/formsubmit-prime.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  prime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Request FormSubmit activation
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(mktemp)"
+          code="$(curl --silent --show-error --location \
+            --output "$body" --write-out '%{http_code}' \
+            --request POST \
+            --form 'name=Twin Lakes Web Co setup' \
+            --form 'email=me@caseykeown.com' \
+            --form 'message=Activate the fallback contact-form delivery endpoint for twinlakesweb.com.' \
+            --form '_subject=Activate Twin Lakes Web Co contact form' \
+            --form '_captcha=false' \
+            --form '_url=https://www.twinlakesweb.com/contact/' \
+            https://formsubmit.co/ajax/me@caseykeown.com)"
+          echo "HTTP $code"
+          cat "$body"
+          test "$code" -ge 200
+          test "$code" -lt 500
