@@ -1,4 +1,4 @@
-name: Contact backend diagnostics
+name: Contact delivery diagnostic
 
 on:
   pull_request:
@@ -9,43 +9,32 @@ permissions:
   contents: read
 
 jobs:
-  diagnose:
+  delivery-test:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Check old-domain contact route
+      - name: Verify FlowForm email delivery endpoint
         shell: bash
         run: |
           set -euo pipefail
-          for url in 'https://caseykeown.com/leads.html' 'https://caseykeown.com/contact/' 'https://caseykeown.com/'; do
-            echo "--- $url"
-            curl --silent --show-error --location --max-time 20 \
-              --output /tmp/page --write-out 'status=%{http_code} final=%{url_effective}\n' "$url" || true
-            grep -Eo 'leads-intake\.caseykeown\.workers\.dev|6LcqDT4tAAAAACr0V9SAU5JCztMLIvz_1bM10jWb' /tmp/page | sort -u || true
-          done
-
-      - name: Probe Worker verification contract
-        shell: bash
-        run: |
-          set -euo pipefail
-          for token_field in 'g-recaptcha-response' 'recaptcha_response' 'recaptchaToken'; do
-            echo "--- token field: $token_field"
-            headers="$(mktemp)"
-            body="$(mktemp)"
-            code="$(curl --silent --show-error \
-              --output "$body" --dump-header "$headers" --write-out '%{http_code}' \
-              --request POST \
-              --header 'Origin: https://www.twinlakesweb.com' \
-              --form 'name=CONTACT FORM DIAGNOSTIC - IGNORE' \
-              --form 'email=smoke-test@example.com' \
-              --form 'business=Automated diagnostic' \
-              --form 'business_description=Do not treat as a customer lead' \
-              --form 'primary_purpose=Generate leads or quote requests' \
-              --form 'primary_action=Test' \
-              --form "$token_field=definitely-not-a-valid-recaptcha-token" \
-              https://leads-intake.caseykeown.workers.dev/)"
-            echo "status=$code"
-            tr -d '\r' < "$headers" | grep -Ei '^(access-control-allow-origin|content-type):' || true
-            cat "$body"
-            echo
-          done
+          headers="$(mktemp)"
+          body="$(mktemp)"
+          code="$(curl --silent --show-error \
+            --output "$body" --dump-header "$headers" --write-out '%{http_code}' \
+            --request POST \
+            --header 'Accept: application/json' \
+            --header 'Origin: https://www.twinlakesweb.com' \
+            --data-urlencode 'name=CONTACT FORM DELIVERY TEST - IGNORE' \
+            --data-urlencode 'email=smoke-test@example.com' \
+            --data-urlencode 'business=Twin Lakes Web Co automated diagnostic' \
+            --data-urlencode 'project_details=This is an automated delivery test from GitHub Actions. It is not a customer lead.' \
+            --data-urlencode '_subject=CONTACT FORM DELIVERY TEST - IGNORE' \
+            --data-urlencode '_replyto=smoke-test@example.com' \
+            https://flowform.to/me@caseykeown.com)"
+          echo "status=$code"
+          tr -d '\r' < "$headers" | grep -Ei '^(access-control-allow-origin|content-type):' || true
+          cat "$body"
+          echo
+          test "$code" -ge 200
+          test "$code" -lt 300
+          grep -Eq '"success"[[:space:]]*:[[:space:]]*true' "$body"
