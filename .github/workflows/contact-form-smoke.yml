@@ -13,23 +13,51 @@ permissions:
   contents: read
 
 jobs:
-  production-smoke:
+  contact-form-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Verify production contact page
+      - uses: actions/checkout@v6
+
+      - name: Verify Turnstile migration in source
         shell: bash
         run: |
           set -euo pipefail
-          page="$(mktemp)"
-          code="$(curl --fail-with-body --silent --show-error --location \
-            --output "$page" --write-out '%{http_code}' \
-            https://www.twinlakesweb.com/contact/)"
-          test "$code" = "200"
-          grep -Fq 'id="lead-form"' "$page"
-          grep -Fq 'https://leads-intake.caseykeown.workers.dev/' "$page"
+          script='templates/pages/contact.script.html'
+          form='templates/pages/contact.html'
 
-      - name: Verify Worker rejects an incomplete request cleanly
+          grep -Fq 'https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha' "$script" || {
+            echo 'Cloudflare Turnstile compatibility script is missing.'
+            exit 1
+          }
+          grep -Fq '0x4AAAAAAEr77nbJ4X_j3jyb' "$form" || {
+            echo 'Expected Turnstile site key is missing from the contact form.'
+            exit 1
+          }
+          if grep -Fq 'www.google.com/recaptcha/api.js' "$script"; then
+            echo 'Google reCAPTCHA is still loaded by the contact form source.'
+            exit 1
+          fi
+          if grep -Fq '6LcqDT4tAAAAACr0V9SAU5JCztMLIvz_1bM10jWb' "$form" "$script"; then
+            echo 'Retired Google reCAPTCHA site key is still present.'
+            exit 1
+          fi
+
+      - name: Verify generated contact page builds with Turnstile
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/build_site.py
+          grep -Fq 'id="lead-form"' contact/index.html
+          grep -Fq 'https://leads-intake.caseykeown.workers.dev/' contact/index.html
+          grep -Fq 'https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha' contact/index.html
+          grep -Fq '0x4AAAAAAEr77nbJ4X_j3jyb' contact/index.html
+          if grep -Fq 'www.google.com/recaptcha/api.js' contact/index.html; then
+            echo 'Generated contact page still loads Google reCAPTCHA.'
+            exit 1
+          fi
+
+      - name: Verify live Worker rejects incomplete requests cleanly
         shell: bash
         run: |
           set -euo pipefail
@@ -56,24 +84,7 @@ jobs:
           fi
           echo "Worker is reachable and rejected the missing verification token as expected (HTTP $code)."
 
-      - name: Verify Cloudflare Turnstile is configured
-        shell: bash
-        run: |
-          set -euo pipefail
-          page="$(mktemp)"
-          curl --fail --silent --show-error --location \
-            --output "$page" https://www.twinlakesweb.com/contact/
-          if grep -Fq 'www.google.com/recaptcha/api.js' "$page"; then
-            echo 'Google reCAPTCHA is still loaded on the production contact page.'
-            exit 1
-          fi
-          grep -Fq 'challenges.cloudflare.com/turnstile/v0/api.js' "$page" || {
-            echo 'Cloudflare Turnstile script is not loaded on the production contact page.'
-            exit 1
-          }
-
-      - name: Verify Worker CORS for production origins
-        if: always()
+      - name: Verify live Worker CORS for Twin Lakes Web origins
         shell: bash
         run: |
           set -euo pipefail
@@ -91,9 +102,11 @@ jobs:
               cat "$headers"
               exit 1
             fi
-            tr -d '\r' < "$headers" | grep -Eiq '^access-control-allow-origin: (\*|https://(www\.)?twinlakesweb\.com)$' || {
+            allowed="$(tr -d '\r' < "$headers" | awk -F': ' 'tolower($1)=="access-control-allow-origin" {print $2}')"
+            if [[ "$allowed" != "$origin" && "$allowed" != "*" ]]; then
               echo "Worker does not allow production origin: $origin"
+              echo "Access-Control-Allow-Origin: ${allowed:-<missing>}"
               cat "$headers"
               exit 1
-            }
+            fi
           done
