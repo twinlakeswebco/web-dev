@@ -1,4 +1,7 @@
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    document.querySelector('.g-recaptcha')?.setAttribute('data-sitekey', '0x4AAAAAAEr77nbJ4X_j3jyb');
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha" async defer></script>
   <script>
     
 
@@ -316,9 +319,9 @@
         return;
       }
 
-      const recaptchaToken = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
-      if (!recaptchaToken) {
-        setStatus('error', 'VERIFICATION REQUIRED', 'Please complete the reCAPTCHA before sending your request.');
+      const verificationToken = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
+      if (!verificationToken) {
+        setStatus('error', 'VERIFICATION REQUIRED', 'Please complete the verification before sending your request.');
         return;
       }
 
