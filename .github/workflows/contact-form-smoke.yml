@@ -30,49 +30,6 @@ jobs:
           grep -Fq 'https://leads-intake.caseykeown.workers.dev/' "$page"
           grep -Fq '6LcqDT4tAAAAACr0V9SAU5JCztMLIvz_1bM10jWb' "$page"
 
-      - name: Verify reCAPTCHA recognizes production domain
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 -m pip install --quiet selenium
-          python3 - <<'PY'
-          import sys
-          from selenium import webdriver
-          from selenium.webdriver.common.by import By
-          from selenium.webdriver.support.ui import Select, WebDriverWait
-          from selenium.webdriver.support import expected_conditions as EC
-
-          options = webdriver.ChromeOptions()
-          options.add_argument('--headless=new')
-          options.add_argument('--no-sandbox')
-          options.add_argument('--disable-dev-shm-usage')
-          driver = webdriver.Chrome(options=options)
-          wait = WebDriverWait(driver, 20)
-          try:
-              driver.get('https://www.twinlakesweb.com/contact/')
-              wait.until(EC.presence_of_element_located((By.ID, 'lead-form')))
-              driver.find_element(By.ID, 'name').send_keys('Smoke Test')
-              driver.find_element(By.ID, 'email').send_keys('smoke-test@example.com')
-              driver.find_element(By.ID, 'business').send_keys('Twin Lakes Web Co automated test')
-              driver.find_element(By.ID, 'business_description').send_keys('Automated production form check')
-              Select(driver.find_element(By.ID, 'primary_purpose')).select_by_visible_text('Generate leads or quote requests')
-              driver.find_element(By.ID, 'primary_action').send_keys('Test the contact form')
-              driver.find_element(By.CSS_SELECTOR, '.form-step[data-step="1"] .next-step').click()
-              wait.until(lambda d: 'active' in d.find_element(By.CSS_SELECTOR, '.form-step[data-step="2"]').get_attribute('class'))
-              driver.find_element(By.CSS_SELECTOR, '.form-step[data-step="2"] .next-step').click()
-              wait.until(lambda d: 'active' in d.find_element(By.CSS_SELECTOR, '.form-step[data-step="3"]').get_attribute('class'))
-              frame = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.g-recaptcha iframe')))
-              driver.switch_to.frame(frame)
-              text = wait.until(lambda d: d.find_element(By.TAG_NAME, 'body').text.strip())
-              print('reCAPTCHA frame text:', repr(text))
-              if 'ERROR for site owner' in text or 'Invalid domain for site key' in text:
-                  raise SystemExit('reCAPTCHA site key is not authorized for www.twinlakesweb.com')
-              if "I'm not a robot" not in text:
-                  raise SystemExit('reCAPTCHA did not render the expected checkbox')
-          finally:
-              driver.quit()
-          PY
-
       - name: Verify Worker rejects an incomplete request cleanly
         shell: bash
         run: |
@@ -99,6 +56,50 @@ jobs:
             exit 1
           fi
           echo "Worker is reachable and rejected the missing verification token as expected (HTTP $code)."
+
+      - name: Verify reCAPTCHA recognizes production domain
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import Select, WebDriverWait
+          from selenium.webdriver.support import expected_conditions as EC
+
+          options = webdriver.ChromeOptions()
+          options.add_argument('--headless=new')
+          options.add_argument('--no-sandbox')
+          options.add_argument('--disable-dev-shm-usage')
+          driver = webdriver.Chrome(options=options)
+          wait = WebDriverWait(driver, 20)
+          try:
+              driver.get('https://www.twinlakesweb.com/contact/')
+              wait.until(EC.presence_of_element_located((By.ID, 'lead-form')))
+              driver.find_element(By.ID, 'name').send_keys('Smoke Test')
+              driver.find_element(By.ID, 'email').send_keys('smoke-test@example.com')
+              driver.find_element(By.ID, 'business').send_keys('Twin Lakes Web Co automated test')
+              driver.find_element(By.ID, 'business_description').send_keys('Automated production form check')
+              Select(driver.find_element(By.ID, 'primary_purpose')).select_by_visible_text('Generate leads or quote requests')
+              driver.find_element(By.ID, 'primary_action').send_keys('Test the contact form')
+              next_one = driver.find_element(By.CSS_SELECTOR, '.form-step[data-step="1"] .next-step')
+              driver.execute_script('arguments[0].click()', next_one)
+              wait.until(lambda d: 'active' in d.find_element(By.CSS_SELECTOR, '.form-step[data-step="2"]').get_attribute('class'))
+              next_two = driver.find_element(By.CSS_SELECTOR, '.form-step[data-step="2"] .next-step')
+              driver.execute_script('arguments[0].click()', next_two)
+              wait.until(lambda d: 'active' in d.find_element(By.CSS_SELECTOR, '.form-step[data-step="3"]').get_attribute('class'))
+              frame = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.g-recaptcha iframe')))
+              driver.switch_to.frame(frame)
+              text = wait.until(lambda d: d.find_element(By.TAG_NAME, 'body').text.strip())
+              print('reCAPTCHA frame text:', repr(text))
+              if 'ERROR for site owner' in text or 'Invalid domain for site key' in text:
+                  raise SystemExit('reCAPTCHA site key is not authorized for www.twinlakesweb.com')
+              if "I'm not a robot" not in text:
+                  raise SystemExit('reCAPTCHA did not render the expected checkbox')
+          finally:
+              driver.quit()
+          PY
 
       - name: Verify Worker CORS for production origins
         shell: bash
