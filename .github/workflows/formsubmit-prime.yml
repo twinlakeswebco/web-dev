@@ -24,13 +24,13 @@ jobs:
             --request POST \
             --header 'Accept: application/json' \
             --header 'Origin: https://www.twinlakesweb.com' \
-            --data-urlencode 'name=CONTACT FORM DELIVERY TEST - IGNORE' \
+            --data-urlencode 'name=CONTACT FORM DELIVERY TEST 20260907 - IGNORE' \
             --data-urlencode 'email=smoke-test@example.com' \
             --data-urlencode 'business=Twin Lakes Web Co automated diagnostic' \
             --data-urlencode 'project_details=This is an automated delivery test from GitHub Actions. It is not a customer lead.' \
-            --data-urlencode '_subject=CONTACT FORM DELIVERY TEST - IGNORE' \
+            --data-urlencode '_subject=CONTACT FORM DELIVERY TEST 20260907 - IGNORE' \
             --data-urlencode '_replyto=smoke-test@example.com' \
-            https://flowform.to/me@caseykeown.com)"
+            https://flowform.to/caseykeown@gmail.com)"
           echo "status=$code"
           tr -d '\r' < "$headers" | grep -Ei '^(access-control-allow-origin|content-type):' || true
           cat "$body"
