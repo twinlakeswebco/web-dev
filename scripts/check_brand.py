@@ -3,7 +3,8 @@
 
 Checks every published HTML file, the feed, the sitemap, the manifest, and the
 blog Markdown sources for terms and URLs that the Twin Lakes Web Co. migration
-retired, plus em dashes, which the brand guide does not allow.
+retired, plus em dashes. Blog source files are also checked for emoji so the
+editorial rules remain enforceable outside the daily automation prompt.
 """
 
 from __future__ import annotations
@@ -28,6 +29,17 @@ RULES = [
     (re.compile(r"—"), "em dash"),
 ]
 
+# Broad emoji blocks plus variation selectors and joiners commonly used in
+# emoji sequences. Applied only to hand-authored blog Markdown sources.
+EMOJI_PATTERN = re.compile(
+    "["
+    "\U0001F000-\U0001FAFF"
+    "\U00002600-\U000027BF"
+    "\U0000FE0F"
+    "\U0000200D"
+    "]"
+)
+
 TARGET_SUFFIXES = {".html", ".md", ".xml", ".txt", ".webmanifest", ".css"}
 
 
@@ -45,6 +57,16 @@ def files() -> list[Path]:
     return sorted(found)
 
 
+def is_blog_source(path: Path) -> bool:
+    relative = path.relative_to(ROOT)
+    return (
+        len(relative.parts) == 2
+        and relative.parts[0] == "blog"
+        and path.suffix.lower() in {".md", ".markdown"}
+        and path.name != "README.md"
+    )
+
+
 def main() -> int:
     problems: list[str] = []
     for path in files():
@@ -57,6 +79,9 @@ def main() -> int:
                 if pattern.search(line):
                     name = path.relative_to(ROOT)
                     problems.append(f"{name}:{number}: {label}: {line.strip()[:120]}")
+            if is_blog_source(path) and EMOJI_PATTERN.search(line):
+                name = path.relative_to(ROOT)
+                problems.append(f"{name}:{number}: emoji: {line.strip()[:120]}")
 
     if problems:
         print("Brand check failed:")

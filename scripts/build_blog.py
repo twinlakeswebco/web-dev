@@ -217,7 +217,7 @@ def organization_schema() -> dict[str, object]:
         "url": f"{SITE_URL}/",
         "logo": f"{SITE_URL}{brand.LOGO_MONOGRAM}",
         "image": OG_IMAGE,
-        "email": "mailto:{brand.EMAIL}",
+        "email": f"mailto:{brand.EMAIL}",
         "founder": {"@id": f"{SITE_URL}/#casey"},
         "areaServed": "Kentucky",
         "sameAs": [FACEBOOK_URL],

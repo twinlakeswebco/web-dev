@@ -8,7 +8,7 @@ here so the brand stays consistent in one place.
 
 from __future__ import annotations
 
-SITE_URL = "https://twinlakesweb.com"
+SITE_URL = "https://www.twinlakesweb.com"
 SITE_NAME = "Twin Lakes Web Co."
 LEGAL_NAME = "Twin Lakes Web Co. LLC"
 SHORT_NAME = "Twin Lakes Web"
