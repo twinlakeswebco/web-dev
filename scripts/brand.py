@@ -18,6 +18,7 @@ FOOTER_YEAR = "2026"
 EMAIL = "me@caseykeown.com"
 FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61590846744430"
 BOOKING_URL = "https://calendar.app.google/ZXUK3d3zYTUcgLhw5"
+STORE_URL = "https://store.twinlakesweb.com"
 
 LOGO_WORDMARK = "/assets/twin-lakes-wordmark.png"
 LOGO_MONOGRAM = "/assets/twin-lakes-monogram.png"
@@ -35,6 +36,7 @@ NAV_ITEMS = [
     ("work", "/work/", "Work"),
     ("about", "/about/", "About"),
     ("blog", "/blog/", "Blog"),
+    ("store", STORE_URL, "Store"),
     ("contact", "/contact/", "Contact"),
 ]
 
@@ -99,6 +101,7 @@ def footer_html() -> str:
         <li><a href="/work/">Work</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/blog/">Blog</a></li>
+        <li><a href="{STORE_URL}">Store</a></li>
         <li><a href="/contact/">Contact</a></li>
       </ul>
     </div>

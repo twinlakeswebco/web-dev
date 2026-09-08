@@ -499,7 +499,7 @@ strong { font-weight: 700; }
   .article-layout .blog-sidebar { position: static; }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 54rem) {
   .header-bar { min-height: 4.2rem; }
   .brand-mark { flex-basis: 11.5rem; }
   .brand-logo { width: 11.5rem; }
@@ -521,6 +521,9 @@ strong { font-weight: 700; }
   .nav-links[data-open="true"] { display: flex; }
   .nav-links a:not(.btn) { width: 100%; justify-content: center; border-radius: var(--radius-sm); }
   .nav-links .btn { width: 100%; }
+}
+
+@media (max-width: 48rem) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-art { max-width: 24rem; margin-inline: auto; }
   .hero-art picture { max-width: 24rem; }
