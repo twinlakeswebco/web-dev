@@ -3,18 +3,12 @@ title: "Twenty-Five Years Later: Remembering September 11 and Asking What It Cha
 meta_title: "September 11 at 25: Remembrance and Lessons"
 meta_description: "A reflection on the 2,977 lives lost on 9/11, the first responders and veterans who carried the cost, and the institutional failures that reshaped America."
 target_keyword: "september 11 25th anniversary"
-intent: "informational"
+intent: "informational, reflection"
 queue_number: 1
 date: 2026-09-11
 slug: "september-11-twenty-five-years-later"
 author: "Casey Keown, Twin Lakes Web Co."
 ---
-
-**By Casey Keown, Twin Lakes Web Co.**
-**September 11, 2026**
-
-*This post honors the memory of those lost on September 11, 2001, and during the Global War on Terrorism, while examining the institutional failures that preceded that day and the country we became afterward.*
-
 ## Remembering the Victims and the People Who Ran Toward the Danger
 
 Twenty-five years ago today, 2,977 people died in the attacks of September 11. On this anniversary, we take time to remember every innocent person who lost their life in New York, at the Pentagon, and in a field outside Shanksville, Pennsylvania. We carry their families with us, people who woke up that morning with no idea it would be the last ordinary morning they would ever have.
