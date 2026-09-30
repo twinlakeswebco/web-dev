@@ -254,6 +254,7 @@ def head_html(
 ) -> str:
     article_meta = f'\n  <meta property="article:published_time" content="{html.escape(published)}">' if published else ""
     return f'''<head>
+{brand.GOOGLE_TAG}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{html.escape(title)}</title>

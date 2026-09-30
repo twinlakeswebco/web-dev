@@ -254,6 +254,7 @@ REDIRECTS = {
 REDIRECT_TEMPLATE = """<!doctype html>
 <html lang="en">
 <head>
+{google_tag}
   <meta charset="utf-8">
   <title>Page moved | Twin Lakes Web Co.</title>
   <link rel="canonical" href="{site}{target}">
@@ -273,7 +274,7 @@ def write_redirects() -> None:
         destination = ROOT / source
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(
-            REDIRECT_TEMPLATE.format(site=brand.SITE_URL, target=target), encoding="utf-8"
+            REDIRECT_TEMPLATE.format(site=brand.SITE_URL, target=target, google_tag=brand.GOOGLE_TAG), encoding="utf-8"
         )
         print(f"wrote redirect {source} -> {target}")
 
@@ -302,6 +303,7 @@ def render(page: Page) -> str:
         body_extra = (PAGES_DIR / page.script).read_text(encoding="utf-8").rstrip("\n")
 
     replacements = {
+        "{{google_tag}}": brand.GOOGLE_TAG,
         "{{title}}": page.title,
         "{{description}}": page.description,
         "{{canonical}}": f"{brand.SITE_URL}{page.url}",

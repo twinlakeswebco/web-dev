@@ -8,6 +8,16 @@ here so the brand stays consistent in one place.
 
 from __future__ import annotations
 
+GOOGLE_TAG = """<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-69KZHWTBLQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-69KZHWTBLQ');
+</script>"""
+
 SITE_URL = "https://www.twinlakesweb.com"
 SITE_NAME = "Twin Lakes Web Co."
 LEGAL_NAME = "Twin Lakes Web Co. LLC"
