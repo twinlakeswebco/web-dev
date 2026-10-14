@@ -409,7 +409,7 @@ def build() -> None:
     <section class="hero section-tight">
       <div class="wrap measure">
         <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">{html.escape(title)}</li></ol></nav>
-        <p class="eyebrow">Website guidance</p>
+
         <h1>{html.escape(title)}</h1>
         <p class="hero-lede">{html.escape(description)}</p>
         <p class="post-meta">Published {html.escape(nice_date(published))} · Casey Keown</p>
@@ -486,7 +486,6 @@ def build() -> None:
   <main id="main">
     <section class="hero section-tight">
       <div class="wrap measure">
-        <p class="eyebrow">From the blog</p>
         <h1>Website advice without the mystery tech talk.</h1>
         <p class="hero-lede">Practical answers about websites, local search, performance, and useful technology for small businesses in Kentucky.</p>
       </div>

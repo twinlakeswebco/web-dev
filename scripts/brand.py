@@ -87,7 +87,7 @@ def header_html(current: str = "") -> str:
     <nav class="main-nav" aria-label="Main navigation">
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-nav-toggle>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        <span class="sr-only">Menu</span>
+        <span class="sr-only">Open menu</span>
       </button>
       <ul class="nav-links" id="nav-links" data-open="false" data-nav-links>{links}</ul>
     </nav>

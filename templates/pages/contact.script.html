@@ -16,9 +16,19 @@
     function showStep(stepNumber) {
       currentStep = Math.max(1, Math.min(3, stepNumber));
       steps.forEach(step => step.classList.toggle("active", Number(step.dataset.step) === currentStep));
-      stepLabels.forEach(label => label.classList.toggle("active", Number(label.dataset.labelStep) === currentStep));
+      stepLabels.forEach(label => {
+        const active = Number(label.dataset.labelStep) === currentStep;
+        label.classList.toggle("active", active);
+        if (active) label.setAttribute("aria-current", "step");
+        else label.removeAttribute("aria-current");
+      });
       progressFill.style.width = (currentStep * 33.333) + "%";
-      document.querySelector(".wizard-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const heading = steps[currentStep - 1].querySelector(".step-heading");
+      heading.focus({ preventScroll: true });
+      document.querySelector(".wizard-panel")?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+        block: "start"
+      });
     }
 
     function validateStep(stepNumber) {
@@ -42,21 +52,6 @@
     document.querySelectorAll(".prev-step").forEach(button => {
       button.addEventListener("click", () => showStep(currentStep - 1));
     });
-
-    const uploadBox = document.querySelector(".upload-box");
-    if (uploadBox) {
-      uploadBox.innerHTML = `
-        <h3>Reference Photos or Files <span class="optional">(optional)</span></h3>
-        <p>If you have photos, logos, or other files to share, paste a public share link from Google Drive, Dropbox, OneDrive, iCloud, or another file service.</p>
-        <label for="reference_links">Share link(s)</label>
-        <textarea id="reference_links" name="reference_links" placeholder="Paste one or more share links here."></textarea>
-      `;
-    }
-
-    const verificationWrap = document.querySelector(".recaptcha-wrap");
-    if (verificationWrap) {
-      verificationWrap.innerHTML = '<p class="privacy-note">Your answers are sent securely to Twin Lakes Web Co. After submitting, you can also email reference photos directly to <a href="mailto:me@caseykeown.com">me@caseykeown.com</a>.</p>';
-    }
 
     const summaryFields = [
       ["1. Business or organization", "business"],
@@ -197,7 +192,7 @@
         sessionStorage.removeItem(SUBMISSION_LOCK_KEY);
         setStatus("error", "REQUEST NOT SENT", "The form could not be sent. Please email me@caseykeown.com or try again.");
         submitBtn.disabled = false;
-        submitBtn.textContent = "Send Website Request";
+        submitBtn.textContent = "Send my request";
       }
     });
   </script>
