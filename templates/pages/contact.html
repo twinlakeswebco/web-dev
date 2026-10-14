@@ -1,8 +1,7 @@
     <section class="hero section-tight">
       <div class="wrap measure">
-        <p class="eyebrow">Contact</p>
         <h1>Get a website quote.</h1>
-        <p class="hero-lede">Three short sections. Answer what you know and we can work out the rest together. Photos go to a private Google Drive folder, I get notified right away, and I usually reply within one business day.</p>
+        <p class="hero-lede">Three short sections. Answer what you know and we can work out the rest together. You can share links to reference files or email them separately. I usually reply within one business day.</p>
         <div class="btn-row">
           <a class="btn btn-secondary" href="mailto:me@caseykeown.com">Email me@caseykeown.com</a>
           <a class="btn btn-secondary" href="https://calendar.app.google/ZXUK3d3zYTUcgLhw5" target="_blank" rel="noopener">Book a Consultation</a>
@@ -29,15 +28,15 @@
           <div class="wizard-panel">
             <div class="wizard-top">
               <div class="wizard-steps" aria-label="Form progress">
-                <div class="wizard-step-label active" data-label-step="1">1. Your business</div>
+                <div class="wizard-step-label active" data-label-step="1" aria-current="step">1. Your business</div>
                 <div class="wizard-step-label" data-label-step="2">2. Website plan</div>
-                <div class="wizard-step-label" data-label-step="3">3. Details and photos</div>
+                <div class="wizard-step-label" data-label-step="3">3. Details and files</div>
               </div>
               <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
             </div>
 
             <section class="form-step active" data-step="1">
-              <h2 class="step-heading">Step 1 of 3: you and your business</h2>
+              <h2 class="step-heading" tabindex="-1">Step 1 of 3: you and your business</h2>
               <p class="step-copy">Start with the basics. You do not need to have every detail figured out.</p>
 
               <div class="contact-grid">
@@ -94,7 +93,7 @@
             </section>
 
             <section class="form-step" data-step="2">
-              <h2 class="step-heading">Step 2 of 3: your website plan</h2>
+              <h2 class="step-heading" tabindex="-1">Step 2 of 3: your website plan</h2>
               <p class="step-copy">Give me the rough shape of the site. Suggestions and “not sure” are completely fine.</p>
 
               <div class="question-grid">
@@ -122,18 +121,18 @@
                 </div>
                 <div class="question full">
                   <label for="brand_assets"><span class="q-num">10</span>Do you have a logo, brand colors, photographs, or other materials? <span class="optional">(optional)</span></label>
-                  <textarea id="brand_assets" name="brand_assets" placeholder="Describe what you have. You can upload photographs in Step 3."></textarea>
+                  <textarea id="brand_assets" name="brand_assets" placeholder="Describe what you have. You can share links to reference files in Step 3."></textarea>
                 </div>
               </div>
 
               <div class="wizard-actions">
                 <button class="retro-action prev-step" type="button">Back</button>
-                <button class="retro-action primary next-step" type="button">Continue to details and photos</button>
+                <button class="retro-action primary next-step" type="button">Continue to details and files</button>
               </div>
             </section>
 
             <section class="form-step" data-step="3">
-              <h2 class="step-heading">Step 3 of 3: details, timeline, and photos</h2>
+              <h2 class="step-heading" tabindex="-1">Step 3 of 3: details, timeline, and files</h2>
               <p class="step-copy">Finish with logistics and any visual references that will help me understand your idea.</p>
 
               <div class="question-grid">
@@ -149,7 +148,8 @@
                       <label><input type="radio" name="owns_domain" value="No"> No</label>
                       <label><input type="radio" name="owns_domain" value="Not sure" checked> Not sure</label>
                     </div>
-                    <textarea id="existing_web_presence" name="existing_web_presence" placeholder="Existing URL, provider, or anything you know." style="margin-top:7px;"></textarea>
+                    <label class="sr-only" for="existing_web_presence">Existing website, domain, or hosting details</label>
+                    <textarea class="existing-web-presence" id="existing_web_presence" name="existing_web_presence" placeholder="Existing URL, provider, or anything you know."></textarea>
                   </fieldset>
                 </div>
                 <div class="question">
@@ -166,26 +166,14 @@
                 </div>
 
                 <div class="upload-box">
-                  <h3>Reference Photos <span class="optional">(optional, up to 20)</span></h3>
-                  <p>Upload logos, existing branding, team photos, products, locations, inspiration, or anything else that helps explain the project.</p>
-                  <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Add photos">
-                    <div class="dropzone-title">Drag &amp; Drop Photos Here</div>
-                    <div class="dropzone-sub">OR CLICK TO BROWSE · JPG · PNG · HEIC · WEBP</div>
-                    <input type="file" id="file-input" accept="image/*,.heic,.heif" multiple>
-                  </div>
-                  <div class="upload-meta">
-                    <span><strong id="file-count">0</strong> / 20 PHOTOS SELECTED</span>
-                    <span><strong id="file-size-total">0 MB</strong> / 25 MB</span>
-                  </div>
-                  <p class="field-warning" id="upload-warning" hidden></p>
-                  <div class="thumb-grid" id="thumb-grid"></div>
+                  <h3>Reference photos or files <span class="optional">(optional)</span></h3>
+                  <p>If you have photos, logos, or other files to share, paste a public share link from Google Drive, Dropbox, OneDrive, iCloud, or another file service.</p>
+                  <label for="reference_links">Share link(s)</label>
+                  <textarea id="reference_links" name="reference_links" placeholder="Paste one or more share links here."></textarea>
                 </div>
               </div>
 
-              <div class="recaptcha-wrap">
-                <div class="g-recaptcha" data-sitekey="0x4AAAAAAEr77nbJ4X_j3jyb"></div>
-                <p class="privacy-note">Your answers and photographs are sent securely. Uploaded photos are organized in a private Google Drive folder, and Casey receives an email notification.</p>
-              </div>
+              <p class="privacy-note">Your answers are sent securely to Twin Lakes Web Co. After submitting, you can also email reference photos directly to <a href="mailto:me@caseykeown.com">me@caseykeown.com</a>.</p>
 
               <div class="status-banner" id="status-banner" role="status" aria-live="polite">
                 <div class="status-title" id="status-title"></div>
