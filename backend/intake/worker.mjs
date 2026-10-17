@@ -64,7 +64,7 @@ export default {
         if (!(await env.UPLOAD_RATE_LIMITER.limit({ key: session.submissionId })).success) throw new IntakeError('Please wait a minute before retrying the upload.', 429);
         const bytes = await boundedBody(request, MAX_FILE_BYTES);
         if (bytes.byteLength !== file.size || await hash(bytes) !== file.sha256 || !matchesImage(bytes, file.type)) throw new IntakeError('The picture does not match the selected file. Please select a valid image.');
-        await relay(env, { action: 'photo', submissionId: session.submissionId, fingerprint: session.fingerprint, index, base64: Buffer.from(bytes).toString('base64') });
+        await relay(env, { action: 'photo', submissionId: session.submissionId, fingerprint: session.fingerprint, index, base64: Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength).toString('base64') });
         return reply({ success: true });
       }
       const result = await relay(env, { action: 'complete', submissionId: session.submissionId, fingerprint: session.fingerprint });
@@ -90,6 +90,7 @@ async function boundedBody(request, max) {
     if (size > max) { await reader.cancel(); throw new IntakeError('The upload exceeds the size limit.', 413); }
     chunks.push(value);
   }
+  if (chunks.length === 1) return chunks[0];
   const result = new Uint8Array(size);
   let offset = 0;
   for (const chunk of chunks) { result.set(chunk, offset); offset += chunk.byteLength; }
