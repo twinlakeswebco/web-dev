@@ -89,6 +89,7 @@ PAGES = [
         title="Website Design in Grayson County, KY | Twin Lakes Web Co.",
         description=brand.DESCRIPTION,
         nav_key="home",
+        script="home.script.html",
         og_title="Twin Lakes Web Co. | Websites built here. Built to work everywhere.",
         schema=[
             brand.organization_schema(),

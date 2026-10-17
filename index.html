@@ -221,10 +221,21 @@
     </section>
 
     <section class="section section-alt">
-      <div class="wrap wrap-narrow text-center">
+      <div class="wrap studio-grid" id="workspace">
+        <div class="studio-copy">
         <h2>A website developer you can actually reach</h2>
         <p class="text-muted">I'm Casey Keown. I grew up around these two lakes, I raise my family here, and I build websites for the businesses and organizations that keep this county running. My approach comes from a career where details matter: understand the objective, communicate clearly, and finish the job.</p>
         <p><a class="btn btn-quiet" href="/about/">More about me</a></p>
+        </div>
+        <figure class="studio-model" data-workspace>
+          <div class="studio-stage" data-workspace-stage>
+            <img src="/assets/models/twin-lakes-workspace.png" alt="A miniature Twin Lakes Web Co. workspace with a desk, laptop, lamp, and chair beneath the company name." width="800" height="640" loading="lazy" decoding="async" data-workspace-poster>
+          </div>
+          <figcaption>
+            <button class="btn btn-secondary" type="button" data-workspace-toggle hidden aria-expanded="false">Explore in 3D</button>
+            <p class="studio-status" data-workspace-status role="status" aria-live="polite">A little Twin Lakes workspace.</p>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -308,6 +319,6 @@
 </footer>
 
   <script src="/scripts/site.js" defer></script>
-
+  <script type="module" src="/scripts/workspace.js"></script>
 </body>
 </html>

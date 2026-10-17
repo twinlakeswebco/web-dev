@@ -2,8 +2,8 @@
 
 Source for [twinlakesweb.com](https://twinlakesweb.com), the website of Twin
 Lakes Web Co. LLC, a web design and development company in Grayson County,
-Kentucky. The site is plain static HTML and CSS with no runtime dependencies,
-published by GitHub Pages from the `main` branch.
+Kentucky. The site is plain static HTML and CSS, published by GitHub Pages from
+the `main` branch. Its optional homepage 3D view loads a bundled viewer on request.
 
 ## Layout
 
@@ -62,6 +62,19 @@ regenerated output.
 typography, imagery, and approved calls to action. Two rules are enforced by
 `scripts/check_brand.py` and will fail the build: no Custom Web Architecture or
 CWA references, and no em dashes.
+
+## Homepage 3D workspace
+
+The personal introduction on the homepage includes the supplied Twin Lakes
+workspace model. A 21 KB still preview is shown by default. `scripts/workspace.js`
+loads the self-hosted viewer and `assets/models/twin-lakes-web-co.glb` only when
+someone selects **Explore in 3D**. Closing the view removes the viewer. With
+JavaScript disabled, the still image remains and the 3D button stays hidden.
+
+The viewer is Google's [model-viewer 4.1.0](https://github.com/google/model-viewer),
+bundled in `scripts/vendor/` with its Apache 2.0 license. No CDN request is needed
+at runtime. Replace the GLB and regenerate the still preview together when
+changing the model. The OBJ is an authoring source and is not needed by the site.
 
 ## Deployment
 
