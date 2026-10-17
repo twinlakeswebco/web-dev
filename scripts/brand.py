@@ -30,9 +30,9 @@ FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61590846744430"
 BOOKING_URL = "https://calendar.app.google/ZXUK3d3zYTUcgLhw5"
 STORE_URL = "https://store.twinlakesweb.com"
 
-LOGO_WORDMARK = "/assets/twin-lakes-wordmark.png"
-LOGO_MONOGRAM = "/assets/twin-lakes-monogram.png"
-OG_IMAGE = f"{SITE_URL}/assets/twin-lakes-social.jpg"
+LOGO_WORDMARK = "/assets/twin-lakes-primary.svg"
+LOGO_MONOGRAM = "/assets/twin-lakes-tlwc-monogram.png"
+OG_IMAGE = f"{SITE_URL}/assets/twin-lakes-social.jpg?v=20261017"
 
 DESCRIPTION = (
     "Twin Lakes Web Co. designs fast, professional websites for businesses and "
@@ -63,12 +63,12 @@ FONT_LINKS = """  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">"""
 
-ICON_LINKS = """  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/assets/favicon-96x96.png" sizes="96x96" type="image/png">
-  <link rel="shortcut icon" href="/assets/favicon.ico">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="manifest" href="/assets/site.webmanifest">"""
+ICON_LINKS = """  <link rel="icon" href="/assets/favicon.svg?v=20261017" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32x32.png?v=20261017" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/favicon-96x96.png?v=20261017" sizes="96x96" type="image/png">
+  <link rel="shortcut icon" href="/assets/favicon.ico?v=20261017">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20261017">
+  <link rel="manifest" href="/assets/site.webmanifest?v=20261017">"""
 
 
 def header_html(current: str = "") -> str:
@@ -82,7 +82,10 @@ def header_html(current: str = "") -> str:
     return f'''<header class="site-header">
   <div class="wrap header-bar">
     <a class="brand-mark" href="/" aria-label="{SITE_NAME} home">
-      <img class="brand-logo" src="{LOGO_WORDMARK}" alt="Twin Lakes Web Co." width="640" height="180" fetchpriority="high" decoding="async">
+      <picture>
+        <source srcset="{LOGO_WORDMARK}" type="image/svg+xml">
+        <img class="brand-logo" src="/assets/twin-lakes-header.png" alt="Twin Lakes Web Co." width="640" height="143" fetchpriority="high" decoding="async">
+      </picture>
     </a>
     <nav class="main-nav" aria-label="Main navigation">
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-nav-toggle>
@@ -100,7 +103,12 @@ def footer_html() -> str:
     return f'''<footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
-      <h2>{SITE_NAME}</h2>
+      <a class="footer-brand" href="/" aria-label="{SITE_NAME} home">
+        <picture>
+          <source srcset="/assets/twin-lakes-stacked-wordmark.svg" type="image/svg+xml">
+          <img src="/assets/twin-lakes-stacked-wordmark.png" alt="Twin Lakes Web Co." width="1755" height="365" loading="lazy" decoding="async">
+        </picture>
+      </a>
       <p>{TAGLINE}</p>
       <p>Website design and development in Grayson County, Kentucky, serving the communities around Rough River Lake and Nolin Lake.</p>
     </div>

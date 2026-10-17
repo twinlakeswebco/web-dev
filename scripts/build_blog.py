@@ -277,7 +277,7 @@ def head_html(
   <link rel="alternate" type="application/rss+xml" title="{SITE_NAME} Blog" href="/blog/feed.xml">
 {brand.FONT_LINKS}
   <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css?v=20261017-logos">
 </head>'''
 
 

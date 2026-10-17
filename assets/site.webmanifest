@@ -9,19 +9,19 @@
   "background_color": "#F6F1E8",
   "icons": [
     {
-      "src": "/assets/web-app-manifest-192x192.png",
+      "src": "/assets/web-app-manifest-192x192.png?v=20261017",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/web-app-manifest-512x512.png",
+      "src": "/assets/web-app-manifest-512x512.png?v=20261017",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/web-app-manifest-512x512.png",
+      "src": "/assets/web-app-manifest-512x512.png?v=20261017",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

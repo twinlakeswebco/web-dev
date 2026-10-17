@@ -52,8 +52,9 @@ regenerated output.
 - **Blog posts** are Markdown files in `/blog`. See `blog/README.md` for the front
   matter format. Pushing a Markdown file rebuilds the blog automatically.
 - **Brand assets** are generated from the master files in `/assets`
-  (`TWIN-LAKES-WORDMARK.png`, `TWIN-LAKES-MONOGRAM-1000.png`,
-  `TWLC-binary-waves-2000.png`). Replace a master, then run
+  (`twin-lakes-primary.png/.svg`, `twin-lakes-stacked-wordmark.png/.svg`,
+  `twin-lakes-tlwc-monogram.png/.svg`). The header and footer use SVG with PNG
+  fallbacks; the monogram supplies browser and app icons. Replace a master, then run
   `scripts/build_assets.py`.
 
 ## Brand rules
