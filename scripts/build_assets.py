@@ -5,6 +5,7 @@ Sources (checked into /assets):
 - twin-lakes-primary.png/.svg          primary logo
 - twin-lakes-stacked-wordmark.png/.svg stacked wordmark
 - twin-lakes-tlwc-monogram.png/.svg    monogram
+- twin-lakes-favicon.png/.svg          paired-line browser and app icon
 
 Outputs the header wordmark, the monogram, the favicon and app icon set, and the
 Open Graph image. Run after replacing any master file:
@@ -15,7 +16,7 @@ Open Graph image. Run after replacing any master file:
 from __future__ import annotations
 
 from pathlib import Path
-from xml.etree import ElementTree as ET
+from shutil import copyfile
 
 from PIL import Image, ImageDraw
 
@@ -96,36 +97,27 @@ def main() -> None:
     )
     logo_web.save(ASSETS / "twin-lakes-logo.webp", quality=82, method=6)
 
-    # Square SVG favicon containing the supplied vector monogram unchanged.
-    # Center it on cream so the charcoal lettering also works in dark browser UI.
-    ET.register_namespace("", "http://www.w3.org/2000/svg")
-    mark = ET.parse(ASSETS / "twin-lakes-tlwc-monogram.svg").getroot()
-    mark.set("x", "6")
-    mark.set("y", "6")
-    mark.set("width", "88")
-    mark.set("height", "88")
-    favicon = ET.Element("{http://www.w3.org/2000/svg}svg", {
-        "viewBox": "0 0 100 100", "role": "img", "aria-label": "Twin Lakes Web Co.",
-    })
-    ET.SubElement(favicon, "{http://www.w3.org/2000/svg}rect", {
-        "width": "100", "height": "100", "rx": "18", "fill": "#F6F1E8",
-    })
-    favicon.append(mark)
-    ET.ElementTree(favicon).write(ASSETS / "favicon.svg", encoding="unicode")
-
-    # Raster favicons and app icons from the supplied PNG monogram.
+    # Dedicated paired-line favicon masters preserve legibility at browser sizes.
+    # Keep the monogram for larger brand applications, not tiny browser tabs.
+    copyfile(ASSETS / "twin-lakes-favicon.svg", ASSETS / "favicon.svg")
+    icon = Image.open(ASSETS / "twin-lakes-favicon.png").convert("RGBA")
     for size in (16, 32, 96):
-        square(monogram, size, margin=0.02, background=CREAM).save(ASSETS / f"favicon-{size}x{size}.png", optimize=True)
-    square(monogram, 180, margin=0.10, background=CREAM).convert("RGB").save(
-        ASSETS / "apple-touch-icon.png", optimize=True
-    )
-    for size in (192, 512):
-        square(monogram, size, margin=0.14, background=CREAM).convert("RGB").save(
-            ASSETS / f"web-app-manifest-{size}x{size}.png", optimize=True
+        icon.resize((size, size), Image.LANCZOS).save(
+            ASSETS / f"favicon-{size}x{size}.png", optimize=True
         )
-    square(monogram, 256, margin=0.02, background=CREAM).save(
-        ASSETS / "favicon.ico",
-        sizes=[(16, 16), (32, 32), (48, 48)],
+    # App launchers use a full cream background, including the rounded corners.
+    app_icon = Image.new("RGBA", icon.size, CREAM)
+    app_icon.alpha_composite(icon)
+    for size, filename in (
+        (180, "apple-touch-icon.png"),
+        (192, "web-app-manifest-192x192.png"),
+        (512, "web-app-manifest-512x512.png"),
+    ):
+        app_icon.resize((size, size), Image.LANCZOS).convert("RGB").save(
+            ASSETS / filename, optimize=True
+        )
+    icon.resize((256, 256), Image.LANCZOS).save(
+        ASSETS / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48), (256, 256)]
     )
 
     # Homepage hero photograph, resized and offered as WebP with a JPEG fallback.

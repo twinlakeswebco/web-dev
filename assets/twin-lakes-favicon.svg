@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title">
+  <title id="title">Twin Lakes Web Co.</title>
+  <rect width="64" height="64" rx="14" fill="#F6F1E8"/>
+  <path d="M10 27C19 27 23 19 32 19S45 27 54 27V33C45 33 41 25 32 25S19 33 10 33Z" fill="#64745A"/>
+  <path d="M10 38C19 38 23 30 32 30S45 38 54 38V44C45 44 41 36 32 36S19 44 10 44Z" fill="#F47A3C"/>
+</svg>

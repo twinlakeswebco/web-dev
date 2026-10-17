@@ -256,6 +256,7 @@ REDIRECT_TEMPLATE = """<!doctype html>
 <html lang="en">
 <head>
 {google_tag}
+{icons}
   <meta charset="utf-8">
   <title>Page moved | Twin Lakes Web Co.</title>
   <link rel="canonical" href="{site}{target}">
@@ -275,7 +276,7 @@ def write_redirects() -> None:
         destination = ROOT / source
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(
-            REDIRECT_TEMPLATE.format(site=brand.SITE_URL, target=target, google_tag=brand.GOOGLE_TAG), encoding="utf-8"
+            REDIRECT_TEMPLATE.format(site=brand.SITE_URL, target=target, google_tag=brand.GOOGLE_TAG, icons=brand.ICON_LINKS), encoding="utf-8"
         )
         print(f"wrote redirect {source} -> {target}")
 

@@ -54,7 +54,8 @@ regenerated output.
 - **Brand assets** are generated from the master files in `/assets`
   (`twin-lakes-primary.png/.svg`, `twin-lakes-stacked-wordmark.png/.svg`,
   `twin-lakes-tlwc-monogram.png/.svg`). The header and footer use SVG with PNG
-  fallbacks; the monogram supplies browser and app icons. Replace a master, then run
+  fallbacks. The paired-line `twin-lakes-favicon.png/.svg` masters supply browser
+  and app icons. Replace a master, then run
   `scripts/build_assets.py`.
 
 ## Brand rules

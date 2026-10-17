@@ -63,12 +63,12 @@ FONT_LINKS = """  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">"""
 
-ICON_LINKS = """  <link rel="icon" href="/assets/favicon.svg?v=20261017" type="image/svg+xml">
-  <link rel="icon" href="/assets/favicon-32x32.png?v=20261017" sizes="32x32" type="image/png">
-  <link rel="icon" href="/assets/favicon-96x96.png?v=20261017" sizes="96x96" type="image/png">
-  <link rel="shortcut icon" href="/assets/favicon.ico?v=20261017">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20261017">
-  <link rel="manifest" href="/assets/site.webmanifest?v=20261017">"""
+ICON_LINKS = """  <link rel="icon" href="/assets/favicon.svg?v=20261017-waves" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32x32.png?v=20261017-waves" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/favicon-96x96.png?v=20261017-waves" sizes="96x96" type="image/png">
+  <link rel="shortcut icon" href="/assets/favicon.ico?v=20261017-waves">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20261017-waves">
+  <link rel="manifest" href="/assets/site.webmanifest?v=20261017-waves">"""
 
 
 def header_html(current: str = "") -> str:
