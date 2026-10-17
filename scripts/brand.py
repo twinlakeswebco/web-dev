@@ -25,7 +25,7 @@ SHORT_NAME = "Twin Lakes Web"
 TAGLINE = "Websites built here. Built to work everywhere."
 FOOTER_YEAR = "2026"
 
-EMAIL = "me@caseykeown.com"
+EMAIL = "casey@twinlakesweb.com"
 FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61590846744430"
 BOOKING_URL = "https://calendar.app.google/ZXUK3d3zYTUcgLhw5"
 STORE_URL = "https://store.twinlakesweb.com"

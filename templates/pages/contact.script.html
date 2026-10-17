@@ -1,5 +1,5 @@
   <script>
-    const FORM_ENDPOINT = "https://flowform.to/caseykeown@gmail.com";
+    const FORM_ENDPOINT = "https://flowform.to/casey@twinlakesweb.com";
     const SUBMISSION_LOCK_KEY = "twinLakesLeadSubmission";
     const SUBMISSION_LOCK_MS = 15 * 60 * 1000;
 
@@ -190,7 +190,7 @@
       } catch (error) {
         console.error("Submission failed:", error);
         sessionStorage.removeItem(SUBMISSION_LOCK_KEY);
-        setStatus("error", "REQUEST NOT SENT", "The form could not be sent. Please email me@caseykeown.com or try again.");
+        setStatus("error", "REQUEST NOT SENT", "The form could not be sent. Please email casey@twinlakesweb.com or try again.");
         submitBtn.disabled = false;
         submitBtn.textContent = "Send my request";
       }

@@ -31,7 +31,7 @@ jobs:
           set -euo pipefail
           page='contact/index.html'
           grep -Fq 'id="lead-form"' "$page"
-          grep -Fq 'https://flowform.to/caseykeown@gmail.com' "$page"
+          grep -Fq 'https://flowform.to/casey@twinlakesweb.com' "$page"
           grep -Fq 'New Website Request' "$page"
           if grep -Fq 'https://leads-intake.caseykeown.workers.dev/' "$page"; then
             echo 'Retired leads-intake Worker is still referenced by the generated contact page.'
@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          endpoint='https://flowform.to/caseykeown@gmail.com'
+          endpoint='https://flowform.to/casey@twinlakesweb.com'
           headers="$(mktemp)"
           code="$(curl --silent --show-error --output /dev/null --dump-header "$headers" \
             --write-out '%{http_code}' --request OPTIONS \
@@ -76,7 +76,7 @@ jobs:
         run: |
           set -euo pipefail
           code="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
-            'https://flowform.to/caseykeown@gmail.com')"
+            'https://flowform.to/casey@twinlakesweb.com')"
           test "$code" = "405" || {
             echo "Expected GET to be rejected with 405; got HTTP $code"
             exit 1

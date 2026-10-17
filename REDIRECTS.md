@@ -1,7 +1,7 @@
 # URL migration map
 
 The site moved from `caseykeown.com` (flat `.html` files) to `twinlakesweb.com`
-(directory URLs). `caseykeown.com` is retained for email at `me@caseykeown.com`.
+(directory URLs). The current contact email is `casey@twinlakesweb.com`.
 
 ## Same-site redirects (already implemented)
 
@@ -63,5 +63,5 @@ Options, in order of preference:
 3. **Netlify or Cloudflare Pages.** The `_redirects` file in this repository is
    already written in that format and can be reused on the old domain.
 
-Keep the cross-domain redirects in place permanently. Do not remove the old
-domain's DNS while `me@caseykeown.com` is the contact address in use.
+Keep the cross-domain redirects in place permanently. The current contact email
+is `casey@twinlakesweb.com`; preserve the old domain's DNS for those redirects.
