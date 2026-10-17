@@ -1,7 +1,7 @@
     <section class="hero section-tight">
       <div class="wrap measure">
         <h1>Get a website quote.</h1>
-        <p class="hero-lede">Three short sections. Answer what you know and we can work out the rest together. You can share links to reference files or email them separately. I usually reply within one business day.</p>
+        <p class="hero-lede">Three short sections. Answer what you know and we can work out the rest together. Add up to 10 reference pictures, and I usually reply within one business day.</p>
         <div class="btn-row">
           <a class="btn btn-secondary" href="mailto:casey@twinlakesweb.com">Email casey@twinlakesweb.com</a>
           <a class="btn btn-secondary" href="https://calendar.app.google/ZXUK3d3zYTUcgLhw5" target="_blank" rel="noopener">Book a Consultation</a>
@@ -166,14 +166,21 @@
                 </div>
 
                 <div class="upload-box">
-                  <h3>Reference photos or files <span class="optional">(optional)</span></h3>
-                  <p>If you have photos, logos, or other files to share, paste a public share link from Google Drive, Dropbox, OneDrive, iCloud, or another file service.</p>
+                  <h3>Reference pictures <span class="optional">(optional, up to 10)</span></h3>
+                  <p id="photo-help">Add photos, logos, or inspiration. Each picture can be up to 15 MB. JPG, PNG, WebP, GIF, HEIC, and HEIF are supported. Your original files are preserved.</p>
+                  <label for="photos">Choose pictures</label>
+                  <input type="file" id="photos" accept="image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photo-help photo-count photo-error">
+                  <p id="photo-count" role="status" aria-live="polite">0 of 10 pictures selected</p>
+                  <p id="photo-error" role="alert"></p>
+                  <ul id="photo-list" class="photo-list"></ul>
+                  <p>You can also share links to other reference files.</p>
                   <label for="reference_links">Share link(s)</label>
                   <textarea id="reference_links" name="reference_links" placeholder="Paste one or more share links here."></textarea>
                 </div>
               </div>
 
-              <p class="privacy-note">Your answers are sent securely to Twin Lakes Web Co. After submitting, you can also email reference photos directly to <a href="mailto:casey@twinlakesweb.com">casey@twinlakesweb.com</a>.</p>
+              <p class="privacy-note">Your answers and pictures are saved together in a private intake folder. Casey receives your inquiry at <a href="mailto:casey@twinlakesweb.com">casey@twinlakesweb.com</a>.</p>
+              <div id="turnstile-widget" aria-label="Cloudflare human verification"></div>
 
               <div class="status-banner" id="status-banner" role="status" aria-live="polite">
                 <div class="status-title" id="status-title"></div>
@@ -183,6 +190,7 @@
               <div class="wizard-actions">
                 <button class="retro-action prev-step" type="button">Back</button>
                 <button class="retro-action primary" type="submit" id="submit-btn">Send my request</button>
+                <button class="retro-action" type="button" id="start-over-btn" hidden>Start a new request</button>
               </div>
             </section>
           </div>

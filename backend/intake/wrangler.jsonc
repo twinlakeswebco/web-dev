@@ -1,0 +1,12 @@
+{
+  "name": "twinlakes-intake",
+  "account_id": "fa1086d11708a5183253488970082fb8",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "ratelimits": [
+    { "name": "INIT_RATE_LIMITER", "namespace_id": "1017", "simple": { "limit": 5, "period": 60 } },
+    { "name": "UPLOAD_RATE_LIMITER", "namespace_id": "1018", "simple": { "limit": 30, "period": 60 } }
+  ]
+}
