@@ -1,83 +1,33 @@
-name: Contact form smoke test
-
+name: Contact intake checks
 on:
   pull_request:
-    paths:
-      - "contact/**"
-      - "templates/pages/contact*"
-      - ".github/workflows/contact-form-smoke.yml"
+    paths: ["contact/**", "templates/pages/contact*", "scripts/contact-intake*", "backend/intake/**", ".github/workflows/contact-form-smoke.yml"]
   workflow_dispatch: {}
-
 permissions:
   contents: read
-
 jobs:
-  contact-form-smoke:
+  intake:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v6
-
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-
-      - name: Build contact page
-        run: python3 scripts/build_site.py
-
-      - name: Verify replacement backend is wired
-        shell: bash
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - run: python3 scripts/build_site.py
+      - run: node --test backend/intake/intake.test.mjs
+      - name: Check generated form wiring
         run: |
-          set -euo pipefail
-          page='contact/index.html'
-          grep -Fq 'id="lead-form"' "$page"
-          grep -Fq 'https://flowform.to/casey@twinlakesweb.com' "$page"
-          grep -Fq 'New Website Request' "$page"
-          if grep -Fq 'https://leads-intake.caseykeown.workers.dev/' "$page"; then
-            echo 'Retired leads-intake Worker is still referenced by the generated contact page.'
-            exit 1
-          fi
-          if grep -Fq 'www.google.com/recaptcha/api.js' "$page"; then
-            echo 'Google reCAPTCHA is still loaded by the generated contact page.'
-            exit 1
-          fi
-          if grep -Fq 'challenges.cloudflare.com/turnstile/v0/api.js' "$page"; then
-            echo 'Turnstile is still loaded even though FlowForm is now the submission backend.'
-            exit 1
-          fi
-
-      - name: Verify FlowForm browser endpoint and CORS
-        shell: bash
-        run: |
-          set -euo pipefail
-          endpoint='https://flowform.to/casey@twinlakesweb.com'
-          headers="$(mktemp)"
-          code="$(curl --silent --show-error --output /dev/null --dump-header "$headers" \
-            --write-out '%{http_code}' --request OPTIONS \
-            --header 'Origin: https://www.twinlakesweb.com' \
-            --header 'Access-Control-Request-Method: POST' \
-            --header 'Access-Control-Request-Headers: content-type' \
-            "$endpoint")"
-          if [[ "$code" -lt 200 || "$code" -ge 400 ]]; then
-            echo "FlowForm preflight returned HTTP $code"
-            cat "$headers"
-            exit 1
-          fi
-          allowed="$(tr -d '\r' < "$headers" | awk -F': ' 'tolower($1)=="access-control-allow-origin" {print $2}')"
-          if [[ "$allowed" != 'https://www.twinlakesweb.com' && "$allowed" != '*' ]]; then
-            echo "FlowForm does not allow the production browser origin."
-            echo "Access-Control-Allow-Origin: ${allowed:-<missing>}"
-            cat "$headers"
-            exit 1
-          fi
-
-      - name: Verify FlowForm endpoint is healthy without sending a lead
-        shell: bash
-        run: |
-          set -euo pipefail
-          code="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
-            'https://flowform.to/casey@twinlakesweb.com')"
-          test "$code" = "405" || {
-            echo "Expected GET to be rejected with 405; got HTTP $code"
-            exit 1
-          }
+          python3 - <<'PY'
+          from pathlib import Path
+          html = Path('contact/index.html').read_text()
+          js = Path('scripts/contact-intake.js').read_text()
+          assert 'id="photos"' in html and 'id="turnstile-widget"' in html
+          assert '/scripts/contact-intake.js?v=20261017' in html
+          assert 'flowform.to' not in html and 'leads-intake.caseykeown' not in html
+          assert 'challenges.cloudflare.com/turnstile/v0/api.js' in js
+          assert 'https://twinlakes-intake.caseykeown.workers.dev' in js
+          PY

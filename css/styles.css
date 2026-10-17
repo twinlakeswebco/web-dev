@@ -409,6 +409,12 @@ strong { font-weight: 700; }
 .retro-action:disabled { opacity: .55; cursor: wait; }
 .upload-box { padding-top: 1.5rem; border-top: 1px solid var(--color-gray); }
 .upload-box h3 { margin-bottom: .35rem; }
+.photo-list { padding: 0; list-style: none; }
+.photo-list li { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .65rem 0; border-bottom: 1px solid var(--color-gray); }
+.photo-list span { overflow-wrap: anywhere; }
+.photo-list button { flex-shrink: 0; padding: .35rem .65rem; cursor: pointer; }
+#photo-error { color: var(--color-error); }
+#turnstile-widget { margin-top: 1.5rem; }
 .upload-box label { display: block; margin-bottom: .45rem; font-weight: 700; }
 .upload-box textarea { width: 100%; min-height: 7rem; padding: .72rem .75rem; background: #fff; border: 1px solid #aaa59d; border-radius: .35rem; resize: vertical; }
 .existing-web-presence { margin-top: .75rem; }
