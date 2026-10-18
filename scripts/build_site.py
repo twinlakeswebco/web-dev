@@ -286,6 +286,8 @@ def render(page: Page) -> str:
     content = (PAGES_DIR / page.source).read_text(encoding="utf-8").rstrip("\n")
 
     head_extra: list[str] = []
+    if page.source == "contact.html":
+        head_extra.append('  <link rel="stylesheet" href="/css/contact.css?v=20261018">')
     if page.noindex:
         head_extra.append('  <meta name="robots" content="noindex, follow">')
     if page.url == "/blog/" or page.og_type == "article":

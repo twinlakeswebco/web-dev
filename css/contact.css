@@ -1,0 +1,55 @@
+/* Contact packages extend the site's existing palette and typography. */
+.contact-hero-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.contact-hero-grid h1 { max-width: 16ch; }
+.contact-starter-note { padding: 1.5rem; background: var(--brand-cream); border-radius: var(--radius); }
+.contact-starter-note h2 { font-size: var(--step-1); }
+.contact-starter-note p { margin: 0; }
+.package-list { border-top: 1px solid var(--brand-charcoal); }
+.package { border-bottom: 1px solid var(--brand-gray); }
+.package summary { display: grid; grid-template-columns: minmax(0, 1fr) 10rem 7.5rem; gap: 1rem 2rem; align-items: center; padding: 1.75rem 0; cursor: pointer; list-style: none; }
+.package summary::-webkit-details-marker { display: none; }
+.package summary::marker { content: ""; }
+.package summary:hover .package-name { color: var(--brand-orange-deep); }
+.package h2 { margin: 0 0 .4rem; font-size: var(--step-2); }
+.package-kind { display: block; margin-top: .5rem; font: 500 var(--step-0)/1.5 var(--font-body); letter-spacing: 0; }
+.package-tagline { display: block; color: var(--brand-green-dark); font-size: var(--step--1); font-weight: 600; line-height: 1.5; }
+.package-price { font: 700 var(--step-2)/1.2 var(--font-heading); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.package-price.package-price-custom { font-size: var(--step-0); }
+.package-price small { display: block; margin-top: .4rem; color: var(--color-muted); font: 400 var(--step--1)/1.5 var(--font-body); }
+.package-toggle { display: flex; gap: .75rem; align-items: center; justify-content: flex-end; color: var(--brand-orange-deep); font-size: var(--step--1); font-weight: 700; }
+.package-toggle svg { width: 1.1rem; height: 1.1rem; flex: none; transition: transform .2s ease; }
+.package[open] .package-toggle svg { transform: rotate(180deg); }
+.package-close,.package[open] .package-open { display: none; }
+.package[open] .package-close { display: inline; }
+.package-content { max-width: 74ch; padding: 0 0 2rem; }
+.package-content h3 { margin-top: 1.5rem; font-size: var(--step-0); }
+.package-content ul { padding-left: 1.3rem; }
+.package-content li + li { margin-top: .35rem; }
+.package-fit { margin-top: 1.5rem; }
+.package-disclaimer { color: var(--color-muted); font-size: var(--step--1); }
+.package-content .btn { margin-top: .5rem; }
+.contact-expectations { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem 4rem; }
+.contact-expectations h2 { font-size: var(--step-2); }
+.contact-expectations p:last-child { margin-bottom: 0; }
+.contact-form-intro { margin-bottom: 2rem; }
+.contact-signature { margin-top: 1.5rem; font-size: var(--step--1); }
+.contact-signature strong { font-family: var(--font-heading); }
+.contact-signature span { color: var(--color-muted); }
+#inquiry { scroll-margin-top: calc(var(--header-height) + 1.25rem); }
+@media (max-width: 62rem) {
+  .contact-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .contact-starter-note { max-width: 46rem; }
+}
+@media (max-width: 48rem) {
+  .package summary { grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; }
+  .package-toggle { grid-column: 1 / -1; justify-content: flex-start; }
+  .package-price { font-size: var(--step-1); text-align: right; }
+  .contact-expectations { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+}
+@media (max-width: 24rem) {
+  .package summary { grid-template-columns: minmax(0, 1fr); }
+  .package-price { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .package-toggle svg { transition: none; }
+}
