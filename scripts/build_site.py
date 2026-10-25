@@ -121,7 +121,7 @@ PAGES = [
         title="Work | Twin Lakes Web Co.",
         description=(
             "Websites and applications built by Twin Lakes Web Co. for Kentucky businesses, "
-            "city government, nonprofits, and community organizations."
+            "nonprofits, and independent community projects."
         ),
         nav_key="work",
         schema=breadcrumb([("Home", "/"), ("Work", "/work/")]),
