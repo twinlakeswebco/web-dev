@@ -229,6 +229,23 @@ PAGES = [
         ),
     ),
     Page(
+        source="work/hannah-keown-homes.html",
+        output="work/hannah-keown-homes/index.html",
+        url="/work/hannah-keown-homes/",
+        title="Hannah Keown Homes Case Study | Twin Lakes Web Co.",
+        description=(
+            "A real estate website combining property search, buyer and seller resources, "
+            "and easy contact with Hannah Keown."
+        ),
+        nav_key="work",
+        og_type="article",
+        schema=case_study_schema(
+            "Hannah Keown Homes",
+            "/work/hannah-keown-homes/",
+            "A real estate website with property search and buyer and seller resources.",
+        ),
+    ),
+    Page(
         source="not-found.html",
         output="404.html",
         url="/404.html",

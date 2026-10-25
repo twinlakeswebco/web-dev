@@ -44,6 +44,7 @@ STATIC_URLS = [
     ("/work/nalls-specialized-hauling/", None),
     ("/work/isr-with-daphne/", None),
     ("/work/ground-pros/", None),
+    ("/work/hannah-keown-homes/", None),
     ("/about/", None),
     ("/contact/", None),
     ("/blog/", None),
