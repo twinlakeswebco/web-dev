@@ -252,6 +252,8 @@ def head_html(
     canonical: str,
     page_type: str = "website",
     published: str | None = None,
+    image: str = OG_IMAGE,
+    image_alt: str = f"{SITE_NAME}, website design and development in Grayson County, Kentucky",
 ) -> str:
     article_meta = f'\n  <meta property="article:published_time" content="{html.escape(published)}">' if published else ""
     return f'''<head>
@@ -267,12 +269,12 @@ def head_html(
   <meta property="og:description" content="{html.escape(description, quote=True)}">
   <meta property="og:type" content="{page_type}">
   <meta property="og:url" content="{html.escape(canonical, quote=True)}">
-  <meta property="og:image" content="{OG_IMAGE}">
-  <meta property="og:image:alt" content="{SITE_NAME}, website design and development in Grayson County, Kentucky">{article_meta}
+  <meta property="og:image" content="{html.escape(image, quote=True)}">
+  <meta property="og:image:alt" content="{html.escape(image_alt, quote=True)}">{article_meta}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{html.escape(title, quote=True)}">
   <meta name="twitter:description" content="{html.escape(description, quote=True)}">
-  <meta name="twitter:image" content="{OG_IMAGE}">
+  <meta name="twitter:image" content="{html.escape(image, quote=True)}">
   <meta name="theme-color" content="#F47A3C">
 {brand.ICON_LINKS}
   <link rel="alternate" type="application/rss+xml" title="{SITE_NAME} Blog" href="/blog/feed.xml">
@@ -335,7 +337,7 @@ def build_article_schema(post: dict[str, str]) -> dict[str, object]:
                 "dateModified": post.get("modified") or post["date"],
                 "author": {"@id": f"{SITE_URL}/#casey"},
                 "publisher": {"@id": f"{SITE_URL}/#business"},
-                "image": [OG_IMAGE],
+                "image": [post.get("social_image") or OG_IMAGE],
                 "inLanguage": "en-US",
             },
             {
@@ -385,6 +387,10 @@ def build() -> None:
         seo_title = meta.get("meta_title") or f"{title} | {SITE_NAME}"
         article_url = f"/blog/articles/{slug}/"
         canonical = f"{SITE_URL}{article_url}"
+        social_image = meta.get("social_image") or OG_IMAGE
+        if social_image.startswith("/"):
+            social_image = f"{SITE_URL}{social_image}"
+        social_image_alt = meta.get("social_image_alt") or f"{SITE_NAME}, website design and development in Grayson County, Kentucky"
         body = markdown_to_html(markdown)
         body = re.sub(r'^<h1[^>]*>.*?</h1>\s*', "", body, count=1, flags=re.DOTALL)
 
@@ -396,13 +402,14 @@ def build() -> None:
             "modified": modified,
             "description": description,
             "url": article_url,
+            "social_image": social_image,
         }
         posts.append(post)
 
         schema_json = json.dumps(build_article_schema(post), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
         article_html = f'''<!doctype html>
 <html lang="en">
-{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published)}
+{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published, image=social_image, image_alt=social_image_alt)}
 <body class="article-page">
   <a class="skip-link" href="#main">Skip to content</a>
   {header_html("blog")}
