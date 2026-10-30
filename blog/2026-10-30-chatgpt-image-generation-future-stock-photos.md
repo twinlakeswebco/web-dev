@@ -82,5 +82,4 @@ Before you spend another evening searching for a stock photo that almost works, 
 Sources:
 - [Reuters reporting, October 21, 2026](https://www.investing.com/news/stock-market-news/getty-images-files-for-us-bankruptcy-advances-restructuring-plan-4961698)
 - [Getty Images restructuring announcement, October 21, 2026](https://gettyimages.gcs-web.com/news-releases/news-release-details/getty-images-advances-financial-restructuring-strengthen-balance)
-- [OpenAI image prompting guidance](https://developers.openai.com/api/docs/guides/image-prompting)
 
