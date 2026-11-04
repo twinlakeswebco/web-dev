@@ -21,6 +21,8 @@ from pathlib import Path
 from urllib.parse import quote
 
 import sys
+import os
+from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -353,6 +355,12 @@ def build_article_schema(post: dict[str, str]) -> dict[str, object]:
     }
 
 
+def publication_day() -> date:
+    """Use the business timezone; allow deterministic release verification."""
+    override = os.environ.get("BLOG_BUILD_DATE")
+    return date.fromisoformat(override) if override else datetime.now(ZoneInfo("America/New_York")).date()
+
+
 def build() -> None:
     BLOG.mkdir(parents=True, exist_ok=True)
     if ARTICLES.exists():
@@ -374,6 +382,10 @@ def build() -> None:
 
         meta, markdown = parse_front_matter(source.read_text(encoding="utf-8"))
         if meta.get("draft", "false").lower() in {"true", "yes", "1"}:
+            continue
+
+        publish_on = meta.get("publish_on")
+        if publish_on and date.fromisoformat(publish_on) > publication_day():
             continue
 
         first_heading = re.search(r"^#\s+(.+)$", markdown, re.MULTILINE)

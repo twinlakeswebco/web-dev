@@ -11,6 +11,8 @@ on:
       - "templates/**"
       - "scripts/**"
       - ".github/workflows/build-site.yml"
+  schedule:
+    - cron: "15 5 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -30,6 +32,9 @@ jobs:
 
       - name: Build static pages
         run: python3 scripts/build_site.py
+
+      - name: Check scheduled article metadata and assets
+        run: python3 scripts/check_scheduled_blog.py
 
       - name: Build blog, feed, and sitemap
         run: python3 scripts/build_blog.py
