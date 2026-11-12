@@ -1,0 +1,59 @@
+.ad-preferences {
+  position: fixed;
+  z-index: 1000;
+  inset-inline-start: 1rem;
+  inset-block-end: 1rem;
+  width: min(25rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--brand-gray, #d9d6d0);
+  border-radius: .85rem;
+  color: var(--brand-charcoal, #242424);
+  background: var(--brand-cream-soft, #fbf8f3);
+  box-shadow: 0 8px 24px rgb(36 36 36 / .18);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.ad-preferences h2 {
+  margin: 0 0 .35rem;
+  font-size: 1.1rem;
+}
+
+.ad-preferences p {
+  margin: 0 0 .75rem;
+}
+
+.ad-preferences-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-block-end: .55rem;
+}
+
+.ad-preferences-actions button {
+  min-height: 2.75rem;
+  padding: .45rem .65rem;
+  border: 1px solid currentColor;
+  border-radius: .45rem;
+  color: var(--brand-orange-deep, #a9441c);
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ad-preferences-actions button:hover {
+  background: var(--brand-orange-soft, #fff0e7);
+}
+
+.ad-preferences-link {
+  padding: .35rem 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

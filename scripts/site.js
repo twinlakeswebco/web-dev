@@ -1,6 +1,10 @@
 (() => {
   "use strict";
 
+  if (window.location.hostname === "www.twinlakesweb.com" && document.querySelector(".footer-bottom")) {
+    import("./meta-pixel.js").catch((error) => console.warn("Ad preferences could not load:", error));
+  }
+
   document.querySelectorAll("[data-current-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
   });

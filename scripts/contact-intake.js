@@ -187,6 +187,7 @@
       selected.length = 0;
       status('success', 'REQUEST RECEIVED', 'Your inquiry and pictures were received. Casey will respond within one business day.');
       submit.textContent = 'Request received';
+      window.dispatchEvent(new Event('twinlakes:inquiry-submitted'));
     } catch (error) {
       status('error', 'REQUEST NOT CONFIRMED', error.message === 'Failed to fetch' || error.name === 'TimeoutError' ? 'Your connection was interrupted. Keep this page open, verify again, and retry to resume the same request.' : error.message);
       submit.textContent = 'Retry my request';
