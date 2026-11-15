@@ -246,6 +246,23 @@ PAGES = [
         ),
     ),
     Page(
+        source="work/ev-locator.html",
+        output="work/ev-locator/index.html",
+        url="/work/ev-locator/",
+        title="EV Locator Case Study | Twin Lakes Web Co.",
+        description=(
+            "How Twin Lakes Web Co. built EV Locator, a searchable directory for food, "
+            "housing, health care, and other local services in Grayson County, Kentucky."
+        ),
+        nav_key="work",
+        og_type="article",
+        schema=case_study_schema(
+            "EV Locator",
+            "/work/ev-locator/",
+            "A searchable community resource directory for Grayson County, Kentucky.",
+        ),
+    ),
+    Page(
         source="not-found.html",
         output="404.html",
         url="/404.html",

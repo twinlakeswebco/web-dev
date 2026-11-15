@@ -47,6 +47,7 @@ STATIC_URLS = [
     ("/work/isr-with-daphne/", None),
     ("/work/ground-pros/", None),
     ("/work/hannah-keown-homes/", None),
+    ("/work/ev-locator/", None),
     ("/about/", None),
     ("/contact/", None),
     ("/blog/", None),
