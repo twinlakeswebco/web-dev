@@ -9,7 +9,9 @@ date: 2026-11-22
 slug: "twin-lakes-owensboro-health-surplus-staffing-investigation"
 paid: true
 draft: false
-social_image: "/blog/assets/twin-lakes-investigation-social.jpg"
+social_image: "/blog/assets/twin-lakes-investigation-social.jpg?v=20261122-share2"
+social_image_width: "1732"
+social_image_height: "908"
 social_image_alt: "Owensboro Health Twin Lakes Medical Center with the investigation headline."
 ---
 
