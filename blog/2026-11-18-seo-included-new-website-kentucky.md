@@ -1,7 +1,7 @@
 ---
 title: "What SEO Should Be Included in a New Website Build?"
 meta_title: "SEO in a New Kentucky Website: What to Include"
-meta_description: "A new build should include crawlable pages, useful service content, descriptive titles, canonical URLs, a sitemap, sensible internal links, and."
+meta_description: "A new website needs crawlable pages, useful content, titles, canonical URLs, a sitemap, internal links, and indexing checks. Ongoing SEO is separate."
 target_keyword: "what seo should be included in a new website build Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-15"

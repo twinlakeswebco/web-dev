@@ -1,7 +1,7 @@
 ---
 title: "Custom Website or Website Builder: Test the Fit"
 meta_title: "Custom Site or Website Builder? Kentucky Guide"
-meta_description: "Choose a builder when its editing and standard functions fit. Choose custom development when specific content, integration, performance, or workflow."
+meta_description: "Choose a builder when standard tools fit. Choose custom development when content, integrations, performance, or workflows justify the added work."
 target_keyword: "custom website or website builder: test the fit Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-32"

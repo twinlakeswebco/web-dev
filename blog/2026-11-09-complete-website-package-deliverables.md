@@ -1,7 +1,7 @@
 ---
 title: "What a Complete Website Package Should Deliver"
 meta_title: "Website Package Deliverables: A Kentucky Guide"
-meta_description: "A complete package should name its pages, content work, functions, testing, launch tasks, ownership, and support. The label complete has no useful."
+meta_description: "A complete website package spells out pages, content, features, testing, launch tasks, ownership, and ongoing support."
 target_keyword: "what a complete website package should deliver Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-06"

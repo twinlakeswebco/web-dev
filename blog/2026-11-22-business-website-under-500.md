@@ -1,7 +1,7 @@
 ---
 title: "Can You Get a Useful Business Website Under $500?"
 meta_title: "A Business Website Under $500? Kentucky Guide"
-meta_description: "A budget below $500 can support a small, tightly defined website or link page. It usually requires limits on pages, content work, integrations, and."
+meta_description: "A budget under $500 can cover a small website or link page if you limit pages, content work, integrations, and ongoing support."
 target_keyword: "can you get a useful business website under $500 Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-19"

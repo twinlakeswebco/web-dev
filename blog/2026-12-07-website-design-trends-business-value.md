@@ -1,7 +1,7 @@
 ---
 title: "Which Website Design Trends Help a Kentucky Business?"
 meta_title: "Website Design Trends for Kentucky Businesses"
-meta_description: "Keep a trend when it improves clarity, usability, brand recognition, or a customer task. Reject it when it hides information, slows pages, or creates."
+meta_description: "Choose design trends that improve clarity, usability, or customer tasks. Avoid trends that hide information, slow pages, or add needless upkeep."
 target_keyword: "which website design trends help a business Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-34"

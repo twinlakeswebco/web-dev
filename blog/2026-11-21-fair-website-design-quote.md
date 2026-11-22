@@ -1,7 +1,7 @@
 ---
 title: "Is Your Website Quote Fair? Evaluate the Scope"
 meta_title: "Is Your Website Quote Fair? A Kentucky Guide"
-meta_description: "A fair website quote clearly connects the price to work, responsibility, deliverables, recurring charges, and risk. Compare equivalent scopes before."
+meta_description: "Judge a website quote by comparing the work, deliverables, responsibilities, recurring fees, and risks, not just the price."
 target_keyword: "is your website quote fair? evaluate the scope Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-18"

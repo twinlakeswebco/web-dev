@@ -1,7 +1,7 @@
 ---
 title: "A Website Launch Checklist for Kentucky Businesses"
 meta_title: "Website Launch Checklist for Kentucky Businesses"
-meta_description: "Launch after the production site’s content, customer tasks, domain, redirects, indexing settings, analytics, social previews, and account ownership."
+meta_description: "Before launch, check content, customer tasks, domains, redirects, indexing, analytics, social previews, and account ownership on the production site."
 target_keyword: "a website launch checklist for businesses Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-39"

@@ -1,7 +1,7 @@
 ---
 title: "Website Revisions: Define Rounds Before Work Begins"
 meta_title: "Website Revisions: A Kentucky Buyer’s Guide"
-meta_description: "A revision round should mean one consolidated set of feedback on an agreed deliverable. Define the number of rounds, response window, exclusions, and."
+meta_description: "Define revision rounds, feedback deadlines, exclusions, and charges for added scope. Each round should use one consolidated set of feedback."
 target_keyword: "website revisions: define rounds before work begins Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-30"

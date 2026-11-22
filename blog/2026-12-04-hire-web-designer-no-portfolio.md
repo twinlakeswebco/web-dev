@@ -1,7 +1,7 @@
 ---
 title: "Hiring a Web Designer With No Portfolio"
 meta_title: "Hiring Without a Portfolio: Kentucky Website Guide"
-meta_description: "A missing portfolio increases uncertainty. Reduce it with a relevant demo, verified contribution to other work, a bounded paid first phase, and clear."
+meta_description: "Assess a designer without a portfolio through demos, verified past contributions, a small paid first phase, and clear acceptance criteria."
 target_keyword: "hiring a web designer with no portfolio Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-31"

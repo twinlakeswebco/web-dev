@@ -1,7 +1,7 @@
 ---
 title: "What to Put in Writing Before Hiring a Web Designer"
 meta_title: "Website Agreements: A Kentucky Buyer’s Checklist"
-meta_description: "Record scope, deliverables, fees, payment milestones, content duties, revisions, acceptance, ownership, recurring services, and exit terms before."
+meta_description: "Before work starts, record website scope, fees, payment milestones, content duties, revisions, acceptance, ownership, support, and exit terms."
 target_keyword: "what to put in writing before hiring a web designer Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-33"

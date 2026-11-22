@@ -1,7 +1,7 @@
 ---
 title: "Where to Hire a Web Designer: Comparing Your Options"
 meta_title: "Where to Hire a Web Designer in Kentucky"
-meta_description: "Compare referrals, local studios, independent professionals, agencies, and freelance marketplaces by relevant work, accountability, scope, and."
+meta_description: "Compare referrals, studios, independent designers, agencies, and marketplaces by relevant work, accountability, scope, and ownership."
 target_keyword: "where to hire a web designer: comparing your options Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-08"

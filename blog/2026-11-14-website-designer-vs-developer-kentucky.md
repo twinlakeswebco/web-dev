@@ -1,7 +1,7 @@
 ---
 title: "Website Designer vs Developer: Who Does What?"
 meta_title: "Web Designer vs Developer: A Kentucky Buyer’s Guide"
-meta_description: "A designer usually plans the visual experience and interactions. A developer builds and connects the functioning site. One person can do both, but."
+meta_description: "Designers plan the visual experience; developers build the working site. One person can do both, but every task needs a named owner."
 target_keyword: "website designer vs developer: who does what Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-11"

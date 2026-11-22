@@ -1,7 +1,7 @@
 ---
 title: "Paying a Web Designer: Deposits and Milestones"
 meta_title: "Web Designer Payment Milestones: Kentucky Guide"
-meta_description: "Match payments to a defined scope and reviewed milestones. Confirm deposits, recurring charges, cancellation terms, ownership transfer, and final."
+meta_description: "Tie website payments to defined scope and reviewed milestones. Check deposits, recurring fees, cancellation terms, ownership, and final handoff."
 target_keyword: "paying a web designer: deposits and milestones Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-38"

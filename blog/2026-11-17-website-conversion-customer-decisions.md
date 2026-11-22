@@ -1,7 +1,7 @@
 ---
 title: "Why Visitors Leave Without Becoming Customers"
 meta_title: "Website Conversions for Kentucky Small Businesses"
-meta_description: "A website converts when the right visitor understands the offer, trusts the business, and can complete a clear next step. Fix confusion and failed."
+meta_description: "Help visitors understand your offer, trust your business, and take the next step. Fix confusion and broken contact paths before buying more traffic."
 target_keyword: "why visitors leave without becoming customers Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-14"

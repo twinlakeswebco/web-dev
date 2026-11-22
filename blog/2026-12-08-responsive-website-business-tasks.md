@@ -1,7 +1,7 @@
 ---
 title: "Responsive Website Design: Test the Tasks That Matter"
 meta_title: "Responsive Website Testing for Kentucky Businesses"
-meta_description: "Responsive design should preserve readable content and working customer tasks across screen sizes. Test navigation, forms, calls, galleries, and."
+meta_description: "Test readable content, navigation, forms, calls, galleries, and checkout across screen sizes. A page that fits a phone must also work on one."
 target_keyword: "responsive website design: test the tasks that matter Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-35"

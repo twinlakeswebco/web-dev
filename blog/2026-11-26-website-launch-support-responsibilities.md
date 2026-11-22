@@ -1,7 +1,7 @@
 ---
 title: "After Website Launch: Divide Support Responsibilities Clearly"
 meta_title: "Website Support After Launch: Kentucky Guide"
-meta_description: "After launch, assign responsibility for hosting, updates, backups, content changes, third-party services, and defects. A support agreement should say."
+meta_description: "Assign website support duties after launch, including hosting, updates, backups, and fixes. Define what is covered and how to request help."
 target_keyword: "after website launch: divide support responsibilities clearly Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-23"

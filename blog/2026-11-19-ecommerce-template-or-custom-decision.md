@@ -1,7 +1,7 @@
 ---
 title: "Online Store Template or Custom Development?"
 meta_title: "Ecommerce Template or Custom? Kentucky Guide"
-meta_description: "Use an established store platform and template when standard catalog, checkout, and fulfillment workflows fit. Add custom development for a."
+meta_description: "Use a store platform and template when standard workflows fit. Add custom development for requirements those tools cannot meet."
 target_keyword: "online store template or custom development Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-16"

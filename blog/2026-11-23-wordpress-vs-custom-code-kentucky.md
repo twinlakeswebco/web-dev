@@ -1,7 +1,7 @@
 ---
 title: "WordPress vs Custom Code: Compare Editing and Maintenance"
 meta_title: "WordPress vs Custom Code for Kentucky Businesses"
-meta_description: "WordPress is a content-management platform that can support custom design. Custom code describes an implementation approach. Choose based on editing,."
+meta_description: "A WordPress site can be custom-designed. Compare WordPress and custom code by editing needs, features, maintenance, portability, and support."
 target_keyword: "wordpress vs custom code: compare editing and maintenance Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-20"

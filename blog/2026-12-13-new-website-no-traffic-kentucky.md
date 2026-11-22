@@ -1,7 +1,7 @@
 ---
 title: "Why Your New Website Is Not Getting Traffic"
 meta_title: "New Website With No Traffic? A Kentucky Guide"
-meta_description: "First check whether pages are discoverable and indexed, then whether they target useful customer searches. Separate technical access, search demand,."
+meta_description: "Check discovery and indexing before diagnosing low traffic. Separate technical access, search demand, competition, and conversion to choose a fix."
 target_keyword: "why your new website is not getting traffic Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-40"

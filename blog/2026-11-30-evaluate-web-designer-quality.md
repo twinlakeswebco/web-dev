@@ -1,7 +1,7 @@
 ---
 title: "How to Tell Whether Your Web Designer Does Good Work"
 meta_title: "Evaluate Web Designer Quality: Kentucky Guide"
-meta_description: "Judge a designer by clear reasoning, relevant live work, reliable customer tasks, accurate content, and a usable handoff. Appearance is only part of."
+meta_description: "Judge a designer by clear reasoning, relevant live work, reliable customer tasks, accurate content, and a usable handoff, not appearance alone."
 target_keyword: "how to tell whether your web designer does good work Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-27"

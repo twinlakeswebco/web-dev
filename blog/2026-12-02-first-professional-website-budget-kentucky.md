@@ -1,7 +1,7 @@
 ---
 title: "Budgeting for Your First Professional Website"
 meta_title: "Your First Website Budget: A Kentucky Guide"
-meta_description: "Set your first website budget around a minimum useful scope, a full year of operating costs, and the content work needed to launch. Keep optional."
+meta_description: "Budget for a minimum useful website, launch content, and a full year of operating costs. Keep optional expansion separate."
 target_keyword: "budgeting for your first professional website Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-29"

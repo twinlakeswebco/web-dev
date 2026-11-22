@@ -1,7 +1,7 @@
 ---
 title: "What Should a Professional Business Website Include?"
 meta_title: "Professional Website Checklist for Kentucky Owners"
-meta_description: "A professional website should clearly identify the business, explain its services and territory, support the main customer task, work on phones, and."
+meta_description: "A professional website explains your business and service area, works on phones, supports customer tasks, and has clear ownership and maintenance terms."
 target_keyword: "what should a professional business website include Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-09"

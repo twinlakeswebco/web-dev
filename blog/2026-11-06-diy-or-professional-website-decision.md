@@ -1,7 +1,7 @@
 ---
 title: "DIY or Professional Website: Decide by the Work Required"
 meta_title: "DIY or Professional Website? A Kentucky Guide"
-meta_description: "Build it yourself when the required functions are simple and you can maintain them. Hire help when content, integrations, accessibility, migration,."
+meta_description: "Choose DIY for simple functions you can maintain. Hire help when content, integrations, accessibility, migration, or risk exceeds your time and skill."
 target_keyword: "diy or professional website: decide by the work required Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-03"

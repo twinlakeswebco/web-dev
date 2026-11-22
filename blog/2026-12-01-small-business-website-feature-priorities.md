@@ -1,7 +1,7 @@
 ---
 title: "Small-Business Website Features Worth Paying For First"
 meta_title: "Website Feature Priorities for Kentucky Businesses"
-meta_description: "Prioritize clear service content, trust, mobile usability, and dependable contact or purchase paths. Add advanced features when they solve a."
+meta_description: "Fund clear content, mobile usability, trust, and reliable contact or purchase paths first. Add features that solve a documented business problem."
 target_keyword: "small-business website features worth paying for first Kentucky"
 intent: "commercial investigation"
 queue_number: "ky-buyers-28"
