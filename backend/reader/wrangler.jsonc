@@ -1,0 +1,18 @@
+{
+  "name": "twin-lakes-article-reader",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-22",
+  "workers_dev": false,
+  "routes": [{ "pattern": "www.twinlakesweb.com/api/reader/*", "zone_name": "twinlakesweb.com" }],
+  "account_id": "581a71bb4a760c1bdc276a097611b950",
+  "d1_databases": [{ "binding": "DB", "database_name": "twin-lakes-reader", "database_id": "abd29f5f-2a61-4689-b23e-46dc8295d636" }],
+  "vars": {
+    "ENABLED": "true",
+    "EMAIL_ENABLED": "true",
+    "STRIPE_LIVE": "true",
+    "PAYMENT_LINK_ID": "plink_1UefcoAp0FzsFGWx3ELQEfn4",
+    "PAYMENT_LINK_URL": "https://buy.stripe.com/14A6oGbaM5aEgIQa232ZO05",
+    "EMAIL_FROM": "Twin Lakes Web Co. <reader@twinlakesweb.com>"
+  },
+  "triggers": { "crons": ["17 7 * * *"] }
+}

@@ -76,7 +76,7 @@ def slugify(value: str) -> str:
 
 
 def inline_markdown(value: str) -> str:
-    escaped = html.escape(value, quote=False)
+    escaped = html.escape(value, quote=True)
 
     # Images before links so the link pattern does not consume image syntax.
     escaped = re.sub(
@@ -97,6 +97,20 @@ def inline_markdown(value: str) -> str:
 
 
 def markdown_to_html(markdown: str) -> str:
+    # Render Markdown tables before the line parser; use the same inline escaping.
+    tables = list(re.finditer(r'(?m)^\|[^\n]+\|\n\|[ :|\-]+\|\n(?:\|[^\n]+\|(?:\n|$))+', markdown))
+    if tables:
+        rendered = []
+        cursor = 0
+        for table in tables:
+            rendered.append(markdown_to_html(markdown[cursor:table.start()]))
+            rows = [line.strip().strip('|').split('|') for line in table.group().strip().splitlines()]
+            headers = ''.join(f'<th scope="col">{inline_markdown(cell.strip())}</th>' for cell in rows[0])
+            body = ''.join('<tr>' + ''.join(f'<td>{inline_markdown(cell.strip())}</td>' for cell in row) + '</tr>' for row in rows[2:])
+            rendered.append(f'<div class="table-scroll" role="region" aria-label="Data table" tabindex="0"><table><thead><tr>{headers}</tr></thead><tbody>{body}</tbody></table></div>')
+            cursor = table.end()
+        rendered.append(markdown_to_html(markdown[cursor:]))
+        return '\n'.join(rendered)
     lines = markdown.replace("\r\n", "\n").split("\n")
     output: list[str] = []
     paragraph: list[str] = []
@@ -342,6 +356,7 @@ def build_article_schema(post: dict[str, str]) -> dict[str, object]:
                 "publisher": {"@id": f"{SITE_URL}/#business"},
                 "image": [post.get("social_image") or OG_IMAGE],
                 "inLanguage": "en-US",
+                **({"isAccessibleForFree": False, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": False, "cssSelector": "#paid-content"}} if post.get("paid") else {}),
             },
             {
                 "@type": "BreadcrumbList",
@@ -406,6 +421,33 @@ def build() -> None:
         social_image_alt = meta.get("social_image_alt") or f"{SITE_NAME}, website design and development in Grayson County, Kentucky"
         body = markdown_to_html(markdown)
         body = re.sub(r'^<h1[^>]*>.*?</h1>\s*', "", body, count=1, flags=re.DOTALL)
+        paid = meta.get("paid", "false").lower() in {"true", "yes", "1"}
+        # Paid Markdown in /blog MUST contain only the public preview. Full text
+        # is stored in D1, never committed to this public repository.
+        paid_assets = ''
+        paid_script = ''
+        if paid:
+            paid_assets = '<link rel="stylesheet" href="/css/reader.css">'
+            paid_script = '<script src="/scripts/reader.js" defer></script>'
+            body = f'''<div data-reader-preview>{body}</div>
+<div id="paid-content" hidden tabindex="-1"></div>
+<section class="reader-paywall" data-reader aria-labelledby="reader-title">
+  <h2 id="reader-title">Read the full investigation</h2>
+  <p>Unlock the complete report, financial tables, employee accounts, and linked sources.</p>
+  <button class="btn btn-primary" type="button" data-reader-buy disabled>Unlock this article · $1.35</button>
+  <p class="reader-terms">$1.35 total. One payment. No subscription. Return access with your checkout email.</p>
+  <button class="btn btn-secondary" type="button" data-reader-restore hidden>Restore access</button>
+  <p class="reader-status" data-reader-status role="status" aria-live="polite">Checking article access…</p>
+  <details><summary>Already purchased?</summary>
+    <form class="reader-recover" data-reader-recover>
+      <label for="reader-email">Email used at checkout</label>
+      <input id="reader-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+      <button class="btn btn-secondary" type="submit">Email my access link</button>
+    </form>
+  </details>
+  <p class="reader-terms">Need help? <a href="mailto:casey@twinlakesweb.com">Contact Casey</a>.</p>
+  <noscript><p>JavaScript is required to purchase and read this article. Email Casey if you need help accessing it.</p></noscript>
+</section>'''
 
         post = {
             "title": title,
@@ -416,30 +458,33 @@ def build() -> None:
             "description": description,
             "url": article_url,
             "social_image": social_image,
+            "paid": paid,
         }
         posts.append(post)
 
         schema_json = json.dumps(build_article_schema(post), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
         article_html = f'''<!doctype html>
 <html lang="en">
-{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published, image=social_image, image_alt=social_image_alt)}
+{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published, image=social_image, image_alt=social_image_alt).replace('</head>', paid_assets + '</head>')}
 <body class="article-page">
   <a class="skip-link" href="#main">Skip to content</a>
   {header_html("blog")}
   <main id="main">
-    <section class="hero section-tight">
+    <section class="hero section-tight{' investigation-header' if paid else ''}">
       <div class="wrap measure">
         <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">{html.escape(title)}</li></ol></nav>
 
+        {'<p class="investigation-label">A Grayson County investigation</p>' if paid else ''}
         <h1>{html.escape(title)}</h1>
         <p class="hero-lede">{html.escape(description)}</p>
         <p class="post-meta">Published {html.escape(nice_date(published))} · Casey Keown</p>
+        {f'<img class="investigation-image" src="{html.escape(social_image, quote=True)}" alt="{html.escape(social_image_alt, quote=True)}" width="1732" height="908" fetchpriority="high">' if paid else ''}
       </div>
     </section>
     <section class="section">
-      <div class="wrap article-layout">
+      <div class="wrap {'investigation-layout' if paid else 'article-layout'}">
         <article class="article-body">{body}</article>
-        <aside class="blog-sidebar" aria-label="About the author">
+        <aside class="blog-sidebar" aria-label="About the author"{' hidden' if paid else ''}>
           <h2>Written by Casey</h2>
           <p>I build straightforward websites and practical web tools for small businesses and organizations.</p>
           <p><a class="btn btn-primary" href="/contact/">Request a Quote</a></p>
@@ -451,6 +496,7 @@ def build() -> None:
   {footer_html()}
   <script type="application/ld+json">{schema_json}</script>
   <script src="/scripts/site.js" defer></script>
+  {paid_script}
 </body>
 </html>
 '''
@@ -465,9 +511,11 @@ def build() -> None:
     for post in posts:
         search_text = f"{post['title']} {post['description']}".lower()
         list_items.append(f'''<li data-search="{html.escape(search_text, quote=True)}">
+  {f'<a href="{post["url"]}" tabindex="-1" aria-hidden="true"><img src="{html.escape(post["social_image"], quote=True)}" alt="" width="1732" height="908" loading="lazy" style="display:block;width:100%;height:auto;border-radius:.5rem;margin-bottom:1rem"></a>' if post.get('paid') else ''}
   <p class="post-meta">{html.escape(nice_date(post['date']))}</p>
   <h2><a href="{post['url']}">{html.escape(post['title'])}</a></h2>
   <p>{html.escape(post['description'])}</p>
+  {'<p class="post-meta">Paid article · $1.35 one-time access</p>' if post.get('paid') else ''}
 </li>''')
     for item in downloads:
         list_items.append(f'''<li data-search="{html.escape(item['title'].lower(), quote=True)}">
@@ -581,3 +629,4 @@ def build() -> None:
 
 if __name__ == "__main__":
     build()
+

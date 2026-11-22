@@ -1,0 +1,25 @@
+.investigation-header { padding-block: clamp(2.5rem, 7vw, 6rem) 2rem; }
+.investigation-header h1 { max-width: 24ch; font-size: clamp(2rem, 4.6vw, 4.5rem); line-height: 1.08; text-wrap: balance; }
+.investigation-header .hero-lede { max-width: 65ch; }
+.investigation-label { font-weight: 700; color: var(--color-orange-dark); letter-spacing: .08em; text-transform: uppercase; }
+.investigation-image { display: block; width: 100%; height: auto; margin: 1.5rem 0 0; border-radius: .5rem; }
+.investigation-layout { max-width: 60rem; }
+.investigation-layout .article-body { max-width: 75ch; margin-inline: auto; font-size: 1.125rem; line-height: 1.8; }
+.reader-paywall { border: 1px solid var(--color-gray); border-top: 4px solid var(--color-orange); border-radius: .5rem; padding: clamp(1.25rem, 4vw, 2.5rem); margin-top: 2rem; background: var(--color-white); }
+.reader-paywall h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-top: 0; }
+.reader-paywall .reader-terms { font-size: .9375rem; line-height: 1.6; color: var(--color-muted); }
+.reader-paywall button { cursor: pointer; }
+.reader-paywall button:disabled { opacity: .65; cursor: wait; }
+.reader-recover { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: .75rem; }
+.reader-recover label { width: 100%; }
+.reader-recover input { min-width: 0; flex: 1 1 16rem; }
+.reader-status { min-height: 1.8em; font-size: 1rem; }
+.reader-status:empty { display: none; }
+.reader-price-label { display: inline-block; font-size: .875rem; font-weight: 600; margin-left: .5rem; color: var(--color-muted); }
+.article-body .table-scroll { overflow-x: auto; max-width: 100%; margin-block: 1.5rem; }
+.article-body table { border-collapse: collapse; min-width: 100%; font-size: 1rem; }
+.article-body th, .article-body td { padding: .75rem; border-bottom: 1px solid var(--color-gray); vertical-align: top; text-align: left; min-width: 9rem; }
+.article-body th { background: var(--color-orange-soft); }
+.article-body blockquote { border-left: 3px solid var(--color-orange); padding-left: 1.25rem; margin-inline: 0; }
+[hidden] { display: none !important; }
+@media print { .reader-paywall { display: none; } }
