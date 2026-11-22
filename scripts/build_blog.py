@@ -271,10 +271,14 @@ def head_html(
     published: str | None = None,
     image: str = OG_IMAGE,
     image_alt: str = f"{SITE_NAME}, website design and development in Grayson County, Kentucky",
+    image_width: str = "",
+    image_height: str = "",
 ) -> str:
     article_meta = f'\n  <meta property="article:published_time" content="{html.escape(published)}">' if published else ""
+    image_dimensions = ''
+    if image_width.isdigit() and image_height.isdigit():
+        image_dimensions = f'\n  <meta property="og:image:width" content="{image_width}">\n  <meta property="og:image:height" content="{image_height}">'
     return f'''<head>
-{brand.GOOGLE_TAG}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{html.escape(title)}</title>
@@ -287,11 +291,15 @@ def head_html(
   <meta property="og:type" content="{page_type}">
   <meta property="og:url" content="{html.escape(canonical, quote=True)}">
   <meta property="og:image" content="{html.escape(image, quote=True)}">
+  <meta property="og:image:secure_url" content="{html.escape(image, quote=True)}">
+  <meta property="og:image:type" content="image/jpeg">{image_dimensions}
   <meta property="og:image:alt" content="{html.escape(image_alt, quote=True)}">{article_meta}
+  <link rel="image_src" href="{html.escape(image, quote=True)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{html.escape(title, quote=True)}">
   <meta name="twitter:description" content="{html.escape(description, quote=True)}">
   <meta name="twitter:image" content="{html.escape(image, quote=True)}">
+{brand.GOOGLE_TAG}
   <meta name="theme-color" content="#F47A3C">
 {brand.ICON_LINKS}
   <link rel="alternate" type="application/rss+xml" title="{SITE_NAME} Blog" href="/blog/feed.xml">
@@ -465,7 +473,7 @@ def build() -> None:
         schema_json = json.dumps(build_article_schema(post), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
         article_html = f'''<!doctype html>
 <html lang="en">
-{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published, image=social_image, image_alt=social_image_alt).replace('</head>', paid_assets + '</head>')}
+{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published, image=social_image, image_alt=social_image_alt, image_width=meta.get("social_image_width", ""), image_height=meta.get("social_image_height", "")).replace('</head>', paid_assets + '</head>')}
 <body class="article-page">
   <a class="skip-link" href="#main">Skip to content</a>
   {header_html("blog")}
