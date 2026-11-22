@@ -275,6 +275,7 @@ def head_html(
     image_height: str = "",
 ) -> str:
     article_meta = f'\n  <meta property="article:published_time" content="{html.escape(published)}">' if published else ""
+    image_type = 'image/png' if image.split('?')[0].endswith('.png') else 'image/webp' if image.split('?')[0].endswith('.webp') else 'image/jpeg'
     image_dimensions = ''
     if image_width.isdigit() and image_height.isdigit():
         image_dimensions = f'\n  <meta property="og:image:width" content="{image_width}">\n  <meta property="og:image:height" content="{image_height}">'
@@ -292,7 +293,7 @@ def head_html(
   <meta property="og:url" content="{html.escape(canonical, quote=True)}">
   <meta property="og:image" content="{html.escape(image, quote=True)}">
   <meta property="og:image:secure_url" content="{html.escape(image, quote=True)}">
-  <meta property="og:image:type" content="image/jpeg">{image_dimensions}
+  <meta property="og:image:type" content="{image_type}">{image_dimensions}
   <meta property="og:image:alt" content="{html.escape(image_alt, quote=True)}">{article_meta}
   <link rel="image_src" href="{html.escape(image, quote=True)}">
   <meta name="twitter:card" content="summary_large_image">
