@@ -14,7 +14,7 @@ completed client work, so replace them as the images become available.
    - `<slug>.jpg` at 800 pixels wide, quality 82, as the fallback
    Current slugs: `nalls-specialized-hauling`, `isr-with-daphne`, `ground-pros`,
    `caneyville`, `twin-lakes-skatepark`, `blush-brass-vintage`,
-   `hannah-keown-homes`, `pure-can-cleaning`, `troopertranscribe`.
+   `hannah-keown-homes`, `pure-can-cleaning`.
 3. In `templates/pages/work.html` and `templates/pages/home.html`, replace the
    card's `<div class="project-thumb" aria-hidden="true">...</div>` with:
 
