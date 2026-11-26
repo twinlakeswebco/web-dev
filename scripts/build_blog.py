@@ -433,10 +433,10 @@ def build() -> None:
         paid = meta.get("paid", "false").lower() in {"true", "yes", "1"}
         # Paid Markdown in /blog MUST contain only the public preview. Full text
         # is stored in D1, never committed to this public repository.
-        paid_assets = ''
+        article_assets = ''
         paid_script = ''
         if paid:
-            paid_assets = '<link rel="stylesheet" href="/css/reader.css">'
+            article_assets = '<link rel="stylesheet" href="/css/reader.css">'
             paid_script = '<script src="/scripts/reader.js" defer></script>'
             body = f'''<div data-reader-preview>{body}</div>
 <div id="paid-content" hidden tabindex="-1"></div>
@@ -458,6 +458,20 @@ def build() -> None:
   <noscript><p>JavaScript is required to purchase and read this article. Email Casey if you need help accessing it.</p></noscript>
 </section>'''
 
+        study_dialog = ''
+        if meta.get("study_pdf"):
+            study_url = html.escape(meta["study_pdf"], quote=True)
+            article_assets += '<link rel="stylesheet" href="/css/study-dialog.css">'
+            study_dialog = f'''<dialog id="study-dialog" aria-labelledby="study-title">
+  <header>
+    <h2 id="study-title">Bridge replacement study</h2>
+    <a href="{study_url}" target="_blank" rel="noopener">Open full PDF</a>
+    <form method="dialog"><button class="btn btn-secondary" autofocus>Close</button></form>
+  </header>
+  <iframe title="Caney Creek Bridge Replacement Study"></iframe>
+</dialog>
+<script src="/scripts/study-dialog.js" defer></script>'''
+
         post = {
             "title": title,
             "seo_title": seo_title,
@@ -474,7 +488,7 @@ def build() -> None:
         schema_json = json.dumps(build_article_schema(post), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
         article_html = f'''<!doctype html>
 <html lang="en">
-{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published, image=social_image, image_alt=social_image_alt, image_width=meta.get("social_image_width", ""), image_height=meta.get("social_image_height", "")).replace('</head>', paid_assets + '</head>')}
+{head_html(title=seo_title, description=description, canonical=canonical, page_type="article", published=published, image=social_image, image_alt=social_image_alt, image_width=meta.get("social_image_width", ""), image_height=meta.get("social_image_height", "")).replace('</head>', article_assets + '</head>')}
 <body class="article-page">
   <a class="skip-link" href="#main">Skip to content</a>
   {header_html("blog")}
@@ -505,7 +519,7 @@ def build() -> None:
   {footer_html()}
   <script type="application/ld+json">{schema_json}</script>
   <script src="/scripts/site.js" defer></script>
-  {paid_script}
+  {paid_script}{study_dialog}
 </body>
 </html>
 '''
