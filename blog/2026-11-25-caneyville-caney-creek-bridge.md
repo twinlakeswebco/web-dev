@@ -39,14 +39,10 @@ Kentucky lists the bridge as Grayson County item **80406**. Here’s how lawmake
 
 The first question for KYTC District 4 is how much of the design is complete. What still has to happen before contractors can bid? Which steps could move sooner? A public update at City Hall would give bus drivers, parents, nearby businesses and emergency responders a chance to weigh in on the design and any detour while there’s still time to change them.
 
-## What would it cost to include sidewalks?
+## One possible design for the Caney Creek bridge
 
 ![Concept rendering of two flatbed trucks passing on a wider Caney Creek bridge, with pedestrians behind concrete barriers on both sides.](/blog/assets/caney-creek-bridge/concept.webp)
 
-*Concept rendering. The November 2026 study illustrates one possible replacement, with a six-foot protected sidewalk on each side. The state road plan calls for replacement and widening and leaves the layout open.*
-
-The study estimates **$2.93 million to $3.07 million for the proposed bridge alone**. That’s roughly $530,000 to $670,000 above the state’s construction allocation before demolition and work on the approaches. The estimate covers the whole proposed bridge. It doesn’t tell us how much the sidewalks themselves would cost. District 4 can help by pricing the options and explaining what each would deliver. [Read the Caney Creek Bridge Replacement Study (PDF)](/blog/assets/caney-creek-bridge/replacement-study.pdf).
+*Concept rendering. The [November 2026 study](/blog/assets/caney-creek-bridge/replacement-study.pdf) illustrates one possible replacement, with a six-foot protected sidewalk on each side. The state road plan calls for replacement and widening and leaves the layout open.*
 
 If you drive a school bus, haul a load or cross on foot, **share this article on Facebook or in your Grayson County community group** and tell people what happens when you meet traffic coming the other way. Those firsthand accounts helped put this bridge in the state road plan. Now let’s ask KYTC to come back to Caneyville and tell us when the work can begin.
-
-[Read K105’s April 2026 reporting on the funding.](https://www.k105.com/2026/04/16/nearly-2-8-million-earmarked-to-replace-caney-creek-bridge-in-east-caneyville/)
